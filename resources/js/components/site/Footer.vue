@@ -12,7 +12,7 @@ const imgFacebook =
 <template>
     <footer class="w-full bg-[#1e1e1e] text-[#f6f6f6]">
         <!-- Main footer area -->
-        <div class="mx-auto w-[1182px] pt-8 pb-4">
+        <div class="mx-auto w-full max-w-[1182px] px-4 pt-8 pb-4">
             <!-- Facebook icon row -->
             <div class="mb-6 flex justify-end">
                 <a
@@ -32,7 +32,7 @@ const imgFacebook =
             <!-- Nav links row 1 -->
             <nav class="mb-8">
                 <ul
-                    class="flex flex-row flex-wrap gap-x-25 gap-y-3 text-[20px] font-normal"
+                    class="flex flex-row flex-wrap gap-x-9 gap-y-3 text-base font-normal md:flex-nowrap md:gap-x-16 md:text-[20px] lg:gap-x-25"
                 >
                     <li>
                         <a
@@ -80,36 +80,38 @@ const imgFacebook =
             </nav>
 
             <!-- Nav links row 2 + sponsor logos -->
-            <div class="mb-8 flex items-center justify-between">
+            <div
+                class="mb-8 flex flex-col items-center gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between"
+            >
                 <a
                     href="/mentions-legales"
-                    class="text-[20px] font-normal whitespace-nowrap hover:underline"
+                    class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
                 >
                     Mentions légales
                 </a>
 
                 <!-- Sponsor logos -->
-                <div class="flex items-center gap-30">
+                <div class="flex items-center gap-8 md:gap-16 lg:gap-30">
                     <img
                         src="storage/Cubitus.png"
                         alt="Cubitus"
-                        class="h-[88px] w-[88px] object-contain"
+                        class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
                     />
                     <img
                         src="storage/Trakks.png"
                         alt="Trakks"
-                        class="h-[28px] w-[88px] object-contain"
+                        class="h-[20px] w-[60px] object-contain md:h-[28px] md:w-[88px]"
                     />
                     <img
                         src="storage/Nutribay.png"
                         alt="Nutribay"
-                        class="h-[88px] w-[88px] object-contain"
+                        class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
                     />
                 </div>
 
                 <a
                     href="/confidentialite"
-                    class="text-[20px] font-normal whitespace-nowrap hover:underline"
+                    class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
                 >
                     Politique de confidentialité
                 </a>
@@ -118,7 +120,9 @@ const imgFacebook =
 
         <!-- Copyright bar -->
         <div class="w-full bg-black py-3">
-            <p class="text-center text-[20px] font-normal text-white">
+            <p
+                class="text-center text-base font-normal text-white md:text-[20px]"
+            >
                 © U-Trail Limal 2026
             </p>
         </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -31,11 +32,12 @@ import Footer from '@/components/site/Footer.vue';
         >
             Prêts à relever un nouveau défi ?
         </h1>
-        <button
+        <Link
+            href="/Inscription"
             class="absolute top-[88%] left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-[#C42827] px-5 py-3 text-sm whitespace-nowrap text-[#F6F6F6] sm:text-lg md:text-[24px]"
         >
             Intégrer le projet 2026
-        </button>
+        </Link>
     </header>
     <main>
         <section id="shortpres">
@@ -161,11 +163,12 @@ import Footer from '@/components/site/Footer.vue';
                             >.
                         </p>
                     </div>
-                    <button
+                    <Link
+                        href="/Presentation"
                         class="mt-8 w-fit rounded-sm bg-[#C42827] px-8 py-4 text-sm font-semibold whitespace-nowrap text-[#F6F6F6] sm:text-lg md:text-[24px]"
                     >
                         Voir l'histoire du club
-                    </button>
+                    </Link>
                 </div>
                 <div class="min-h-[300px] md:min-h-[683px]">
                     <img

@@ -24,15 +24,13 @@ const mobileOpen = ref(false);
                 class="flex flex-row items-center gap-6 text-[16px] font-normal lg:gap-12 lg:text-[20px]"
             >
                 <li>
-                    <a
-                        href="/Presentation"
-                        class="whitespace-nowrap hover:underline"
+                    <a href="/" class="whitespace-nowrap hover:underline"
                         >Présentation</a
                     >
                 </li>
                 <li>
                     <a
-                        href="/Histoire"
+                        href="/Presentation"
                         class="whitespace-nowrap hover:underline"
                         >Histoire du club</a
                     >
@@ -79,10 +77,12 @@ const mobileOpen = ref(false);
     >
         <ul class="flex flex-col gap-4 text-[18px] font-normal">
             <li>
-                <a href="/Presentation" class="hover:underline">Présentation</a>
+                <a href="/" class="hover:underline">Présentation</a>
             </li>
             <li>
-                <a href="/Histoire" class="hover:underline">Histoire du club</a>
+                <a href="/Presentation" class="hover:underline"
+                    >Histoire du club</a
+                >
             </li>
             <li>
                 <a href="/Equipe" class="hover:underline">L'équipe</a>

@@ -1,6 +1,7 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import Card from '@/components/ui/card/Card.vue';
 </script>
 
 <template>
@@ -20,7 +21,7 @@ import Footer from '@/components/site/Footer.vue';
         </figure>
     </header>
     <main>
-        <div class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
+        <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
             >
@@ -40,7 +41,7 @@ import Footer from '@/components/site/Footer.vue';
                 complet mêlant préparation physique et préparation spécifique au
                 trail, au sein d’un projet collectif motivant.
             </p>
-        </div>
+        </section>
     </main>
     <Footer />
 </template>

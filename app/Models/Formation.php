@@ -9,4 +9,14 @@ class Formation extends Model
 {
     /** @use HasFactory<\Database\Factories\FormationFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'nom',
+        'description',
+        'date',
+        'photo',
+        'niveau',
+    ];
+
+    
 }

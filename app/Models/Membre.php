@@ -9,4 +9,21 @@ class Membre extends Model
 {
     /** @use HasFactory<\Database\Factories\MembreFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'participant_id',
+        'date_naissance',
+        'participation_un',
+        'distance_un',
+        'logement_un',
+        'participation_deux',
+        'distance_deux',
+        'logement_deux',
+        'tshirt_taille',
+    ];
+
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class);
+    }
 }

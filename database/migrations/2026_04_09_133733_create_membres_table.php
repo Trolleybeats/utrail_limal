@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('email')->unique();
-            $table->string('telephone')->unique();
+            $table->foreignId('participant_id')->constrained('participants')->onDelete('cascade');
             $table->date('date_naissance');
             $table->boolean('participation_un');
             $table->string('distance_un');

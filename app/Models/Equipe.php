@@ -9,4 +9,12 @@ class Equipe extends Model
 {
     /** @use HasFactory<\Database\Factories\EquipeFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'nom',
+        'prenom',
+        'role',
+        'description',
+        'photo',
+    ];
 }

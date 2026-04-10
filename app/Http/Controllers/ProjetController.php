@@ -13,7 +13,7 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/projet/Index', [
+        return Inertia::render('admin/projets/Index', [
             'projets' => Projet::all(),
         ]);
     }
@@ -23,7 +23,7 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/projet/Create');
+        return Inertia::render('admin/projets/Create');
     }
 
     /**
@@ -47,7 +47,7 @@ class ProjetController extends Controller
         // Create the project
         Projet::create($validated);
 
-        return redirect()->route('projet.index')->with('success', 'Project created successfully.');
+        return redirect()->route('projets.index')->with('success', 'Project created successfully.');
 
     }
 
@@ -56,7 +56,7 @@ class ProjetController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('admin/projet/Show', [
+        return Inertia::render('admin/projets/Show', [
             'projet' => Projet::findOrFail($id),
         ]);
     }
@@ -66,7 +66,7 @@ class ProjetController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('admin/projet/Edit', [
+        return Inertia::render('admin/projets/Edit', [
             'projet' => Projet::findOrFail($id),
         ]);
     }
@@ -94,7 +94,7 @@ class ProjetController extends Controller
         // Update the project
         $projet->update($validated);
 
-        return redirect()->route('projet.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('projets.index')->with('success', 'Project updated successfully.');
     }
 
     /**
@@ -105,6 +105,6 @@ class ProjetController extends Controller
         $projet = Projet::findOrFail($id);
         $projet->delete();
 
-        return redirect()->route('projet.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('projets.index')->with('success', 'Project deleted successfully.');
     }
 }

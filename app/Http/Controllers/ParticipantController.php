@@ -13,7 +13,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/participant/Index', [
+        return Inertia::render('admin/participants/Index', [
             'participants' => Participant::all(),
         ]);
     }
@@ -23,7 +23,7 @@ class ParticipantController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/participant/Create');
+        return Inertia::render('admin/participants/Create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ParticipantController extends Controller
 
         Participant::create($validated);
 
-        return redirect()->route('participant.index')->with('success', 'Participant created successfully.');
+        return redirect()->route('participants.index')->with('success', 'Participant created successfully.');
     }
 
     /**
@@ -48,7 +48,7 @@ class ParticipantController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('admin/participant/Show', [
+        return Inertia::render('admin/participants/Show', [
             'participant' => Participant::findOrFail($id),
         ]);
     }
@@ -58,7 +58,7 @@ class ParticipantController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('admin/participant/Edit', [
+        return Inertia::render('admin/participants/Edit', [
             'participant' => Participant::findOrFail($id),
         ]);
     }
@@ -79,7 +79,7 @@ class ParticipantController extends Controller
 
         $participant->update($validated);
 
-        return redirect()->route('participant.index')->with('success', 'Participant updated successfully.');
+        return redirect()->route('participants.index')->with('success', 'Participant updated successfully.');
     }
 
     /**
@@ -90,6 +90,6 @@ class ParticipantController extends Controller
         $participant = Participant::findOrFail($id);
         $participant->delete();
 
-        return redirect()->route('participant.index')->with('success', 'Participant deleted successfully.');
+        return redirect()->route('participants.index')->with('success', 'Participant deleted successfully.');
     }
 }

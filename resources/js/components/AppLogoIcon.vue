@@ -15,7 +15,7 @@ defineProps<Props>();
 <template>
     <figure>
         <img
-            src="storage/Logo.png"
+            src="/storage/Logo.png"
             alt="U-Trail Limal Logo"
             class="size-10 fill-current text-white dark:text-black"
             :class="className"

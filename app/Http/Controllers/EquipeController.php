@@ -13,7 +13,7 @@ class EquipeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/equipe/Index', [
+        return Inertia::render('admin/equipes/Index', [
             'equipes' => Equipe::all(),
         ]);
     }
@@ -23,7 +23,7 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/equipe/Create');
+        return Inertia::render('admin/equipes/Create');
     }
 
     /**
@@ -41,7 +41,7 @@ class EquipeController extends Controller
 
         Equipe::create($validated);
 
-        return redirect()->route('equipe.index')->with('success', 'Equipe created successfully.');
+        return redirect()->route('equipes.index')->with('success', 'Equipe created successfully.');
     }
 
     /**
@@ -49,7 +49,7 @@ class EquipeController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('admin/equipe/Show', [
+        return Inertia::render('admin/equipes/Show', [
             'equipe' => Equipe::findOrFail($id),
         ]);
     }
@@ -59,7 +59,7 @@ class EquipeController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('admin/equipe/Edit', [
+        return Inertia::render('admin/equipes/Edit', [
             'equipe' => Equipe::findOrFail($id),
         ]);
     }
@@ -81,7 +81,7 @@ class EquipeController extends Controller
 
         $equipe->update($validated);
 
-        return redirect()->route('equipe.index')->with('success', 'Equipe updated successfully.');
+        return redirect()->route('equipes.index')->with('success', 'Equipe updated successfully.');
     }
 
     /**
@@ -92,6 +92,6 @@ class EquipeController extends Controller
         $equipe = Equipe::findOrFail($id);
         $equipe->delete();
 
-        return redirect()->route('equipe.index')->with('success', 'Equipe deleted successfully.');
+        return redirect()->route('equipes.index')->with('success', 'Equipe deleted successfully.');
     }
 }

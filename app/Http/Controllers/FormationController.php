@@ -13,7 +13,7 @@ class FormationController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/formation/Index', [
+        return Inertia::render('admin/formations/Index', [
             'formations' => Formation::all(),
         ]);
     }
@@ -23,7 +23,7 @@ class FormationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/formation/Create');
+        return Inertia::render('admin/formations/Create');
     }
 
     /**
@@ -41,7 +41,7 @@ class FormationController extends Controller
 
         Formation::create($validated);
 
-        return redirect()->route('formation.index')->with('success', 'Formation created successfully.');
+        return redirect()->route('formations.index')->with('success', 'Formation created successfully.');
     }
 
     /**
@@ -49,7 +49,7 @@ class FormationController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('admin/formation/Show', [
+        return Inertia::render('admin/formations/Show', [
             'formation' => Formation::findOrFail($id),
         ]);
     }
@@ -59,7 +59,7 @@ class FormationController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('admin/formation/Edit', [
+        return Inertia::render('admin/formations/Edit', [
             'formation' => Formation::findOrFail($id),
         ]);
     }
@@ -81,7 +81,7 @@ class FormationController extends Controller
 
         $formation->update($validated);
 
-        return redirect()->route('formation.index')->with('success', 'Formation updated successfully.');
+        return redirect()->route('formations.index')->with('success', 'Formation updated successfully.');
     }
 
     /**
@@ -92,6 +92,6 @@ class FormationController extends Controller
         $formation = Formation::findOrFail($id);
         $formation->delete();
 
-        return redirect()->route('formation.index')->with('success', 'Formation deleted successfully.');
+        return redirect()->route('formations.index')->with('success', 'Formation deleted successfully.');
     }
 }

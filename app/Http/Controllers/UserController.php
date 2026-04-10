@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/user/Index', [
+        return Inertia::render('admin/users/Index', [
             'users' => User::all(),
         ]);
     }
@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/user/Create');
+        return Inertia::render('admin/users/Create');
     }
 
     /**
@@ -44,7 +44,7 @@ class UserController extends Controller
                 'password' => Hash::make($validated['password']),
             ]);
 
-        return redirect()->route('user.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -52,7 +52,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('admin/user/Show', [
+        return Inertia::render('admin/users/Show', [
             'user' => User::findOrFail($id),
         ]);
     }
@@ -62,7 +62,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('admin/user/Edit', [
+        return Inertia::render('admin/users/Edit', [
             'user' => User::findOrFail($id),
         ]);
     }
@@ -86,7 +86,7 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('user.index')->with('success', 'User updated successfully.');
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
     /**
@@ -97,6 +97,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('user.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

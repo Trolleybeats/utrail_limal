@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -18,12 +19,7 @@ Route::inertia('/Contact', 'Contact')->name('contact');
 //Page admin
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
-    Route::inertia('projet', 'admin/projet')->name('admin.projet');
-    Route::inertia('equipe', 'admin/equipe')->name('admin.equipe');
-    Route::inertia('formation', 'admin/formation')->name('admin.formation');
-    Route::inertia('participant', 'admin/participant')->name('admin.participant');
-    Route::inertia('membre', 'admin/membre')->name('admin.membre');
-    Route::inertia('user', 'admin/user')->name('admin.user');
+    Route::get('admin/users', [UserController::class, 'index'])->name('admin.users');
 });
 
 require __DIR__.'/settings.php';

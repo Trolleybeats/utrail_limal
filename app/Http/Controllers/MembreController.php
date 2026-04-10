@@ -13,7 +13,7 @@ class MembreController extends Controller
      */
     public function index()
     {
-        return Inertia::render('admin/membre/Index', [
+        return Inertia::render('admin/membres/Index', [
             'membres' => Membre::all(),
         ]);
     }
@@ -23,7 +23,7 @@ class MembreController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/membre/Create');
+        return Inertia::render('admin/membres/Create');
     }
 
     /**
@@ -45,7 +45,7 @@ class MembreController extends Controller
 
         Membre::create($validated);
 
-        return redirect()->route('membre.index')->with('success', 'Membre created successfully.');
+        return redirect()->route('membres.index')->with('success', 'Membre created successfully.');
     }
 
     /**
@@ -53,7 +53,7 @@ class MembreController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('admin/membre/Show', [
+        return Inertia::render('admin/membres/Show', [
             'membre' => Membre::findOrFail($id),
         ]);
     }
@@ -63,7 +63,7 @@ class MembreController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('admin/membre/Edit', [
+        return Inertia::render('admin/membres/Edit', [
             'membre' => Membre::findOrFail($id),
         ]);
     }
@@ -89,7 +89,7 @@ class MembreController extends Controller
 
         $membre->update($validated);
 
-        return redirect()->route('membre.index')->with('success', 'Membre updated successfully.');
+        return redirect()->route('membres.index')->with('success', 'Membre updated successfully.');
     }
 
     /**
@@ -100,6 +100,6 @@ class MembreController extends Controller
         $membre = Membre::findOrFail($id);
         $membre->delete();
 
-        return redirect()->route('membre.index')->with('success', 'Membre deleted successfully.');
+        return redirect()->route('membres.index')->with('success', 'Membre deleted successfully.');
     }
 }

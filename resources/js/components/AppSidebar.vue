@@ -34,12 +34,12 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
-    { title: 'Projets', href: '#', icon: FolderCheck },
-    { title: 'Equipe', href: '#', icon: Users },
-    { title: 'Formations', href: '#', icon: Folder },
-    { title: 'Membres', href: '#', icon: BookUser },
-    { title: 'Participants', href: '#', icon: Contact },
-    { title: 'Users', href: '#', icon: User },
+    { title: 'Projets', href: '/admin/projets', icon: FolderCheck },
+    { title: 'Equipe', href: '/admin/equipes', icon: Users },
+    { title: 'Formations', href: '/admin/formations', icon: Folder },
+    { title: 'Membres', href: '/admin/membres', icon: BookUser },
+    { title: 'Participants', href: '/admin/participants', icon: Contact },
+    { title: 'Users', href: '/admin/users', icon: User },
 ];
 
 const footerNavItems: NavItem[] = [

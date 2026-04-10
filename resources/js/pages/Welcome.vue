@@ -96,21 +96,48 @@ import { Link } from '@inertiajs/vue3';
                 <div
                     class="flex flex-wrap items-center justify-center gap-10 md:gap-16"
                 >
-                    <img
-                        src="/storage/cubitus.png"
-                        alt="Centre Cubitus"
-                        class="h-auto w-[150px] object-contain md:w-[225px]"
-                    />
-                    <img
-                        src="/storage/trakks.png"
-                        alt="Trakks"
-                        class="h-auto w-[150px] object-contain md:w-[224px]"
-                    />
-                    <img
-                        src="/storage/nutribay.png"
-                        alt="Nutribay"
-                        class="h-auto w-[150px] object-contain md:w-[225px]"
-                    />
+                    <figure>
+                        <a
+                            href="https://www.kine-cubitus.be/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Cubitus"
+                        >
+                            <img
+                                src="/storage/cubitus.png"
+                                alt="Centre Cubitus"
+                                class="h-auto w-[150px] object-contain md:w-[225px]"
+                            />
+                        </a>
+                    </figure>
+                    <figure>
+                        <a
+                            href="https://www.trakks.be/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Trakks"
+                        >
+                            <img
+                                src="/storage/trakks.png"
+                                alt="Trakks"
+                                class="h-auto w-[150px] object-contain md:w-[224px]"
+                            />
+                        </a>
+                    </figure>
+                    <figure>
+                        <a
+                            href="https://www.nutri-bay.com/?gad_source=1&gad_campaignid=23160452095&gbraid=0AAAAADLj-_k5EqPqE0C4vuiRAyvL8GvNS&gclid=Cj0KCQjwv-LOBhCdARIsAM5hdKeTkcDJ5bwRUbwoJVAgM9mxowqHC7fhjeSWCXj7MfwqUc6PyoNGTXUaAsjVEALw_wcB"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Nutribay"
+                        >
+                            <img
+                                src="/storage/nutribay.png"
+                                alt="Nutribay"
+                                class="h-auto w-[150px] object-contain md:w-[225px]"
+                            />
+                        </a>
+                    </figure>
                 </div>
             </div>
         </section>

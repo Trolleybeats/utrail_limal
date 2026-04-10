@@ -36,42 +36,42 @@ const imgFacebook =
                 >
                     <li>
                         <a
-                            href="/presentation"
+                            href="/Presentation"
                             class="whitespace-nowrap hover:underline"
                             >Présentation</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/histoire"
+                            href="/Histoire"
                             class="whitespace-nowrap hover:underline"
                             >Histoire du club</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/equipe"
+                            href="/Equipe"
                             class="whitespace-nowrap hover:underline"
                             >L'équipe</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/projet"
+                            href="/Projet"
                             class="whitespace-nowrap hover:underline"
                             >Projet de l'année</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/formation"
+                            href="/Formation"
                             class="whitespace-nowrap hover:underline"
                             >Utrail formation</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/contact"
+                            href="/Contact"
                             class="whitespace-nowrap hover:underline"
                             >Contact</a
                         >
@@ -83,38 +83,69 @@ const imgFacebook =
             <div
                 class="mb-8 flex flex-col items-center gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between"
             >
-                <a
-                    href="/mentions-legales"
-                    class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
-                >
-                    Mentions légales
-                </a>
+                <p>
+                    <a
+                        href="/Mentions-legales"
+                        class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
+                    >
+                        Mentions légales
+                    </a>
+                </p>
 
                 <!-- Sponsor logos -->
                 <div class="flex items-center gap-8 md:gap-16 lg:gap-30">
-                    <img
-                        src="storage/Cubitus.png"
-                        alt="Cubitus"
-                        class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
-                    />
-                    <img
-                        src="storage/Trakks.png"
-                        alt="Trakks"
-                        class="h-[20px] w-[60px] object-contain md:h-[28px] md:w-[88px]"
-                    />
-                    <img
-                        src="storage/Nutribay.png"
-                        alt="Nutribay"
-                        class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
-                    />
+                    <figure>
+                        <a
+                            href="https://www.kine-cubitus.be/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Cubitus"
+                        >
+                            <img
+                                src="storage/Cubitus.png"
+                                alt="Cubitus"
+                                class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
+                            />
+                        </a>
+                    </figure>
+                    <figure>
+                        <a
+                            href="https://www.trakks.be/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Trakks"
+                        >
+                            <img
+                                src="storage/Trakks.png"
+                                alt="Trakks"
+                                class="h-[20px] w-[60px] object-contain md:h-[28px] md:w-[88px]"
+                            />
+                        </a>
+                    </figure>
+                    <figure>
+                        <a
+                            href="https://www.nutri-bay.com/?gad_source=1&gad_campaignid=23160452095&gbraid=0AAAAADLj-_k5EqPqE0C4vuiRAyvL8GvNS&gclid=Cj0KCQjwv-LOBhCdARIsAM5hdKeTkcDJ5bwRUbwoJVAgM9mxowqHC7fhjeSWCXj7MfwqUc6PyoNGTXUaAsjVEALw_wcB"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Nutribay"
+                        >
+                            <img
+                                src="storage/Nutribay.png"
+                                alt="Nutribay"
+                                class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
+                            />
+                        </a>
+                    </figure>
                 </div>
 
-                <a
-                    href="/confidentialite"
-                    class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
-                >
-                    Politique de confidentialité
-                </a>
+                <p>
+                    <a
+                        href="/Confidentialite"
+                        class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
+                    >
+                        Politique de confidentialité
+                    </a>
+                </p>
             </div>
         </div>
 
@@ -123,7 +154,7 @@ const imgFacebook =
             <p
                 class="text-center text-base font-normal text-white md:text-[20px]"
             >
-                © U-Trail Limal 2026
+                © U-Trail Limal {{ new Date().getFullYear() }}
             </p>
         </div>
     </footer>

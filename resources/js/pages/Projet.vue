@@ -24,7 +24,7 @@ import Footer from '@/components/site/Footer.vue';
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
             >
-                Projet de l'année
+                Projet de l'année {{ new Date().getFullYear() }}
             </h2>
         </div>
     </main>

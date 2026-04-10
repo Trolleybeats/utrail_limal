@@ -26,6 +26,20 @@ import Footer from '@/components/site/Footer.vue';
             >
                 Notre équipe
             </h2>
+
+            <h3
+                class="mb-4 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-6 md:text-3xl lg:text-[32px]"
+            >
+                Vous rêvez de prendre le départ d’un trail ou d’un ultra-trail ?
+            </h3>
+            <p
+                class="mb-6 text-lg text-gray-700 sm:text-xl md:mb-8 md:text-2xl lg:text-[24px]"
+            >
+                Avec U-Trail Limal, nous vous accompagnons sur plusieurs mois
+                pour transformer ce rêve en réalité, grâce à un programme
+                complet mêlant préparation physique et préparation spécifique au
+                trail, au sein d’un projet collectif motivant.
+            </p>
         </div>
     </main>
     <Footer />

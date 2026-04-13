@@ -238,7 +238,14 @@ const props = defineProps<{
                     </figure>
                     <figure
                         v-else-if="projetActuel.photos.length"
-                        class="grid grid-cols-3 gap-2"
+                        :class="[
+                            'grid gap-2',
+                            projetActuel.photos.length === 1
+                                ? 'grid-cols-1'
+                                : projetActuel.photos.length === 2
+                                  ? 'grid-cols-2'
+                                  : 'grid-cols-3',
+                        ]"
                     >
                         <img
                             v-for="photo in projetActuel.photos.slice(0, 4)"

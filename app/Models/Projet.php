@@ -13,6 +13,17 @@ class Projet extends Model
     protected $fillable = [
         'titre',
         'description',
-        'photo',
+        'photo_id',
+        'ordre',
     ];
+
+    public function photoPrincipale()
+    {
+        return $this->belongsTo(PhotoProjet::class, 'photo_id');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(PhotoProjet::class);
+    }
 }

@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhotoProjet;
 use App\Models\Projet;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ProjetController extends Controller
 {
+    public function presentation()
+    {
+        return Inertia::render('Presentation', [
+            'projets' => Projet::with(['photoPrincipale', 'photos'])->orderBy('ordre')->get(),
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return Inertia::render('admin/projets/Index', [
-            'projets' => Projet::all(),
+            'projets' => Projet::orderBy('ordre')->get(),
         ]);
     }
 
@@ -31,24 +39,39 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
-            'niveau' => 'required|string|max:255',
-            'date' => 'required|date',
-            'photo' => 'nullable|image|max:2048',
+            'photos' => 'nullable|array',
+            'photos.*' => 'image|max:5120',
+            'photo_principale_index' => 'nullable|integer|min:0',
         ]);
 
-        // Handle file upload if photo is provided
-        if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('projets', 'public');
+        $projet = Projet::create([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'ordre' => (Projet::max('ordre') ?? 0) + 1,
+        ]);
+
+        if ($request->hasFile('photos')) {
+            $principaleIndex = (int) ($request->input('photo_principale_index', 0));
+            $firstPhoto = null;
+
+            foreach ($request->file('photos') as $index => $file) {
+                $chemin = $file->store('projets', 'public');
+                $photo = $projet->photos()->create(['chemin' => $chemin]);
+
+                if ($index === $principaleIndex) {
+                    $firstPhoto = $photo;
+                }
+            }
+
+            if ($firstPhoto) {
+                $projet->update(['photo_id' => $firstPhoto->id]);
+            }
         }
 
-        // Create the project
-        Projet::create($validated);
-
-        return redirect()->route('projets.index')->with('success', 'Project created successfully.');
-
+        return redirect()->route('projets.index')->with('success', 'Projet créé avec succès.');
     }
 
     /**
@@ -67,34 +90,45 @@ class ProjetController extends Controller
     public function edit(string $id)
     {
         return Inertia::render('admin/projets/Edit', [
-            'projet' => Projet::findOrFail($id),
+            'projet' => Projet::with(['photos', 'photoPrincipale'])->findOrFail($id),
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $validated = $request->validate([
+        $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
-            'niveau' => 'required|string|max:255',
-            'date' => 'required|date',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image|max:5120',
         ]);
 
         $projet = Projet::findOrFail($id);
+        $projet->update([
+            'titre' => $request->titre,
+            'description' => $request->description,
+        ]);
 
-        // Handle file upload if photo is provided
         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('projets', 'public');
+            $chemin = $request->file('photo')->store('projets', 'public');
+            $photo = $projet->photos()->create(['chemin' => $chemin]);
+            $projet->update(['photo_id' => $photo->id]);
         }
 
-        // Update the project
-        $projet->update($validated);
+        return redirect()->route('projets.index')->with('success', 'Projet mis à jour avec succès.');
+    }
 
-        return redirect()->route('projets.index')->with('success', 'Project updated successfully.');
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'ordre' => 'required|array',
+            'ordre.*' => 'integer|exists:projets,id',
+        ]);
+
+        foreach ($request->ordre as $position => $id) {
+            Projet::where('id', $id)->update(['ordre' => $position + 1]);
+        }
+
+        return back();
     }
 
     /**

@@ -20,13 +20,13 @@ import Footer from '@/components/site/Footer.vue';
         </figure>
     </header>
     <main>
-        <div class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
+        <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
             >
                 Projet de l'année {{ new Date().getFullYear() }}
             </h2>
-        </div>
+        </section>
     </main>
     <Footer />
 </template>

@@ -4,14 +4,11 @@ use App\Http\Controllers\PhotoProjetController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Features;
 
 //Page statique public
-Route::inertia('/', 'Welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+Route::get('/', [ProjetController::class, 'welcome'])->name('home');
 Route::get('/Presentation', [ProjetController::class, 'presentation'])->name('presentation');
-Route::inertia('/Projet', 'Projet')->name('projet');
+Route::get('/Projet', [ProjetController::class, 'projetPage'])->name('projet');
 Route::inertia('/Equipe', 'Equipe')->name('equipe');
 Route::inertia('/Inscription', 'Inscription')->name('inscription');
 Route::inertia('/Paiement', 'Paiement')->name('paiement');

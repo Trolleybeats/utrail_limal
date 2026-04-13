@@ -2,6 +2,17 @@
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
 import { Link } from '@inertiajs/vue3';
+
+const props = defineProps<{
+    canRegister?: boolean;
+    projetActuel: {
+        id: number;
+        titre: string;
+        description: string;
+        photos: { id: number; url: string }[];
+        photoPrincipale: { id: number; url: string } | null;
+    } | null;
+}>();
 </script>
 
 <template>
@@ -206,7 +217,61 @@ import { Link } from '@inertiajs/vue3';
                 </div>
             </div>
         </section>
-        <!-- <section id="projet">Faire un components pour ajout via CMS</section> -->
+        <section
+            id="projet"
+            v-if="projetActuel"
+            class="mx-auto w-full max-w-[1182px] px-4 py-10 md:py-16"
+        >
+            <h2
+                class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+            >
+                Projet de l'année {{ new Date().getFullYear() }}
+            </h2>
+            <div>
+                <div>
+                    <figure v-if="projetActuel.photoPrincipale">
+                        <img
+                            :src="projetActuel.photoPrincipale.url"
+                            :alt="projetActuel.titre"
+                            class="h-64 w-full rounded object-contain md:h-80"
+                        />
+                    </figure>
+                    <figure
+                        v-else-if="projetActuel.photos.length"
+                        class="grid grid-cols-3 gap-2"
+                    >
+                        <img
+                            v-for="photo in projetActuel.photos.slice(0, 4)"
+                            :key="photo.id"
+                            :src="photo.url"
+                            :alt="projetActuel.titre"
+                            class="h-64 w-full rounded object-contain"
+                        />
+                    </figure>
+                    <div class="mt-12 w-full space-y-4">
+                        <p
+                            v-for="(
+                                paragraph, index
+                            ) in projetActuel.description
+                                .split('\n')
+                                .filter((p) => p.trim())"
+                            :key="index"
+                            class="w-full text-justify text-sm leading-relaxed text-gray-800 sm:text-base md:text-[20px]"
+                        >
+                            {{ paragraph }}
+                        </p>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <Link
+                            href="/Inscription"
+                            class="inline-block rounded-sm bg-[#C42827] px-6 py-3 text-sm font-semibold text-[#F6F6F6] sm:text-2xl"
+                        >
+                            Rejoindre l'aventure
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <Footer></Footer>
 </template>

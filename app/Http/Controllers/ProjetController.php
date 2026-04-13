@@ -16,6 +16,21 @@ class ProjetController extends Controller
         ]);
     }
 
+    public function welcome()
+    {
+        return Inertia::render('Welcome', [
+            'canRegister' => \Laravel\Fortify\Features::enabled(\Laravel\Fortify\Features::registration()),
+            'projetActuel' => Projet::with(['photoPrincipale', 'photos'])->orderBy('ordre')->first(),
+        ]);
+    }
+
+    public function projetPage()
+    {
+        return Inertia::render('Projet', [
+            'projetActuel' => Projet::with(['photoPrincipale', 'photos'])->orderBy('ordre')->first(),
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */

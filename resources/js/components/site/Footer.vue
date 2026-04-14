@@ -35,15 +35,13 @@ const imgFacebook =
                     class="flex flex-row flex-wrap gap-x-9 gap-y-3 text-base font-normal md:flex-nowrap md:gap-x-16 md:text-[20px] lg:gap-x-25"
                 >
                     <li>
-                        <a
-                            href="/Presentation"
-                            class="whitespace-nowrap hover:underline"
-                            >Présentation</a
+                        <a href="/" class="whitespace-nowrap hover:underline"
+                            >Accueil</a
                         >
                     </li>
                     <li>
                         <a
-                            href="/Histoire"
+                            href="/Presentation"
                             class="whitespace-nowrap hover:underline"
                             >Histoire du club</a
                         >

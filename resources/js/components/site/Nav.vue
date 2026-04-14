@@ -25,7 +25,7 @@ const mobileOpen = ref(false);
             >
                 <li>
                     <a href="/" class="whitespace-nowrap hover:underline"
-                        >Présentation</a
+                        >Accueil</a
                     >
                 </li>
                 <li>

@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EquipeController extends Controller
 {
+    public function equipe()
+    {
+        return Inertia::render('Equipe', [
+            'equipes' => Equipe::all(),
+        ]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,8 +43,14 @@ class EquipeController extends Controller
             'prenom' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'description' => 'required|string',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('photos', 'public');
+            $validated['photo'] = $photoPath;
+        }
 
         Equipe::create($validated);
 
@@ -76,12 +89,31 @@ class EquipeController extends Controller
             'prenom' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'description' => 'required|string',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('photo')) {
+            if ($equipe->photo) {
+                Storage::disk('public')->delete($equipe->photo);
+            }
+            $validated['photo'] = $request->file('photo')->store('photos', 'public');
+        }
 
         $equipe->update($validated);
 
         return redirect()->route('equipes.index')->with('success', 'Equipe updated successfully.');
+    }
+
+    public function deletePhoto(string $id)
+    {
+        $equipe = Equipe::findOrFail($id);
+
+        if ($equipe->photo) {
+            Storage::disk('public')->delete($equipe->photo);
+            $equipe->update(['photo' => null]);
+        }
+
+        return back();
     }
 
     /**

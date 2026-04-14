@@ -172,7 +172,7 @@ function submitForm() {
                             class="absolute top-2 left-2 rounded bg-white/80 px-1.5 py-0.5 text-xs text-gray-700 opacity-0 transition-opacity group-hover:opacity-100 hover:bg-white"
                             title="Définir comme principale"
                         >
-                            ⭐ Principale
+                            ⭐
                         </button>
                         <!-- Bouton supprimer -->
                         <button

@@ -11,8 +11,13 @@ class ProjetController extends Controller
 {
     public function presentation()
     {
+        $projetActuel = Projet::orderBy('ordre')->first();
+
         return Inertia::render('Presentation', [
-            'projets' => Projet::with(['photoPrincipale', 'photos'])->orderBy('ordre')->get(),
+            'projets' => Projet::with(['photoPrincipale', 'photos'])
+                ->orderBy('ordre')
+                ->when($projetActuel, fn($q) => $q->where('id', '!=', $projetActuel->id))
+                ->get(),
         ]);
     }
 

@@ -15,33 +15,30 @@ import DropdownMenuLabel from '@/components/ui/dropdown-menu/DropdownMenuLabel.v
 import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
 
 const props = defineProps({
-    projets: {
+    equipes: {
         type: Array,
         required: true,
     },
 });
 
-// Copie locale pour la réorganisation
-const liste = ref([...props.projets]);
-
 const deleteDialog = ref(false);
-const projetToDelete = ref(null);
+const equipeToDelete = ref(null);
 
-function openDeleteDialog(projet) {
-    projetToDelete.value = projet;
+function openDeleteDialog(equipe) {
+    equipeToDelete.value = equipe;
     deleteDialog.value = true;
 }
 
-const deleteProjet = () => {
-    if (projetToDelete.value) {
-        router.delete(`/admin/projets/${projetToDelete.value.id}`, {
+const deleteEquipe = () => {
+    if (equipeToDelete.value) {
+        router.delete(`/admin/equipes/${equipeToDelete.value.id}`, {
             onSuccess: () => {
                 deleteDialog.value = false;
-                projetToDelete.value = null;
+                equipeToDelete.value = null;
             },
             onError: (errors) => {
                 console.error(
-                    'Erreur lors de la suppression du projet.',
+                    "Erreur lors de la suppression de l'équipe.",
                     errors,
                 );
             },
@@ -49,89 +46,39 @@ const deleteProjet = () => {
     }
 };
 
-const editProjet = (projet) => {
-    router.visit(`/admin/projets/${projet.id}/edit`);
+const editEquipe = (equipe) => {
+    router.visit(`/admin/equipes/${equipe.id}/edit`);
 };
 
-const createProjet = () => {
-    router.visit('/admin/projets/create');
+const createEquipe = () => {
+    router.visit('/admin/equipes/create');
 };
-
-function moveUp(index) {
-    if (index === 0) return;
-    const arr = [...liste.value];
-    [arr[index - 1], arr[index]] = [arr[index], arr[index - 1]];
-    liste.value = arr;
-    saveOrder();
-}
-
-function moveDown(index) {
-    if (index === liste.value.length - 1) return;
-    const arr = [...liste.value];
-    [arr[index + 1], arr[index]] = [arr[index], arr[index + 1]];
-    liste.value = arr;
-    saveOrder();
-}
-
-function saveOrder() {
-    router.post(
-        '/admin/projets/reorder',
-        { ordre: liste.value.map((p) => p.id) },
-        { preserveScroll: true },
-    );
-}
 </script>
 
 <template>
     <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Projets</h1>
-        <Button @click="createProjet" class="text-[#F6F6F6]"
-            >Créer un projet</Button
+        <h1 class="px-4 py-4 text-2xl font-bold">Équipes</h1>
+        <Button @click="createEquipe" class="text-[#F6F6F6]"
+            >Créer une équipe</Button
         >
-        <table class="w-full table-auto">
+        <table class="w-full table-auto border-collapse">
             <thead>
-                <tr>
-                    <th class="border px-4 py-2 text-left">Ordre</th>
-                    <th class="border px-4 py-2 text-left">Nom du projet</th>
-                    <th class="border px-4 py-2 text-left">Description</th>
+                <tr class="bg-gray-100">
+                    <th class="border px-4 py-2 text-left">Nom</th>
+                    <th class="border px-4 py-2 text-left">Prénom</th>
+                    <th class="border px-4 py-2 text-left">Rôle</th>
                     <th class="border px-4 py-2 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr
-                    v-for="(projet, index) in liste"
-                    :key="projet.id"
-                    @click="editProjet(projet)"
-                    class="cursor-pointer hover:bg-gray-50"
+                    v-for="equipe in equipes"
+                    :key="equipe.id"
+                    class="hover:bg-gray-50"
                 >
-                    <td class="border px-4 py-2 whitespace-nowrap" @click.stop>
-                        <div class="flex items-center gap-1">
-                            <button
-                                type="button"
-                                :disabled="index === 0"
-                                @click="moveUp(index)"
-                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
-                                title="Monter"
-                            >
-                                ▲
-                            </button>
-                            <span
-                                class="w-6 text-center text-sm text-gray-600"
-                                >{{ index + 1 }}</span
-                            >
-                            <button
-                                type="button"
-                                :disabled="index === liste.length - 1"
-                                @click="moveDown(index)"
-                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
-                                title="Descendre"
-                            >
-                                ▼
-                            </button>
-                        </div>
-                    </td>
-                    <td class="border px-4 py-2">{{ projet.titre }}</td>
-                    <td class="border px-4 py-2">{{ projet.description }}</td>
+                    <td class="border px-4 py-2">{{ equipe.nom }}</td>
+                    <td class="border px-4 py-2">{{ equipe.prenom }}</td>
+                    <td class="border px-4 py-2">{{ equipe.role }}</td>
                     <td
                         class="border px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
                         @click.stop
@@ -149,13 +96,13 @@ function saveOrder() {
                                 "
                             >
                                 <DropdownMenuLabel>
-                                    Actions pour {{ projet.titre }}
+                                    Actions pour {{ equipe.nom }}
                                 </DropdownMenuLabel>
-                                <DropdownMenuItem @click="editProjet(projet)">
+                                <DropdownMenuItem @click="editEquipe(equipe)">
                                     Modifier
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
-                                    @click="openDeleteDialog(projet)"
+                                    @click="openDeleteDialog(equipe)"
                                 >
                                     Supprimer
                                 </DropdownMenuItem>
@@ -177,8 +124,8 @@ function saveOrder() {
             <DialogHeader>
                 <DialogTitle>Confirmer la suppression</DialogTitle>
                 <DialogDescription>
-                    Êtes-vous sûr de vouloir supprimer le projet "{{
-                        projetToDelete?.titre
+                    Êtes-vous sûr de vouloir supprimer l'équipe "{{
+                        equipeToDelete?.nom
                     }}" ? Cette action est irréversible.
                 </DialogDescription>
             </DialogHeader>
@@ -192,7 +139,7 @@ function saveOrder() {
                 </Button>
                 <Button
                     variant="destructive"
-                    @click="deleteProjet"
+                    @click="deleteEquipe"
                     style="background-color: var(--button)"
                 >
                     Supprimer

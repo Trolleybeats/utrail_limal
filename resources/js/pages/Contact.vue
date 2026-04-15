@@ -1,15 +1,29 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
-import { ref } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+import { submit as contactSubmit } from '@/routes/contact';
 
-const form = ref({
+const form = useForm({
     prenom: '',
     nom: '',
     email: '',
     telephone: '',
     message: '',
 });
+
+const submitForm = () => {
+    form.post(contactSubmit().url, {
+        onSuccess: () => {
+            form.reset();
+        },
+        onError: (errors) => {
+            alert(
+                'Une erreur est survenue. Veuillez vérifier vos informations et réessayer.',
+            );
+        },
+    });
+};
 </script>
 
 <template>
@@ -63,7 +77,19 @@ const form = ref({
                         Une question sur le projet?
                     </h2>
 
-                    <form @submit.prevent class="flex flex-col gap-6 md:gap-8">
+                    <form
+                        @submit.prevent="submitForm"
+                        class="flex flex-col gap-6 md:gap-8"
+                    >
+                        <!-- Success message -->
+
+                        <p
+                            v-if="form.recentlySuccessful"
+                            class="mt-4 text-center text-green-600"
+                        >
+                            Votre message a été envoyé avec succès !
+                        </p>
+
                         <!-- Prénom + Nom de famille -->
                         <div
                             class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8"
@@ -76,8 +102,20 @@ const form = ref({
                                 <input
                                     v-model="form.prenom"
                                     type="text"
-                                    class="border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none"
+                                    :class="[
+                                        'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
+                                        {
+                                            'border-red-500':
+                                                form.errors.prenom,
+                                        },
+                                    ]"
                                 />
+                                <p
+                                    v-if="form.errors.prenom"
+                                    class="text-sm text-red-500"
+                                >
+                                    {{ form.errors.prenom }}
+                                </p>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label
@@ -87,8 +125,17 @@ const form = ref({
                                 <input
                                     v-model="form.nom"
                                     type="text"
-                                    class="border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none"
+                                    :class="[
+                                        'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
+                                        { 'border-red-500': form.errors.nom },
+                                    ]"
                                 />
+                                <p
+                                    v-if="form.errors.nom"
+                                    class="text-sm text-red-500"
+                                >
+                                    {{ form.errors.nom }}
+                                </p>
                             </div>
                         </div>
 
@@ -104,8 +151,17 @@ const form = ref({
                                 <input
                                     v-model="form.email"
                                     type="email"
-                                    class="border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none"
+                                    :class="[
+                                        'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
+                                        { 'border-red-500': form.errors.email },
+                                    ]"
                                 />
+                                <p
+                                    v-if="form.errors.email"
+                                    class="text-sm text-red-500"
+                                >
+                                    {{ form.errors.email }}
+                                </p>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label
@@ -115,8 +171,20 @@ const form = ref({
                                 <input
                                     v-model="form.telephone"
                                     type="tel"
-                                    class="border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none"
+                                    :class="[
+                                        'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
+                                        {
+                                            'border-red-500':
+                                                form.errors.telephone,
+                                        },
+                                    ]"
                                 />
+                                <p
+                                    v-if="form.errors.telephone"
+                                    class="text-sm text-red-500"
+                                >
+                                    {{ form.errors.telephone }}
+                                </p>
                             </div>
                         </div>
 
@@ -129,14 +197,24 @@ const form = ref({
                             <textarea
                                 v-model="form.message"
                                 rows="3"
-                                class="resize-none border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none"
+                                :class="[
+                                    'resize-none border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
+                                    { 'border-red-500': form.errors.message },
+                                ]"
                             ></textarea>
+                            <p
+                                v-if="form.errors.message"
+                                class="text-sm text-red-500"
+                            >
+                                {{ form.errors.message }}
+                            </p>
                         </div>
 
                         <!-- Submit -->
                         <div>
                             <button
                                 type="submit"
+                                @click="submitForm"
                                 class="w-full cursor-pointer rounded-sm bg-[#c42827] px-7 py-3 text-base font-semibold text-[#f6f6f6] sm:w-auto sm:text-lg md:text-xl"
                             >
                                 Envoyer
@@ -153,7 +231,7 @@ const form = ref({
                         >Suivez-nous</span
                     >
                     <a
-                        href="https://www.facebook.com/utraillimal"
+                        href="https://www.facebook.com/profile.php?id=61566596292504"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Facebook U-Trail Limal"

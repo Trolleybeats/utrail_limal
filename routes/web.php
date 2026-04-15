@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnvoiContactFormController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\PhotoProjetController;
@@ -16,6 +17,9 @@ Route::inertia('/Inscription', 'Inscription')->name('inscription');
 Route::inertia('/Paiement', 'Paiement')->name('paiement');
 Route::get('/Formation', [FormationController::class, 'formation'])->name('formation');
 Route::inertia('/Contact', 'Contact')->name('contact');
+
+//Contact form submission
+Route::post('/contact', EnvoiContactFormController::class)->name('contact.submit');
 
 //Page admin
 Route::middleware(['auth', 'verified'])->group(function () {

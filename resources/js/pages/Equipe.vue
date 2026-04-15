@@ -32,7 +32,7 @@ const props = defineProps({
         </figure>
     </header>
     <main>
-        <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
+        <section class="mx-auto w-full max-w-[1182px] px-4 py-6 md:py-8">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
             >
@@ -45,7 +45,7 @@ const props = defineProps({
                 Vous rêvez de prendre le départ d’un trail ou d’un ultra-trail ?
             </h3>
             <p
-                class="mb-6 text-lg text-gray-700 sm:text-xl md:mb-8 md:text-2xl lg:text-[24px]"
+                class="mb-4 text-lg text-gray-700 sm:text-xl md:mb-6 md:text-2xl lg:text-[24px]"
             >
                 Avec U-Trail Limal, nous vous accompagnons sur plusieurs mois
                 pour transformer ce rêve en réalité, grâce à un programme
@@ -53,14 +53,14 @@ const props = defineProps({
                 trail, au sein d’un projet collectif motivant.
             </p>
         </section>
-        <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
+        <section class="mx-auto w-full max-w-[1182px] px-4 py-4 md:py-8">
             <div
                 class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             >
                 <Card
                     v-for="equipe in equipes"
                     :key="equipe.id"
-                    class="overflow-hidden p-0"
+                    class="flex flex-col overflow-hidden p-0"
                 >
                     <img
                         v-if="equipe.photo"
@@ -75,8 +75,11 @@ const props = defineProps({
                         >
                         <CardDescription>{{ equipe.role }}</CardDescription>
                     </CardHeader>
-                    <CardContent v-if="equipe.description">
-                        <p class="pt-5 text-sm text-gray-600">
+                    <CardContent
+                        v-if="equipe.description"
+                        class="mt-auto pb-[18px]"
+                    >
+                        <p class="text-sm text-gray-600">
                             <a
                                 :href="`#membre-${equipe.id}`"
                                 class="text-primary hover:underline"
@@ -92,7 +95,7 @@ const props = defineProps({
             v-for="equipe in equipes"
             :key="equipe.id"
             :id="`membre-${equipe.id}`"
-            class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14"
+            class="mx-auto w-full max-w-[1182px] px-4 py-4 md:py-6"
         >
             <h3
                 class="mb-4 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-6 md:text-3xl lg:text-[32px]"

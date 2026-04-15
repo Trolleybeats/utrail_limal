@@ -84,7 +84,7 @@ function saveOrder() {
 
 <template>
     <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Projets</h1>
+        <h1 class="py-4 text-2xl font-bold">Projets</h1>
         <Button @click="createProjet" class="text-[#F6F6F6]"
             >Créer un projet</Button
         >

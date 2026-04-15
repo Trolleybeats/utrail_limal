@@ -11,7 +11,7 @@ class Formation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom',
+        'titre',
         'description',
         'date',
         'photo',

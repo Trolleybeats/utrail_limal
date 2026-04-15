@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\FormationController;
 use App\Http\Controllers\PhotoProjetController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\UserController;
@@ -13,7 +14,7 @@ Route::get('/Projet', [ProjetController::class, 'projetPage'])->name('projet');
 Route::get('/Equipe', [EquipeController::class, 'equipe'])->name('equipe');
 Route::inertia('/Inscription', 'Inscription')->name('inscription');
 Route::inertia('/Paiement', 'Paiement')->name('paiement');
-Route::inertia('/Formation', 'Formation')->name('formation');
+Route::get('/Formation', [FormationController::class, 'formation'])->name('formation');
 Route::inertia('/Contact', 'Contact')->name('contact');
 
 //Page admin
@@ -35,6 +36,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Gestion des équipes
     Route::resource('admin/equipes', EquipeController::class);
     Route::delete('admin/equipes/{equipe}/photo', [EquipeController::class, 'deletePhoto'])->name('admin.equipes.photo.delete');
+
+    //Gestion des formations
+    Route::resource('admin/formations', FormationController::class);
 });
 
 require __DIR__.'/settings.php';

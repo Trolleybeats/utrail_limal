@@ -57,7 +57,7 @@ const createEquipe = () => {
 
 <template>
     <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Équipes</h1>
+        <h1 class="py-4 text-2xl font-bold">Équipes</h1>
         <Button @click="createEquipe" class="text-[#F6F6F6]"
             >Créer une équipe</Button
         >

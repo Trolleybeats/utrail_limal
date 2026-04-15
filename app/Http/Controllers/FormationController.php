@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class FormationController extends Controller
 {
+
+    public function formation()
+    {
+        return Inertia::render('Formation', [
+            'formations' => Formation::all(),
+        ]);
+     }
+
     /**
      * Display a listing of the resource.
      */
@@ -35,9 +44,15 @@ class FormationController extends Controller
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image|max:5120',
             'niveau' => 'required|string|max:255',
         ]);
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('formations', 'public');
+            $validated['photo'] = $photoPath;
+        }
 
         Formation::create($validated);
 
@@ -75,9 +90,16 @@ class FormationController extends Controller
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'photo' => 'nullable|image|max:2048',
+            'photo' => 'nullable|image|max:5120',
             'niveau' => 'required|string|max:255',
         ]);
+
+        if ($request->hasFile('photo')) {
+            if ($formation->photo) {
+                Storage::disk('public')->delete($formation->photo);
+            }
+            $validated['photo'] = $request->file('photo')->store('formations', 'public');
+        }
 
         $formation->update($validated);
 

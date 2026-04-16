@@ -31,7 +31,7 @@ function openDeleteDialog(user) {
 
 const deleteUser = () => {
     if (userToDelete.value) {
-        router.delete(`/users/${userToDelete.value.id}`, {
+        router.delete(`/admin/users/${userToDelete.value.id}`, {
             onSuccess: () => {
                 deleteDialog.value = false;
                 userToDelete.value = null;
@@ -46,11 +46,22 @@ const deleteUser = () => {
         });
     }
 };
+
+const createUser = () => {
+    router.visit('/admin/users/create');
+};
+
+const editUser = (user) => {
+    router.visit(`/admin/users/${user.id}/edit`);
+};
 </script>
 
 <template>
     <div class="mx-4 my-4 space-y-4">
         <h1 class="px-4 py-4 text-2xl font-bold">Users</h1>
+        <Button @click="createUser" class="text-[#F6F6F6]"
+            >Créer un utilisateur</Button
+        >
         <table class="w-full table-auto">
             <thead>
                 <tr>
@@ -76,11 +87,7 @@ const deleteUser = () => {
                                 <DropdownMenuLabel>
                                     Actions pour {{ user.name }}
                                 </DropdownMenuLabel>
-                                <DropdownMenuItem
-                                    @click="
-                                        router.visit(`/users/${user.id}/edit`)
-                                    "
-                                >
+                                <DropdownMenuItem @click="editUser(user)">
                                     Modifier
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
@@ -97,7 +104,12 @@ const deleteUser = () => {
     </div>
     <!-- Dialog de confirmation de suppression -->
     <Dialog v-model:open="deleteDialog">
-        <DialogContent>
+        <DialogContent
+            style="
+                background-color: var(--background-footer);
+                color: var(--secondary);
+            "
+        >
             <DialogHeader>
                 <DialogTitle>Confirmer la suppression</DialogTitle>
                 <DialogDescription>
@@ -111,10 +123,16 @@ const deleteUser = () => {
                     type="button"
                     variant="outline"
                     @click="deleteDialog = false"
+                    style="color: var(--primary)"
                 >
                     Annuler
                 </Button>
-                <Button type="button" variant="destructive" @click="deleteUser">
+                <Button
+                    type="button"
+                    variant="destructive"
+                    @click="deleteUser"
+                    style="background-color: var(--button)"
+                >
                     Supprimer
                 </Button>
             </DialogFooter>

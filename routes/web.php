@@ -32,7 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 
     //Gestion des utilisateurs
-    Route::get('admin/users', [UserController::class, 'index'])->name('admin.users');
+    Route::resource('admin/users', UserController::class);
+
 
     //Gestion des projets
     Route::resource('admin/projets', ProjetController::class);

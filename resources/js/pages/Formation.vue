@@ -27,7 +27,7 @@ const props = defineProps<{
             <img
                 src="/storage/formation.jpg"
                 alt="Formation U-Trail Limal"
-                class="h-full w-full object-cover"
+                class="h-full w-full object-cover object-[center_70%]"
             />
         </figure>
     </header>

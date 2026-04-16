@@ -49,7 +49,7 @@ const submit = () => {
             <img
                 src="/storage/paiement.jpg"
                 alt="Paiement U-Trail Limal"
-                class="h-full w-full object-cover"
+                class="h-full w-full object-cover object-[center_60%]"
             />
         </figure>
     </header>

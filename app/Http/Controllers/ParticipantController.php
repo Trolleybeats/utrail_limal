@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ParticipantsExport;
 use App\Mail\LienPaiement;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ParticipantController extends Controller
 {
@@ -58,6 +60,11 @@ class ParticipantController extends Controller
         return Inertia::render('admin/participants/Show', [
             'participant' => Participant::findOrFail($id),
         ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new ParticipantsExport(), 'participants.xlsx');
     }
 
     /**

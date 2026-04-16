@@ -51,10 +51,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Gestion des participants
     Route::post('admin/participants/send-mail-all', [ParticipantController::class, 'sendMailAll'])->name('admin.participants.send-mail-all');
+    Route::get('admin/participants/export', [ParticipantController::class, 'export'])->name('admin.participants.export');
     Route::resource('admin/participants', ParticipantController::class);
     Route::post('admin/participants/{participant}/send-mail', [ParticipantController::class, 'resendMail'])->name('admin.participants.resend-mail');
 
     //Gestion des membres
+    Route::get('admin/membres/export', [MembreController::class, 'export'])->name('admin.membres.export');
     Route::resource('admin/membres', MembreController::class);
 });
 

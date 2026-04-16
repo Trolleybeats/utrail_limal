@@ -59,11 +59,20 @@ const envoimail = (participant) => {
 const envoimailAll = () => {
     router.post('/admin/participants/send-mail-all');
 };
+
+const exportExcel = () => {
+    window.location.href = '/admin/participants/export';
+};
 </script>
 
 <template>
     <section class="mx-4 my-4 space-y-4">
-        <h1 class="py-4 text-2xl font-bold">Participants</h1>
+        <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-bold">Participants</h1>
+            <Button @click="exportExcel" variant="outline">
+                Exporter Excel
+            </Button>
+        </div>
         <div class="flex">
             <Button @click="envoimailAll" style="color: var(--secondary)"
                 >Envoyer le mail à tous</Button

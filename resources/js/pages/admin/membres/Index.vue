@@ -58,11 +58,20 @@ const dateFormat = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(date).toLocaleDateString('fr-FR', options);
 };
+
+const exportExcel = () => {
+    window.location.href = '/admin/membres/export';
+};
 </script>
 
 <template>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="mb-6 text-2xl font-bold">Gestion des Membres</h1>
+        <div class="mb-6 flex items-center justify-between">
+            <h1 class="text-2xl font-bold">Gestion des Membres</h1>
+            <Button @click="exportExcel" variant="outline">
+                Exporter Excel
+            </Button>
+        </div>
         <div class="overflow-x-auto rounded-lg border">
             <table class="w-full table-auto border-collapse">
                 <thead>

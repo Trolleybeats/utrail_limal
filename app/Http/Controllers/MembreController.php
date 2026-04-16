@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MembresExport;
 use App\Models\Membre;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MembreController extends Controller
 {
@@ -103,6 +105,11 @@ class MembreController extends Controller
         $membre->update($validated);
 
         return redirect()->route('membres.index')->with('success', 'Membre updated successfully.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new MembresExport(), 'membres.xlsx');
     }
 
     /**

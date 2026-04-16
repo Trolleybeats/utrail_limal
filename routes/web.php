@@ -3,6 +3,8 @@
 use App\Http\Controllers\EnvoiContactFormController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\MembreController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PhotoProjetController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\UserController;
@@ -14,7 +16,9 @@ Route::get('/Presentation', [ProjetController::class, 'presentation'])->name('pr
 Route::get('/Projet', [ProjetController::class, 'projetPage'])->name('projet');
 Route::get('/Equipe', [EquipeController::class, 'equipe'])->name('equipe');
 Route::inertia('/Inscription', 'Inscription')->name('inscription');
-Route::inertia('/Paiement', 'Paiement')->name('paiement');
+Route::post('/inscription', [ParticipantController::class, 'store'])->name('inscription.store');
+Route::get('/paiement/{token}', [MembreController::class, 'create'])->name('paiement');
+Route::post('/paiement/{token}', [MembreController::class, 'store'])->name('paiement.store');
 Route::get('/Formation', [FormationController::class, 'formation'])->name('formation');
 Route::inertia('/Contact', 'Contact')->name('contact');
 
@@ -43,6 +47,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Gestion des formations
     Route::resource('admin/formations', FormationController::class);
+
+    //Gestion des participants
+    Route::resource('admin/participants', ParticipantController::class);
+
+    //Gestion des membres
+    Route::resource('admin/membres', MembreController::class);
 });
 
 require __DIR__.'/settings.php';

@@ -15,6 +15,14 @@ class Participant extends Model
         'prenom',
         'email',
         'telephone',
+        'rgpd',
+        'pre_inscription',
+        'token',
+    ];
+
+    protected $casts = [
+        'rgpd' => 'boolean',
+        'pre_inscription' => 'boolean',
     ];
 
     public function membres()

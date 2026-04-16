@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LienPaiement;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class ParticipantController extends Controller
@@ -23,7 +26,7 @@ class ParticipantController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/participants/Create');
+        return Inertia::render('Inscription');
     }
 
     /**
@@ -36,11 +39,17 @@ class ParticipantController extends Controller
             'prenom' => 'required|string|max:255',
             'email' => 'required|email|unique:participants,email',
             'telephone' => 'nullable|string|max:20',
+            'rgpd' => 'accepted',
+            'pre_inscription' => 'accepted',
         ]);
 
-        Participant::create($validated);
+        $validated['token'] = Str::uuid()->toString();
 
-        return redirect()->route('participants.index')->with('success', 'Participant created successfully.');
+        $participant = Participant::create($validated);
+
+        Mail::to($participant->email)->send(new LienPaiement($participant));
+
+        return redirect()->route('inscription')->with('success', 'Votre inscription a été envoyée avec succès !');
     }
 
     /**

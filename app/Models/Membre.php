@@ -20,6 +20,17 @@ class Membre extends Model
         'distance_deux',
         'logement_deux',
         'tshirt_taille',
+        'rgpd',
+        'inscription',
+    ];
+
+    protected $casts = [
+        'participation_un' => 'boolean',
+        'participation_deux' => 'boolean',
+        'logement_un' => 'boolean',
+        'logement_deux' => 'boolean',
+        'rgpd' => 'boolean',
+        'inscription' => 'boolean',
     ];
 
     public function participant()

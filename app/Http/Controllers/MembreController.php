@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membre;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,38 +15,50 @@ class MembreController extends Controller
     public function index()
     {
         return Inertia::render('admin/membres/Index', [
-            'membres' => Membre::all(),
+            'membres' => Membre::with('participant')->get(),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $token)
     {
-        return Inertia::render('admin/membres/Create');
+        $participant = Participant::where('token', $token)->firstOrFail();
+
+        return Inertia::render('Paiement', [
+            'participant' => array_merge(
+                $participant->only('id', 'nom', 'prenom', 'email'),
+                ['token' => $token]
+            ),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $token)
     {
+        $participant = Participant::where('token', $token)->firstOrFail();
+
         $validated = $request->validate([
-            'participant_id' => 'required|exists:participants,id',
             'date_naissance' => 'required|date',
             'participation_un' => 'required|boolean',
             'distance_un' => 'required|string|max:255',
-            'logement_un' => 'required|string|max:255',
+            'logement_un' => 'required|boolean',
             'participation_deux' => 'required|boolean',
             'distance_deux' => 'required|string|max:255',
-            'logement_deux' => 'required|string|max:255',
+            'logement_deux' => 'required|boolean',
             'tshirt_taille' => 'required|string|max:255',
+            'rgpd' => 'accepted',
+            'inscription' => 'accepted',
         ]);
+
+        $validated['participant_id'] = $participant->id;
 
         Membre::create($validated);
 
-        return redirect()->route('membres.index')->with('success', 'Membre created successfully.');
+        return redirect()->route('projet')->with('success', 'Votre inscription est confirmée !');
     }
 
     /**
@@ -80,10 +93,10 @@ class MembreController extends Controller
             'date_naissance' => 'required|date',
             'participation_un' => 'required|boolean',
             'distance_un' => 'required|string|max:255',
-            'logement_un' => 'required|string|max:255',
+            'logement_un' => 'required|boolean',
             'participation_deux' => 'required|boolean',
             'distance_deux' => 'required|string|max:255',
-            'logement_deux' => 'required|string|max:255',
+            'logement_deux' => 'required|boolean',
             'tshirt_taille' => 'required|string|max:255',
         ]);
 

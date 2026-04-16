@@ -49,11 +49,26 @@ const deleteParticipant = () => {
 const editParticipant = (participant) => {
     router.visit(`/admin/participants/${participant.id}/edit`);
 };
+
+const envoimail = (participant) => {
+    if (participant) {
+        router.post(`/admin/participants/${participant.id}/send-mail`);
+    }
+};
+
+const envoimailAll = () => {
+    router.post('/admin/participants/send-mail-all');
+};
 </script>
 
 <template>
     <section class="mx-4 my-4 space-y-4">
         <h1 class="py-4 text-2xl font-bold">Participants</h1>
+        <div class="flex">
+            <Button @click="envoimailAll" style="color: var(--secondary)"
+                >Envoyer le mail à tous</Button
+            >
+        </div>
         <div class="overflow-x-auto rounded-lg border">
             <table class="w-full table-auto border-collapse">
                 <thead>
@@ -123,6 +138,11 @@ const editParticipant = (participant) => {
                                         @click="openDeleteDialog(participant)"
                                     >
                                         Supprimer
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        @click="envoimail(participant)"
+                                    >
+                                        Envoyer le Mail
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>

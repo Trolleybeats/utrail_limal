@@ -50,7 +50,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('admin/formations', FormationController::class);
 
     //Gestion des participants
+    Route::post('admin/participants/send-mail-all', [ParticipantController::class, 'sendMailAll'])->name('admin.participants.send-mail-all');
     Route::resource('admin/participants', ParticipantController::class);
+    Route::post('admin/participants/{participant}/send-mail', [ParticipantController::class, 'resendMail'])->name('admin.participants.resend-mail');
 
     //Gestion des membres
     Route::resource('admin/membres', MembreController::class);

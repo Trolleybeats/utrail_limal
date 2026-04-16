@@ -47,8 +47,6 @@ class ParticipantController extends Controller
 
         $participant = Participant::create($validated);
 
-        Mail::to($participant->email)->send(new LienPaiement($participant));
-
         return redirect()->route('inscription')->with('success', 'Votre inscription a été envoyée avec succès !');
     }
 
@@ -100,5 +98,23 @@ class ParticipantController extends Controller
         $participant->delete();
 
         return redirect()->route('participants.index')->with('success', 'Participant deleted successfully.');
+    }
+
+    public function resendMail(Participant $participant)
+    {
+        Mail::to($participant->email)->send(new LienPaiement($participant));
+
+        return back()->with('success', 'Mail renvoyé avec succès.');
+    }
+
+    public function sendMailAll()
+    {
+        $participants = Participant::all();
+
+        foreach ($participants as $participant) {
+            Mail::to($participant->email)->send(new LienPaiement($participant));
+        }
+
+        return back()->with('success', 'Mails envoyés à tous les participants.');
     }
 }

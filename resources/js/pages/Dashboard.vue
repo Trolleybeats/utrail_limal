@@ -3,11 +3,22 @@ import { Head } from '@inertiajs/vue3';
 import PlaceholderPattern from '@/components/PlaceholderPattern.vue';
 import { dashboard } from '@/routes';
 
+const props = defineProps({
+    participantsCount: {
+        type: Number,
+        required: true,
+    },
+    membresCount: {
+        type: Number,
+        required: true,
+    },
+});
+
 defineOptions({
     layout: {
         breadcrumbs: [
             {
-                title: 'Dashboard',
+                title: "Vue d'ensemble",
                 href: dashboard(),
             },
         ],
@@ -23,14 +34,18 @@ defineOptions({
     >
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
             <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
+                class="relative flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-sidebar-border/70 p-6 dark:border-sidebar-border"
             >
-                <PlaceholderPattern />
+                <span class="text-4xl font-bold">{{
+                    props.participantsCount
+                }}</span>
+                <span class="text-sm text-muted-foreground">Participants</span>
             </div>
             <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
+                class="relative flex flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border border-sidebar-border/70 p-6 dark:border-sidebar-border"
             >
-                <PlaceholderPattern />
+                <span class="text-4xl font-bold">{{ props.membresCount }}</span>
+                <span class="text-sm text-muted-foreground">Membres</span>
             </div>
             <div
                 class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"

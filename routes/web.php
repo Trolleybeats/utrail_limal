@@ -8,7 +8,10 @@ use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PhotoProjetController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\UserController;
+use App\Models\Membre;
+use App\Models\Participant;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 //Page statique public
 Route::get('/', [ProjetController::class, 'welcome'])->name('home');
@@ -29,7 +32,12 @@ Route::post('/contact', EnvoiContactFormController::class)->name('contact.submit
 Route::middleware(['auth', 'verified'])->group(function () {
 
     //Page accueil admin
-    Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+    Route::get('dashboard', function () {
+        return Inertia::render('Dashboard', [
+            'participantsCount' => Participant::count(),
+            'membresCount' => Membre::count(),
+        ]);
+    })->name('dashboard');
 
     //Gestion des utilisateurs
     Route::resource('admin/users', UserController::class);
@@ -44,7 +52,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Gestion des équipes
     Route::resource('admin/equipes', EquipeController::class);
+    Route::post('admin/equipes/reorder', [EquipeController::class, 'reorder'])->name('admin.equipes.reorder');
     Route::delete('admin/equipes/{equipe}/photo', [EquipeController::class, 'deletePhoto'])->name('admin.equipes.photo.delete');
+    Route::patch('admin/equipes/{equipe}/masquer', [EquipeController::class, 'masquer'])->name('admin.equipes.masquer');
 
     //Gestion des formations
     Route::resource('admin/formations', FormationController::class);

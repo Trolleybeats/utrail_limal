@@ -21,6 +21,9 @@ const props = defineProps({
     },
 });
 
+// Copie locale pour la réorganisation
+const liste = ref([...props.equipes]);
+
 const deleteDialog = ref(false);
 const equipeToDelete = ref(null);
 
@@ -53,6 +56,40 @@ const editEquipe = (equipe) => {
 const createEquipe = () => {
     router.visit('/admin/equipes/create');
 };
+
+const masquerEquipe = (equipe) => {
+    router.patch(
+        `/admin/equipes/${equipe.id}/masquer`,
+        {},
+        {
+            preserveScroll: true,
+        },
+    );
+};
+
+function moveUp(index) {
+    if (index === 0) return;
+    const arr = [...liste.value];
+    [arr[index - 1], arr[index]] = [arr[index], arr[index - 1]];
+    liste.value = arr;
+    saveOrder();
+}
+
+function moveDown(index) {
+    if (index === liste.value.length - 1) return;
+    const arr = [...liste.value];
+    [arr[index + 1], arr[index]] = [arr[index], arr[index + 1]];
+    liste.value = arr;
+    saveOrder();
+}
+
+function saveOrder() {
+    router.post(
+        '/admin/equipes/reorder',
+        { ordre: liste.value.map((e) => e.id) },
+        { preserveScroll: true },
+    );
+}
 </script>
 
 <template>
@@ -64,21 +101,52 @@ const createEquipe = () => {
         <table class="w-full table-auto border-collapse">
             <thead>
                 <tr class="bg-gray-100">
+                    <th class="border px-4 py-2 text-left">Ordre</th>
                     <th class="border px-4 py-2 text-left">Nom</th>
                     <th class="border px-4 py-2 text-left">Prénom</th>
                     <th class="border px-4 py-2 text-left">Rôle</th>
+                    <th class="border px-4 py-2 text-left">Visible</th>
                     <th class="border px-4 py-2 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr
-                    v-for="equipe in equipes"
+                    v-for="(equipe, index) in liste"
                     :key="equipe.id"
                     class="hover:bg-gray-50"
                 >
+                    <td class="border px-4 py-2 whitespace-nowrap" @click.stop>
+                        <div class="flex items-center gap-1">
+                            <button
+                                type="button"
+                                :disabled="index === 0"
+                                @click="moveUp(index)"
+                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                                title="Monter"
+                            >
+                                ▲
+                            </button>
+                            <span
+                                class="w-6 text-center text-sm text-gray-600"
+                                >{{ index + 1 }}</span
+                            >
+                            <button
+                                type="button"
+                                :disabled="index === liste.length - 1"
+                                @click="moveDown(index)"
+                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                                title="Descendre"
+                            >
+                                ▼
+                            </button>
+                        </div>
+                    </td>
                     <td class="border px-4 py-2">{{ equipe.nom }}</td>
                     <td class="border px-4 py-2">{{ equipe.prenom }}</td>
                     <td class="border px-4 py-2">{{ equipe.role }}</td>
+                    <td class="border px-4 py-2">
+                        {{ equipe.masque ? 'Non' : 'Oui' }}
+                    </td>
                     <td
                         class="border px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
                         @click.stop
@@ -105,6 +173,11 @@ const createEquipe = () => {
                                     @click="openDeleteDialog(equipe)"
                                 >
                                     Supprimer
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                    @click="masquerEquipe(equipe)"
+                                >
+                                    {{ equipe.masque ? 'Afficher' : 'Masquer' }}
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>

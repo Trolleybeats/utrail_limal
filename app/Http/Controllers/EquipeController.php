@@ -12,16 +12,23 @@ class EquipeController extends Controller
     public function equipe()
     {
         return Inertia::render('Equipe', [
-            'equipes' => Equipe::all(),
+            'equipes' => Equipe::where('masque', false)->orderBy('ordre')->get(),
         ]);
     }
+    public function masquer(Equipe $equipe)
+    {
+        $equipe->update(['masque' => !$equipe->masque]);
+
+        return redirect()->back();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return Inertia::render('admin/equipes/Index', [
-            'equipes' => Equipe::all(),
+            'equipes' => Equipe::orderBy('ordre')->get(),
         ]);
     }
 
@@ -111,6 +118,20 @@ class EquipeController extends Controller
         if ($equipe->photo) {
             Storage::disk('public')->delete($equipe->photo);
             $equipe->update(['photo' => null]);
+        }
+
+        return back();
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'ordre' => 'required|array',
+            'ordre.*' => 'integer|exists:equipes,id',
+        ]);
+
+        foreach ($request->ordre as $position => $id) {
+            Equipe::where('id', $id)->update(['ordre' => $position + 1]);
         }
 
         return back();

@@ -16,5 +16,7 @@ class Equipe extends Model
         'role',
         'description',
         'photo',
+        'masque',
+        'ordre',
     ];
 }

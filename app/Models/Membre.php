@@ -22,6 +22,9 @@ class Membre extends Model
         'tshirt_taille',
         'rgpd',
         'inscription',
+        'stripe_payment_intent_id',
+        'payment_status',
+        'montant_total',
     ];
 
     protected $casts = [

@@ -93,98 +93,115 @@ function saveOrder() {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="py-4 text-2xl font-bold">Équipes</h1>
-        <Button @click="createEquipe" class="text-[#F6F6F6]"
-            >Créer une équipe</Button
+    <section class="mx-2 my-2 space-y-4 sm:mx-4 sm:my-4">
+        <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
-        <table class="w-full table-auto border-collapse">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="border px-4 py-2 text-left">Ordre</th>
-                    <th class="border px-4 py-2 text-left">Nom</th>
-                    <th class="border px-4 py-2 text-left">Prénom</th>
-                    <th class="border px-4 py-2 text-left">Rôle</th>
-                    <th class="border px-4 py-2 text-left">Visible</th>
-                    <th class="border px-4 py-2 text-left">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="(equipe, index) in liste"
-                    :key="equipe.id"
-                    class="hover:bg-gray-50"
-                >
-                    <td class="border px-4 py-2 whitespace-nowrap" @click.stop>
-                        <div class="flex items-center gap-1">
-                            <button
-                                type="button"
-                                :disabled="index === 0"
-                                @click="moveUp(index)"
-                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
-                                title="Monter"
-                            >
-                                ▲
-                            </button>
-                            <span
-                                class="w-6 text-center text-sm text-gray-600"
-                                >{{ index + 1 }}</span
-                            >
-                            <button
-                                type="button"
-                                :disabled="index === liste.length - 1"
-                                @click="moveDown(index)"
-                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
-                                title="Descendre"
-                            >
-                                ▼
-                            </button>
-                        </div>
-                    </td>
-                    <td class="border px-4 py-2">{{ equipe.nom }}</td>
-                    <td class="border px-4 py-2">{{ equipe.prenom }}</td>
-                    <td class="border px-4 py-2">{{ equipe.role }}</td>
-                    <td class="border px-4 py-2">
-                        {{ equipe.masque ? 'Non' : 'Oui' }}
-                    </td>
-                    <td
-                        class="border px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
-                        @click.stop
+            <h1 class="py-4 text-xl font-bold sm:text-2xl">Équipes</h1>
+            <Button @click="createEquipe" class="text-[#F6F6F6] sm:w-auto"
+                >Créer une équipe</Button
+            >
+        </div>
+        <div class="overflow-x-auto rounded-lg border">
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border px-4 py-2 text-left">Ordre</th>
+                        <th class="border px-4 py-2 text-left">Nom</th>
+                        <th class="border px-4 py-2 text-left">Prénom</th>
+                        <th class="border px-4 py-2 text-left">Rôle</th>
+                        <th class="border px-4 py-2 text-left">Visible</th>
+                        <th class="border px-4 py-2 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        v-for="(equipe, index) in liste"
+                        :key="equipe.id"
+                        class="hover:bg-gray-50"
                     >
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Button variant="outline" size="sm">
-                                    •••
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                                style="
-                                    background-color: var(--background-footer);
-                                    color: var(--secondary);
-                                "
-                            >
-                                <DropdownMenuLabel>
-                                    Actions pour {{ equipe.nom }}
-                                </DropdownMenuLabel>
-                                <DropdownMenuItem @click="editEquipe(equipe)">
-                                    Modifier
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                    @click="openDeleteDialog(equipe)"
+                        <td
+                            class="border px-4 py-2 whitespace-nowrap"
+                            @click.stop
+                        >
+                            <div class="flex items-center gap-1">
+                                <button
+                                    type="button"
+                                    :disabled="index === 0"
+                                    @click="moveUp(index)"
+                                    class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                                    title="Monter"
                                 >
-                                    Supprimer
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                    @click="masquerEquipe(equipe)"
+                                    ▲
+                                </button>
+                                <span
+                                    class="w-6 text-center text-sm text-gray-600"
+                                    >{{ index + 1 }}</span
                                 >
-                                    {{ equipe.masque ? 'Afficher' : 'Masquer' }}
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                <button
+                                    type="button"
+                                    :disabled="index === liste.length - 1"
+                                    @click="moveDown(index)"
+                                    class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                                    title="Descendre"
+                                >
+                                    ▼
+                                </button>
+                            </div>
+                        </td>
+                        <td class="border px-4 py-2">{{ equipe.nom }}</td>
+                        <td class="border px-4 py-2">{{ equipe.prenom }}</td>
+                        <td class="border px-4 py-2">{{ equipe.role }}</td>
+                        <td class="border px-4 py-2">
+                            {{ equipe.masque ? 'Non' : 'Oui' }}
+                        </td>
+                        <td
+                            class="border px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
+                            @click.stop
+                        >
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Button variant="outline" size="sm">
+                                        •••
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent
+                                    style="
+                                        background-color: var(
+                                            --background-footer
+                                        );
+                                        color: var(--secondary);
+                                    "
+                                >
+                                    <DropdownMenuLabel>
+                                        Actions pour {{ equipe.nom }}
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuItem
+                                        @click="editEquipe(equipe)"
+                                    >
+                                        Modifier
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        @click="openDeleteDialog(equipe)"
+                                    >
+                                        Supprimer
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        @click="masquerEquipe(equipe)"
+                                    >
+                                        {{
+                                            equipe.masque
+                                                ? 'Afficher'
+                                                : 'Masquer'
+                                        }}
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
     <!-- Dialog de confirmation de suppression -->
     <Dialog v-model:open="deleteDialog">

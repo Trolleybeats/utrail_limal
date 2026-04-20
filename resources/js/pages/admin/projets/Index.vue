@@ -83,88 +83,105 @@ function saveOrder() {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="py-4 text-2xl font-bold">Projets</h1>
-        <Button @click="createProjet" class="text-[#F6F6F6]"
-            >Créer un projet</Button
+    <section class="mx-2 my-2 space-y-4 sm:mx-4 sm:my-4">
+        <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
-        <table class="w-full table-auto">
-            <thead>
-                <tr>
-                    <th class="border px-4 py-2 text-left">Ordre</th>
-                    <th class="border px-4 py-2 text-left">Nom du projet</th>
-                    <th class="border px-4 py-2 text-left">Description</th>
-                    <th class="border px-4 py-2 text-left">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="(projet, index) in liste"
-                    :key="projet.id"
-                    @click="editProjet(projet)"
-                    class="cursor-pointer hover:bg-gray-50"
-                >
-                    <td class="border px-4 py-2 whitespace-nowrap" @click.stop>
-                        <div class="flex items-center gap-1">
-                            <button
-                                type="button"
-                                :disabled="index === 0"
-                                @click="moveUp(index)"
-                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
-                                title="Monter"
-                            >
-                                ▲
-                            </button>
-                            <span
-                                class="w-6 text-center text-sm text-gray-600"
-                                >{{ index + 1 }}</span
-                            >
-                            <button
-                                type="button"
-                                :disabled="index === liste.length - 1"
-                                @click="moveDown(index)"
-                                class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
-                                title="Descendre"
-                            >
-                                ▼
-                            </button>
-                        </div>
-                    </td>
-                    <td class="border px-4 py-2">{{ projet.titre }}</td>
-                    <td class="border px-4 py-2">{{ projet.description }}</td>
-                    <td
-                        class="border px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
-                        @click.stop
+            <h1 class="py-4 text-xl font-bold sm:text-2xl">Projets</h1>
+            <Button @click="createProjet" class="text-[#F6F6F6] sm:w-auto"
+                >Créer un projet</Button
+            >
+        </div>
+        <div class="overflow-x-auto rounded-lg border">
+            <table class="w-full table-auto">
+                <thead>
+                    <tr>
+                        <th class="border px-4 py-2 text-left">Ordre</th>
+                        <th class="border px-4 py-2 text-left">
+                            Nom du projet
+                        </th>
+                        <th class="border px-4 py-2 text-left">Description</th>
+                        <th class="border px-4 py-2 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        v-for="(projet, index) in liste"
+                        :key="projet.id"
+                        @click="editProjet(projet)"
+                        class="cursor-pointer hover:bg-gray-50"
                     >
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Button variant="outline" size="sm">
-                                    •••
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                                style="
-                                    background-color: var(--background-footer);
-                                    color: var(--secondary);
-                                "
-                            >
-                                <DropdownMenuLabel>
-                                    Actions pour {{ projet.titre }}
-                                </DropdownMenuLabel>
-                                <DropdownMenuItem @click="editProjet(projet)">
-                                    Modifier
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                    @click="openDeleteDialog(projet)"
+                        <td
+                            class="border px-4 py-2 whitespace-nowrap"
+                            @click.stop
+                        >
+                            <div class="flex items-center gap-1">
+                                <button
+                                    type="button"
+                                    :disabled="index === 0"
+                                    @click="moveUp(index)"
+                                    class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                                    title="Monter"
                                 >
-                                    Supprimer
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                    ▲
+                                </button>
+                                <span
+                                    class="w-6 text-center text-sm text-gray-600"
+                                    >{{ index + 1 }}</span
+                                >
+                                <button
+                                    type="button"
+                                    :disabled="index === liste.length - 1"
+                                    @click="moveDown(index)"
+                                    class="rounded p-1 text-gray-500 hover:bg-gray-200 disabled:opacity-30"
+                                    title="Descendre"
+                                >
+                                    ▼
+                                </button>
+                            </div>
+                        </td>
+                        <td class="border px-4 py-2">{{ projet.titre }}</td>
+                        <td class="border px-4 py-2">
+                            {{ projet.description }}
+                        </td>
+                        <td
+                            class="border px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
+                            @click.stop
+                        >
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Button variant="outline" size="sm">
+                                        •••
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent
+                                    style="
+                                        background-color: var(
+                                            --background-footer
+                                        );
+                                        color: var(--secondary);
+                                    "
+                                >
+                                    <DropdownMenuLabel>
+                                        Actions pour {{ projet.titre }}
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuItem
+                                        @click="editProjet(projet)"
+                                    >
+                                        Modifier
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        @click="openDeleteDialog(projet)"
+                                    >
+                                        Supprimer
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
     <!-- Dialog de confirmation de suppression -->
     <Dialog v-model:open="deleteDialog">

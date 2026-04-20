@@ -18,11 +18,13 @@ class Participant extends Model
         'rgpd',
         'pre_inscription',
         'token',
+        'mail_envoye_le',
     ];
 
     protected $casts = [
         'rgpd' => 'boolean',
         'pre_inscription' => 'boolean',
+        'mail_envoye_le' => 'datetime',
     ];
 
     public function membres()

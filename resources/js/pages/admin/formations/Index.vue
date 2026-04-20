@@ -56,12 +56,15 @@ const createFormation = () => {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="py-4 text-2xl font-bold">Formations</h1>
-
-        <Button @click="createFormation" class="text-[#F6F6F6]"
-            >Créer une formation</Button
+    <section class="mx-2 my-2 space-y-4 sm:mx-4 sm:my-4">
+        <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
+            <h1 class="py-4 text-xl font-bold sm:text-2xl">Formations</h1>
+            <Button @click="createFormation" class="text-[#F6F6F6] sm:w-auto"
+                >Créer une formation</Button
+            >
+        </div>
 
         <div class="overflow-x-auto">
             <table class="w-full table-auto border-collapse">

@@ -57,50 +57,56 @@ const editUser = (user) => {
 </script>
 
 <template>
-    <div class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Users</h1>
-        <Button @click="createUser" class="text-[#F6F6F6]"
-            >Créer un utilisateur</Button
+    <div class="mx-2 my-2 space-y-4 sm:mx-4 sm:my-4">
+        <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
-        <table class="w-full table-auto">
-            <thead>
-                <tr>
-                    <th class="px-4 py-2 text-left">User</th>
-                    <th class="px-4 py-2 text-left">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in users" :key="user.id" class="border-t">
-                    <td class="px-4 py-2">{{ user.name }}</td>
-                    <td class="px-4 py-2">{{ user.email }}</td>
-                    <td
-                        class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap"
-                        @click.stop
-                    >
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Button variant="outline" size="sm">
-                                    •••
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuLabel>
-                                    Actions pour {{ user.name }}
-                                </DropdownMenuLabel>
-                                <DropdownMenuItem @click="editUser(user)">
-                                    Modifier
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                    @click="openDeleteDialog(user)"
-                                >
-                                    Supprimer
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <h1 class="px-4 py-4 text-xl font-bold sm:text-2xl">Users</h1>
+            <Button @click="createUser" class="text-[#F6F6F6] sm:w-auto"
+                >Créer un utilisateur</Button
+            >
+        </div>
+        <div class="overflow-x-auto rounded-lg border">
+            <table class="w-full table-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 text-left">User</th>
+                        <th class="px-4 py-2 text-left">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users" :key="user.id" class="border-t">
+                        <td class="px-4 py-2">{{ user.name }}</td>
+                        <td class="px-4 py-2">{{ user.email }}</td>
+                        <td
+                            class="px-4 py-2 text-right text-sm font-medium whitespace-nowrap sm:px-6 sm:py-4"
+                            @click.stop
+                        >
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Button variant="outline" size="sm">
+                                        •••
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel>
+                                        Actions pour {{ user.name }}
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuItem @click="editUser(user)">
+                                        Modifier
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        @click="openDeleteDialog(user)"
+                                    >
+                                        Supprimer
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- Dialog de confirmation de suppression -->
     <Dialog v-model:open="deleteDialog">

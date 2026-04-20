@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
 import Button from '@/components/ui/button/Button.vue';
 import Dialog from '@/components/ui/dialog/Dialog.vue';
@@ -22,6 +22,12 @@ const props = defineProps({
 });
 
 const deleteDialog = ref(false);
+const dernierEnvoi = ref(null);
+
+onMounted(() => {
+    const saved = localStorage.getItem('dernierEnvoiMailAll');
+    if (saved) dernierEnvoi.value = saved;
+});
 const participantToDelete = ref(null);
 
 function openDeleteDialog(participant) {
@@ -57,26 +63,45 @@ const envoimail = (participant) => {
 };
 
 const envoimailAll = () => {
+    const now = new Date().toISOString();
+    localStorage.setItem('dernierEnvoiMailAll', now);
+    dernierEnvoi.value = now;
     router.post('/admin/participants/send-mail-all');
 };
 
 const exportExcel = () => {
     window.location.href = '/admin/participants/export';
 };
+
+const dateEnvoi = (date) => {
+    return new Date(date).toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <div class="mb-6 flex items-center justify-between">
-            <h1 class="text-2xl font-bold">Participants</h1>
+    <section class="mx-2 my-2 space-y-4 sm:mx-4 sm:my-4">
+        <div
+            class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+        >
+            <h1 class="text-xl font-bold sm:text-2xl">Participants</h1>
             <Button @click="exportExcel" variant="outline">
                 Exporter Excel
             </Button>
         </div>
-        <div class="flex">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
             <Button @click="envoimailAll" style="color: var(--secondary)"
                 >Envoyer le mail à tous</Button
             >
+            <p class="text-sm text-gray-500 sm:ml-4">
+                Dernier envoi :
+                {{ dernierEnvoi ? dateEnvoi(dernierEnvoi) : 'Aucun envoi' }}
+            </p>
         </div>
         <div class="overflow-x-auto rounded-lg border">
             <table class="w-full table-auto border-collapse">
@@ -93,6 +118,9 @@ const exportExcel = () => {
                         </th>
                         <th scope="col" class="border px-4 py-2 text-left">
                             Téléphone
+                        </th>
+                        <th scope="col" class="border px-4 py-2 text-left">
+                            Mail envoyé le
                         </th>
                         <th scope="col" class="border px-4 py-2 text-left">
                             Actions
@@ -116,6 +144,17 @@ const exportExcel = () => {
                         </td>
                         <td class="border px-4 py-2">
                             {{ participant.telephone }}
+                        </td>
+                        <td class="border px-4 py-2">
+                            {{
+                                participant.mail_envoye_le
+                                    ? dateEnvoi(participant.mail_envoye_le)
+                                    : dernierEnvoi &&
+                                        new Date(participant.created_at) >
+                                            new Date(dernierEnvoi)
+                                      ? 'Inscrit après envoi'
+                                      : 'Jamais envoyé'
+                            }}
                         </td>
                         <td
                             class="border px-4 py-2 text-right text-sm font-medium whitespace-nowrap"

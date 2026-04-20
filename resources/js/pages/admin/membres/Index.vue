@@ -65,9 +65,11 @@ const exportExcel = () => {
 </script>
 
 <template>
-    <div class="container mx-auto px-4 py-8">
-        <div class="mb-6 flex items-center justify-between">
-            <h1 class="text-2xl font-bold">Gestion des Membres</h1>
+    <div class="container mx-auto px-2 py-4 sm:px-4 sm:py-8">
+        <div
+            class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+        >
+            <h1 class="text-xl font-bold sm:text-2xl">Gestion des Membres</h1>
             <Button @click="exportExcel" variant="outline">
                 Exporter Excel
             </Button>

@@ -110,6 +110,7 @@ class ParticipantController extends Controller
     public function resendMail(Participant $participant)
     {
         Mail::to($participant->email)->send(new LienPaiement($participant));
+        $participant->update(['mail_envoye_le' => now()]);
 
         return back()->with('success', 'Mail renvoyé avec succès.');
     }
@@ -120,6 +121,7 @@ class ParticipantController extends Controller
 
         foreach ($participants as $participant) {
             Mail::to($participant->email)->send(new LienPaiement($participant));
+            $participant->update(['mail_envoye_le' => now()]);
         }
 
         return back()->with('success', 'Mails envoyés à tous les participants.');

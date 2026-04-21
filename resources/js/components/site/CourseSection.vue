@@ -1,4 +1,6 @@
 <script setup>
+import { watch } from 'vue';
+
 const props = defineProps({
     title: {
         type: String,
@@ -25,6 +27,13 @@ const props = defineProps({
 const participation = defineModel('participation');
 const distance = defineModel('distance');
 const logement = defineModel('logement');
+
+watch(participation, (val) => {
+    if (val === 0) {
+        distance.value = 'non';
+        logement.value = 0;
+    }
+});
 </script>
 
 <template>

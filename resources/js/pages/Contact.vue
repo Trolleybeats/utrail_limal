@@ -1,7 +1,7 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import { submit as contactSubmit } from '@/routes/contact';
 
 const form = useForm({
@@ -27,6 +27,23 @@ const submitForm = () => {
 </script>
 
 <template>
+    <Head>
+        <title>Contact Utrail Limal</title>
+        <meta
+            name="description"
+            content="Contactez le club de trail Utrail Limal. Retrouvez notre adresse à Limal (Brabant wallon), notre email et notre numéro de téléphone pour toute demande."
+        />
+        <meta
+            name="keywords"
+            content="contact club trail, adresse Limal, email club, téléphone club, contact Utrail, club trail Brabant wallon"
+        />
+        <meta property="og:title" content="Contact Utrail Limal" />
+        <meta
+            property="og:description"
+            content="Contactez le club de trail Utrail Limal. Adresse, email et téléphone disponibles pour toute demande."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/contact" />
+    </Head>
     <!-- Hero header -->
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"

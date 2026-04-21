@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import { Head } from '@inertiajs/vue3';
 import FormationCard from '@/components/site/FormationCard.vue';
 
 interface Formation {
@@ -18,6 +19,26 @@ const props = defineProps<{
 </script>
 
 <template>
+    <Head>
+        <title>Projet Utrail formation | Utrail Limal</title>
+        <meta
+            name="description"
+            content="Découvrez le projet Utrail formation : programme de formation trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
+        />
+        <meta
+            name="keywords"
+            content="projet Utrail, formation trail, programme trail, apprentissage trail, formation course nature, trail Limal"
+        />
+        <meta
+            property="og:title"
+            content="Projet Utrail formation | Utrail Limal"
+        />
+        <meta
+            property="og:description"
+            content="Découvrez le projet Utrail formation : programme trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/formation" />
+    </Head>
     <!-- Hero header -->
     <header class="relative h-70 w-full sm:h-95 md:h-130 lg:h-screen">
         <div class="absolute top-0 left-0 z-10 h-full w-full">

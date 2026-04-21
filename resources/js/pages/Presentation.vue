@@ -1,6 +1,7 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     projets: {
@@ -11,6 +12,29 @@ const props = defineProps({
 </script>
 
 <template>
+    <Head>
+        <title>Présentation du club de trail | Utrail Limal</title>
+        <meta
+            name="description"
+            content="Découvrez l'histoire, les valeurs et la philosophie du club de trail Utrail, basé à Limal en Brabant wallon. Une équipe passionnée au service des traileurs francophones."
+        />
+        <meta
+            name="keywords"
+            content="histoire club trail, valeurs club, équipe trail, philosophie trail, présentation Utrail, club trail Limal"
+        />
+        <meta
+            property="og:title"
+            content="Présentation du club de trail | Utrail Limal"
+        />
+        <meta
+            property="og:description"
+            content="Découvrez l'histoire, les valeurs et la philosophie du club de trail Utrail, basé à Limal en Brabant wallon."
+        />
+        <meta
+            property="og:url"
+            content="https://utrail-limal.be/presentation"
+        />
+    </Head>
     <!-- Hero header -->
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"

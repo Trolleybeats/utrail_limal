@@ -1,7 +1,7 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     projetActuel: {
@@ -12,6 +12,26 @@ const props = defineProps({
 </script>
 
 <template>
+    <Head>
+        <title>Trail de l'année – inscription | Utrail Limal</title>
+        <meta
+            name="description"
+            content="Inscrivez-vous au trail annuel organisé par Utrail Limal. Participez à notre événement trail en Brabant wallon, ouvert à tous les traileurs francophones."
+        />
+        <meta
+            name="keywords"
+            content="inscription trail, événement trail, trail annuel, participation trail, course nature, trail Brabant wallon, trail Limal"
+        />
+        <meta
+            property="og:title"
+            content="Trail de l'année – inscription | Utrail Limal"
+        />
+        <meta
+            property="og:description"
+            content="Inscrivez-vous au trail annuel organisé par Utrail Limal. Participez à notre événement trail en Brabant wallon."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/projet" />
+    </Head>
     <!-- Hero header -->
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"

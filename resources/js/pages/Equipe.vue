@@ -1,6 +1,7 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import { Head } from '@inertiajs/vue3';
 import Card from '@/components/ui/card/Card.vue';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import CardHeader from '@/components/ui/card/CardHeader.vue';
@@ -16,6 +17,26 @@ const props = defineProps({
 </script>
 
 <template>
+    <Head>
+        <title>Équipe de formation et encadrement | Utrail Limal</title>
+        <meta
+            name="description"
+            content="Rencontrez l'équipe de formateurs et encadrants du club Utrail Limal. Des coachs trail passionnés pour vous accompagner dans votre progression."
+        />
+        <meta
+            name="keywords"
+            content="formateurs trail, coach trail, entraîneurs course, encadrement trail, équipe Utrail, formation sportive Limal"
+        />
+        <meta
+            property="og:title"
+            content="Équipe de formation et encadrement | Utrail Limal"
+        />
+        <meta
+            property="og:description"
+            content="Rencontrez l'équipe de formateurs et encadrants du club Utrail Limal. Des coachs trail passionnés pour vous accompagner."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/equipe" />
+    </Head>
     <!-- Hero header -->
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"

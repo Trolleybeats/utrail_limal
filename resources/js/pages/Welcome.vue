@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 const props = defineProps<{
     canRegister?: boolean;
@@ -16,6 +16,26 @@ const props = defineProps<{
 </script>
 
 <template>
+    <Head>
+        <title>Club de trail à Limal – Brabant wallon | Utrail</title>
+        <meta
+            name="description"
+            content="Club de trail situé à Limal (Brabant wallon), proposant formations, événements et inscription au trail annuel pour les traileurs francophones."
+        />
+        <meta
+            name="keywords"
+            content="trail Limal, club trail Brabant wallon, traileurs Belgique, trail francophone, inscription trail, événement trail, trail annuel"
+        />
+        <meta
+            property="og:title"
+            content="Club de trail à Limal – Brabant wallon | Utrail"
+        />
+        <meta
+            property="og:description"
+            content="Club de trail situé à Limal (Brabant wallon), proposant formations, événements et inscription au trail annuel pour les traileurs francophones."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/" />
+    </Head>
     <header class="relative h-[500px] w-full sm:h-[650px] md:h-screen">
         <video
             autoplay

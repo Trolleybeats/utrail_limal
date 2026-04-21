@@ -3,7 +3,7 @@ import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
 import { onMounted, ref } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
-import { usePage } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 const page = usePage();
 const flashError = ref(page.props.flash?.error ?? null);
 const props = defineProps({
@@ -65,7 +65,36 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-    <Nav />
+    <Head>
+        <title>Paiement</title>
+        <meta
+            name="description"
+            content="Effectuez le paiement de votre inscription au trail annuel organisé par U-Trail Limal. Un processus de paiement sécurisé pour les traileurs francophones."
+        />
+        <meta
+            name="keywords"
+            content="paiement inscription, paiement trail, paiement sécurisé, inscription trail, trail annuel, trail Brabant wallon, trail Limal"
+        />
+        <meta property="og:title" content="Paiement" />
+        <meta
+            property="og:description"
+            content="Effectuez le paiement de votre inscription au trail annuel organisé par U-Trail Limal. Un processus de paiement sécurisé pour les traileurs francophones."
+        />
+    </Head>
+    <header
+        class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-[580px]"
+    >
+        <div class="absolute top-0 left-0 z-10 h-full w-full">
+            <Nav></Nav>
+        </div>
+        <figure class="absolute top-0 left-0 h-full w-full">
+            <img
+                src="/storage/paiement.jpg"
+                alt="Paiement U-Trail Limal"
+                class="h-full w-full object-cover object-[center_60%]"
+            />
+        </figure>
+    </header>
     <main>
         <section
             class="relative mx-auto flex w-full max-w-[1182px] flex-col items-center justify-center px-4 py-8 md:py-14"

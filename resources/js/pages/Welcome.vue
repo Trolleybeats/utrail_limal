@@ -17,7 +17,6 @@ const props = defineProps<{
 
 <template>
     <Head>
-        <title>Club de trail à Limal – Brabant wallon | Utrail</title>
         <meta
             name="description"
             content="Club de trail situé à Limal (Brabant wallon), proposant formations, événements et inscription au trail annuel pour les traileurs francophones."
@@ -28,7 +27,7 @@ const props = defineProps<{
         />
         <meta
             property="og:title"
-            content="Club de trail à Limal – Brabant wallon | Utrail"
+            content="Club de trail à Limal – Brabant wallon | U-Trail"
         />
         <meta
             property="og:description"

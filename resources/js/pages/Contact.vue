@@ -28,19 +28,19 @@ const submitForm = () => {
 
 <template>
     <Head>
-        <title>Contact Utrail Limal</title>
+        <title>Contact</title>
         <meta
             name="description"
-            content="Contactez le club de trail Utrail Limal. Retrouvez notre adresse à Limal (Brabant wallon), notre email et notre numéro de téléphone pour toute demande."
+            content="Contactez le club de trail U-Trail Limal. Retrouvez notre adresse à Limal (Brabant wallon), notre email et notre numéro de téléphone pour toute demande."
         />
         <meta
             name="keywords"
-            content="contact club trail, adresse Limal, email club, téléphone club, contact Utrail, club trail Brabant wallon"
+            content="contact club trail, adresse Limal, email club, téléphone club, contact U-Trail, club trail Brabant wallon"
         />
-        <meta property="og:title" content="Contact Utrail Limal" />
+        <meta property="og:title" content="Contact" />
         <meta
             property="og:description"
-            content="Contactez le club de trail Utrail Limal. Adresse, email et téléphone disponibles pour toute demande."
+            content="Contactez le club de trail U-Trail Limal. Adresse, email et téléphone disponibles pour toute demande."
         />
         <meta property="og:url" content="https://utrail-limal.be/contact" />
     </Head>

@@ -72,6 +72,23 @@ const submit = () => {
 </script>
 
 <template>
+    <Head>
+        <title>Paiement de l'inscription</title>
+        <meta
+            name="description"
+            content="Finalisez votre inscription au projet annuel de U-Trail Limal en procédant au paiement. Découvrez les modalités de paiement et confirmez votre participation à notre aventure trail en Brabant wallon."
+        />
+        <meta
+            name="keywords"
+            content="paiement inscription trail, finaliser inscription trail, modalités paiement trail, confirmation inscription trail, U-Trail Limal, trail Brabant wallon"
+        />
+        <meta property="og:title" content="Paiement de l'inscription" />
+        <meta
+            property="og:description"
+            content="Finalisez votre inscription au projet annuel de U-Trail Limal en procédant au paiement. Découvrez les modalités de paiement et confirmez votre participation à notre aventure trail en Brabant wallon."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/paiement" />
+    </Head>
     <!-- Hero header -->
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"

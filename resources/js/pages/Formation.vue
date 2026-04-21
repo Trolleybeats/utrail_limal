@@ -20,22 +20,19 @@ const props = defineProps<{
 
 <template>
     <Head>
-        <title>Projet Utrail formation | Utrail Limal</title>
+        <title>U-Trail formation</title>
         <meta
             name="description"
-            content="Découvrez le projet Utrail formation : programme de formation trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
+            content="Découvrez le projet U-Trail formation : programme de formation trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
         />
         <meta
             name="keywords"
-            content="projet Utrail, formation trail, programme trail, apprentissage trail, formation course nature, trail Limal"
+            content="projet U-Trail, formation trail, programme trail, apprentissage trail, formation course nature, trail Limal"
         />
-        <meta
-            property="og:title"
-            content="Projet Utrail formation | Utrail Limal"
-        />
+        <meta property="og:title" content="U-Trail formation" />
         <meta
             property="og:description"
-            content="Découvrez le projet Utrail formation : programme trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
+            content="Découvrez le projet U-Trail formation : programme trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
         />
         <meta property="og:url" content="https://utrail-limal.be/formation" />
     </Head>

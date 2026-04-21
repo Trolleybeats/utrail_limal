@@ -31,6 +31,14 @@ class MembreController extends Controller
     {
         $participant = Participant::where('token', $token)->firstOrFail();
 
+        $existingMembre = Membre::where('participant_id', $participant->id)->first();
+        if ($existingMembre) {
+            if ($existingMembre->payment_status === 'succeeded') {
+                return redirect()->route('paiement.confirmation', ['payment_intent' => $existingMembre->stripe_payment_intent_id]);
+            }
+            return redirect()->route('checkout', ['membre' => $existingMembre->id]);
+        }
+
         $courseUn = Tarif::where('categorie', 'Course')
             ->where('course_numero', 1)
             ->where('est_actif', true)
@@ -76,6 +84,14 @@ class MembreController extends Controller
     public function store(Request $request, string $token)
     {
         $participant = Participant::where('token', $token)->firstOrFail();
+
+        $existingMembre = Membre::where('participant_id', $participant->id)->first();
+        if ($existingMembre) {
+            if ($existingMembre->payment_status === 'succeeded') {
+                return redirect()->route('paiement.confirmation', ['payment_intent' => $existingMembre->stripe_payment_intent_id]);
+            }
+            return redirect()->route('checkout', ['membre' => $existingMembre->id]);
+        }
 
         $validated = $request->validate([
             'date_naissance' => 'required|date',

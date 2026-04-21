@@ -1,6 +1,7 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     status: {
@@ -17,8 +18,27 @@ const isSuccess = props.status === 'succeeded';
 </script>
 
 <template>
+    <Head>
+        <title>Paiement {{ isSuccess ? 'confirmé' : 'en attente' }}</title>
+        <meta
+            name="description"
+            content="Confirmation de paiement pour votre inscription au trail annuel organisé par U-Trail Limal. Merci pour votre participation à notre événement trail en Brabant wallon."
+        />
+        <meta
+            name="keywords"
+            content="confirmation paiement, inscription trail, paiement réussi, paiement en attente, trail annuel, événement trail, U-Trail Limal"
+        />
+        <meta
+            property="og:title"
+            content="Paiement {{ isSuccess ? 'confirmé' : 'en attente' }}"
+        />
+        <meta
+            property="og:description"
+            content="Confirmation de paiement pour votre inscription au trail annuel organisé par U-Trail Limal. Merci pour votre participation à notre événement trail en Brabant wallon."
+        />
+    </Head>
     <header
-        class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"
+        class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-[580px]"
     >
         <div class="absolute top-0 left-0 z-10 h-full w-full">
             <Nav></Nav>

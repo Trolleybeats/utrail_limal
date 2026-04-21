@@ -13,22 +13,19 @@ const props = defineProps({
 
 <template>
     <Head>
-        <title>Trail de l'année – inscription | Utrail Limal</title>
+        <title>Trail de l'année – inscription</title>
         <meta
             name="description"
-            content="Inscrivez-vous au trail annuel organisé par Utrail Limal. Participez à notre événement trail en Brabant wallon, ouvert à tous les traileurs francophones."
+            content="Inscrivez-vous au trail annuel organisé par U-Trail Limal. Participez à notre événement trail en Brabant wallon, ouvert à tous les traileurs francophones."
         />
         <meta
             name="keywords"
             content="inscription trail, événement trail, trail annuel, participation trail, course nature, trail Brabant wallon, trail Limal"
         />
-        <meta
-            property="og:title"
-            content="Trail de l'année – inscription | Utrail Limal"
-        />
+        <meta property="og:title" content="Trail de l'année – inscription" />
         <meta
             property="og:description"
-            content="Inscrivez-vous au trail annuel organisé par Utrail Limal. Participez à notre événement trail en Brabant wallon."
+            content="Inscrivez-vous au trail annuel organisé par U-Trail Limal. Participez à notre événement trail en Brabant wallon."
         />
         <meta property="og:url" content="https://utrail-limal.be/projet" />
     </Head>

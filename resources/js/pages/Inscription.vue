@@ -1,7 +1,7 @@
 ﻿<script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     prenom: '',
@@ -27,6 +27,23 @@ const submit = () => {
 </script>
 
 <template>
+    <Head>
+        <title>Inscription au projet</title>
+        <meta
+            name="description"
+            content="Inscrivez-vous à la séance d'information du projet annuel de U-Trail Limal. Découvrez le programme, les modalités d'inscription et participez à notre aventure trail en Brabant wallon."
+        />
+        <meta
+            name="keywords"
+            content="inscription projet trail, séance d'information trail, participation projet trail, programme trail, U-Trail Limal, trail Brabant wallon"
+        />
+        <meta property="og:title" content="Inscription au projet" />
+        <meta
+            property="og:description"
+            content="Inscrivez-vous à la séance d'information du projet annuel de U-Trail Limal. Découvrez le programme et participez à notre aventure trail en Brabant wallon."
+        />
+        <meta property="og:url" content="https://utrail-limal.be/inscription" />
+    </Head>
     <!-- Hero header -->
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-screen"

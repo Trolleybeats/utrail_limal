@@ -18,22 +18,19 @@ const props = defineProps({
 
 <template>
     <Head>
-        <title>Équipe de formation et encadrement | Utrail Limal</title>
+        <title>Équipe de formation</title>
         <meta
             name="description"
-            content="Rencontrez l'équipe de formateurs et encadrants du club Utrail Limal. Des coachs trail passionnés pour vous accompagner dans votre progression."
+            content="Rencontrez l'équipe de formateurs et encadrants du club U-Trail Limal. Des coachs trail passionnés pour vous accompagner dans votre progression."
         />
         <meta
             name="keywords"
-            content="formateurs trail, coach trail, entraîneurs course, encadrement trail, équipe Utrail, formation sportive Limal"
+            content="formateurs trail, coach trail, entraîneurs course, encadrement trail, équipe U-Trail, formation sportive Limal"
         />
-        <meta
-            property="og:title"
-            content="Équipe de formation et encadrement | Utrail Limal"
-        />
+        <meta property="og:title" content="Équipe de formation" />
         <meta
             property="og:description"
-            content="Rencontrez l'équipe de formateurs et encadrants du club Utrail Limal. Des coachs trail passionnés pour vous accompagner."
+            content="Rencontrez l'équipe de formateurs et encadrants du club U-Trail Limal. Des coachs trail passionnés pour vous accompagner."
         />
         <meta property="og:url" content="https://utrail-limal.be/equipe" />
     </Head>

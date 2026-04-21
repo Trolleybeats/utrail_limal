@@ -1,10 +1,16 @@
 <script setup>
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
+import CourseSection from '@/components/site/CourseSection.vue';
 import { useForm } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 const props = defineProps({
     participant: {
+        type: Object,
+        required: true,
+    },
+    tarifs: {
         type: Object,
         required: true,
     },
@@ -21,6 +27,34 @@ const form = useForm({
     tshirt_taille: '',
     rgpd: false,
     inscription: false,
+});
+
+const montantTotal = computed(() => {
+    let total = 0;
+
+    if (
+        form.participation_un === 1 &&
+        form.distance_un &&
+        form.distance_un !== 'non'
+    ) {
+        total += Number(props.tarifs.course_un[form.distance_un] ?? 0);
+    }
+    if (form.logement_un === 1) {
+        total += Number(props.tarifs.logement_un?.prix ?? 0);
+    }
+    if (
+        form.participation_deux === 1 &&
+        form.distance_deux &&
+        form.distance_deux !== 'non'
+    ) {
+        total += Number(props.tarifs.course_deux[form.distance_deux] ?? 0);
+    }
+    if (form.logement_deux === 1) {
+        total += Number(props.tarifs.logement_deux?.prix ?? 0);
+    }
+    total += Number(props.tarifs.tshirt ?? 0);
+
+    return total;
 });
 
 const submit = () => {
@@ -103,180 +137,28 @@ const submit = () => {
             </div>
 
             <!-- Course n°1 -->
-            <h3 class="mb-4 text-xl font-semibold md:mb-6 md:text-[36px]">
-                Course n°1
-            </h3>
-            <div class="mb-6 flex flex-col gap-4">
-                <label
-                    for="participation_un"
-                    class="flex items-center text-[18px] font-medium text-[#586166] md:text-[20px]"
-                >
-                    Participation (si vous ne participez pas, cliquez sur non
-                    aux autres questions de la course n°1) &nbsp;<span
-                        class="text-[#c42827]"
-                        >*</span
-                    >
-                </label>
-                <select
-                    v-model="form.participation_un"
-                    id="participation_un"
-                    name="participation_un"
-                    required
-                    class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
-                >
-                    <option value="" disabled>Choisissez une option</option>
-                    <option :value="1">Oui</option>
-                    <option :value="0">Non</option>
-                </select>
-                <p
-                    v-if="form.errors.participation_un"
-                    class="text-sm text-[#c42827]"
-                >
-                    {{ form.errors.participation_un }}
-                </p>
-            </div>
-            <div class="mb-6 flex flex-col gap-4">
-                <label
-                    for="distance_un"
-                    class="flex items-center text-[18px] font-medium text-[#586166] md:text-[20px]"
-                >
-                    Distance&nbsp;<span class="text-[#c42827]">*</span>
-                </label>
-                <select
-                    v-model="form.distance_un"
-                    id="distance_un"
-                    name="distance_un"
-                    required
-                    class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
-                >
-                    <option value="" disabled>Choisissez une option</option>
-                    <option value="trente">30 km</option>
-                    <option value="cinquante">50 km</option>
-                    <option value="septante">70 km</option>
-                    <option value="ultra-marathon">100 km</option>
-                    <option value="ultra-trail">100 miles</option>
-                    <option value="non">Non</option>
-                </select>
-                <p
-                    v-if="form.errors.distance_un"
-                    class="text-sm text-[#c42827]"
-                >
-                    {{ form.errors.distance_un }}
-                </p>
-            </div>
-            <div class="mb-6 flex flex-col gap-4">
-                <label
-                    for="logement_un"
-                    class="flex items-center text-[18px] font-medium text-[#586166] md:text-[20px]"
-                >
-                    Logement&nbsp;<span class="text-[#c42827]">*</span>
-                </label>
-                <select
-                    v-model="form.logement_un"
-                    id="logement_un"
-                    name="logement_un"
-                    required
-                    class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
-                >
-                    <option value="" disabled>Choisissez une option</option>
-                    <option :value="1">Oui</option>
-                    <option :value="0">Non</option>
-                </select>
-                <p
-                    v-if="form.errors.logement_un"
-                    class="text-sm text-[#c42827]"
-                >
-                    {{ form.errors.logement_un }}
-                </p>
-            </div>
+            <CourseSection
+                title="Course n°1"
+                field-prefix="un"
+                :tarifs-distance="tarifs.course_un"
+                :tarifs-logement="tarifs.logement_un"
+                :errors="form.errors"
+                v-model:participation="form.participation_un"
+                v-model:distance="form.distance_un"
+                v-model:logement="form.logement_un"
+            />
 
             <!-- Course n°2 -->
-            <h3 class="mb-4 text-xl font-semibold md:mb-6 md:text-[36px]">
-                Course n°2
-            </h3>
-            <div class="mb-6 flex flex-col gap-4">
-                <label
-                    for="participation_deux"
-                    class="flex items-center text-[18px] font-medium text-[#586166] md:text-[20px]"
-                >
-                    Participation (si vous ne participez pas, cliquez sur non
-                    aux autres questions de la course n°2) &nbsp;<span
-                        class="text-[#c42827]"
-                        >*</span
-                    >
-                </label>
-                <select
-                    v-model="form.participation_deux"
-                    id="participation_deux"
-                    name="participation_deux"
-                    required
-                    class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
-                >
-                    <option value="" disabled>Choisissez une option</option>
-                    <option :value="1">Oui</option>
-                    <option :value="0">Non</option>
-                </select>
-                <p
-                    v-if="form.errors.participation_deux"
-                    class="text-sm text-[#c42827]"
-                >
-                    {{ form.errors.participation_deux }}
-                </p>
-            </div>
-            <div class="mb-6 flex flex-col gap-4">
-                <label
-                    for="distance_deux"
-                    class="flex items-center text-[18px] font-medium text-[#586166] md:text-[20px]"
-                >
-                    Distance&nbsp;<span class="text-[#c42827]">*</span>
-                </label>
-                <select
-                    v-model="form.distance_deux"
-                    id="distance_deux"
-                    name="distance_deux"
-                    required
-                    class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
-                >
-                    <option value="" disabled>Choisissez une option</option>
-                    <option value="trente">30 km</option>
-                    <option value="cinquante">50 km</option>
-                    <option value="septante">70 km</option>
-                    <option value="ultra-marathon">100 km</option>
-                    <option value="ultra-trail">100 miles</option>
-                    <option value="non">Non</option>
-                </select>
-                <p
-                    v-if="form.errors.distance_deux"
-                    class="text-sm text-[#c42827]"
-                >
-                    {{ form.errors.distance_deux }}
-                </p>
-            </div>
-            <div class="mb-6 flex flex-col gap-4">
-                <label
-                    for="logement_deux"
-                    class="flex items-center text-[18px] font-medium text-[#586166] md:text-[20px]"
-                >
-                    Logement&nbsp;<span class="text-[#c42827]">*</span>
-                </label>
-                <select
-                    v-model="form.logement_deux"
-                    id="logement_deux"
-                    name="logement_deux"
-                    required
-                    class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
-                >
-                    <option value="" disabled>Choisissez une option</option>
-                    <option :value="1">Oui</option>
-                    <option :value="0">Non</option>
-                </select>
-                <p
-                    v-if="form.errors.logement_deux"
-                    class="text-sm text-[#c42827]"
-                >
-                    {{ form.errors.logement_deux }}
-                </p>
-            </div>
+            <CourseSection
+                title="Course n°2"
+                field-prefix="deux"
+                :tarifs-distance="tarifs.course_deux"
+                :tarifs-logement="tarifs.logement_deux"
+                :errors="form.errors"
+                v-model:participation="form.participation_deux"
+                v-model:distance="form.distance_deux"
+                v-model:logement="form.logement_deux"
+            />
 
             <!-- T-shirt -->
             <h3 class="mb-4 text-xl font-semibold md:mb-6 md:text-[36px]">
@@ -364,6 +246,23 @@ const submit = () => {
                     {{ form.errors.inscription }}
                 </p>
             </div>
+
+            <!-- Calcul du prix -->
+            <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
+                <h2
+                    class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+                >
+                    Récapitulatif
+                </h2>
+                <p
+                    class="mb-4 text-center text-[18px] text-[#586166] md:text-[20px]"
+                >
+                    Montant total :
+                    <span class="font-semibold text-[#B3A96F]">
+                        {{ montantTotal.toFixed(2) }} €
+                    </span>
+                </p>
+            </section>
 
             <!-- Submit button -->
             <div class="flex justify-center pt-4">

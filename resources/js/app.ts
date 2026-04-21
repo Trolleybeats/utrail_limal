@@ -19,6 +19,8 @@ createInertiaApp({
             case name === 'Contact':
             case name === 'Inscription':
             case name === 'Paiement':
+            case name === 'Checkout':
+            case name === 'PaiementConfirmation':
                 return null;
             case name.startsWith('auth/'):
                 return AuthLayout;

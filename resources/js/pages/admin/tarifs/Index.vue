@@ -84,6 +84,7 @@ const desactiverTarif = (tarif) => {
                         <th class="px-4 py-2 text-left">Catégorie</th>
                         <th class="px-4 py-2 text-left">Prix</th>
                         <th class="px-4 py-2 text-left">Est actif</th>
+                        <th class="px-4 py-2 text-left">Course</th>
                         <th class="px-4 py-2 text-left">Actions</th>
                     </tr>
                 </thead>
@@ -99,6 +100,13 @@ const desactiverTarif = (tarif) => {
                         <td class="px-4 py-2">{{ tarif.prix }} €</td>
                         <td class="px-4 py-2">
                             {{ tarif.est_actif ? 'Oui' : 'Non' }}
+                        </td>
+                        <td class="px-4 py-2">
+                            {{
+                                tarif.course_numero
+                                    ? tarif.course_numero
+                                    : 'Toutes'
+                            }}
                         </td>
                         <td class="px-4 py-2">
                             <DropdownMenu>

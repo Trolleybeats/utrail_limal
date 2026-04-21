@@ -91,6 +91,7 @@ const exportExcel = () => {
                         <th class="border px-4 py-2">Distance 2</th>
                         <th class="border px-4 py-2">Logement 2</th>
                         <th class="border px-4 py-2">Taille tshirt</th>
+                        <th class="border px-4 py-2">Paiement</th>
                         <th class="border px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -144,6 +145,9 @@ const exportExcel = () => {
                         </td>
                         <td class="border px-4 py-2 uppercase">
                             {{ membre.tshirt_taille }}
+                        </td>
+                        <td class="border px-4 py-2">
+                            {{ membre.payment_status ? 'Payé' : 'Non payé' }}
                         </td>
                         <td
                             class="border px-4 py-2 text-right text-sm font-medium whitespace-nowrap"

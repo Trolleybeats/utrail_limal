@@ -13,6 +13,7 @@ class Tarif extends Model
     protected $fillable = [
         'label',
         'categorie',
+        'course_numero',
         'prix',
         'est_actif',
     ];

@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\ContactForm;
+use App\Models\Membre;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,16 +11,15 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EnvoiFormContact extends Mailable
+class PaiementReussi extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public ContactForm $contactForm
-    ) {}
+    public function __construct(public Membre $membre)
+    {}  
 
     /**
      * Get the message envelope.
@@ -28,7 +27,7 @@ class EnvoiFormContact extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Formulaire de contact',
+            subject: 'Confirmation de paiement',
         );
     }
 
@@ -38,7 +37,7 @@ class EnvoiFormContact extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.ContactForm',
+            view: 'mail.PaiementReussi',
         );
     }
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\EnvoiContactFormController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\MembreController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PhotoProjetController;
 use App\Http\Controllers\ProjetController;
@@ -20,8 +21,10 @@ Route::get('/Projet', [ProjetController::class, 'projetPage'])->name('projet');
 Route::get('/Equipe', [EquipeController::class, 'equipe'])->name('equipe');
 Route::inertia('/Inscription', 'Inscription')->name('inscription');
 Route::post('/inscription', [ParticipantController::class, 'store'])->name('inscription.store');
+Route::get('/paiement/confirmation', [PaiementController::class, 'confirmation'])->name('paiement.confirmation');
 Route::get('/paiement/{token}', [MembreController::class, 'create'])->name('paiement');
 Route::post('/paiement/{token}', [MembreController::class, 'store'])->name('paiement.store');
+Route::get('/checkout/{membre}', [PaiementController::class, 'show'])->name('checkout');
 Route::get('/Formation', [FormationController::class, 'formation'])->name('formation');
 Route::inertia('/Contact', 'Contact')->name('contact');
 

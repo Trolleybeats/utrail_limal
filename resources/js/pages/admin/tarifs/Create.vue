@@ -5,7 +5,7 @@ const form = useForm({
     label: '',
     prix: '',
     categorie: '',
-    est_actif: false,
+    est_actif: true,
 });
 
 const submitForm = () => {

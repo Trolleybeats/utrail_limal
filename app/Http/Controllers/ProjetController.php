@@ -159,6 +159,6 @@ class ProjetController extends Controller
         $projet = Projet::findOrFail($id);
         $projet->delete();
 
-        return redirect()->route('projets.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('projets.index')->with('success', 'Projet supprimé avec succès.');
     }
 }

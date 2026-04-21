@@ -4,6 +4,7 @@ import {
     BookOpen,
     BookUser,
     Contact,
+    DollarSign,
     Folder,
     FolderCheck,
     FolderCheckIcon,
@@ -39,6 +40,7 @@ const mainNavItems: NavItem[] = [
     { title: 'Formations', href: '/admin/formations', icon: Folder },
     { title: 'Membres', href: '/admin/membres', icon: BookUser },
     { title: 'Participants', href: '/admin/participants', icon: Contact },
+    { title: 'Tarifs', href: '/admin/tarifs', icon: DollarSign },
     { title: 'Users', href: '/admin/users', icon: User },
 ];
 

@@ -15,31 +15,31 @@ import DropdownMenuLabel from '@/components/ui/dropdown-menu/DropdownMenuLabel.v
 import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
 
 const props = defineProps({
-    users: {
+    tarifs: {
         type: Array,
         required: true,
     },
 });
 
 const deleteDialog = ref(false);
-const userToDelete = ref(null);
+const tarifToDelete = ref(null);
 
-function openDeleteDialog(user) {
-    userToDelete.value = user;
+function openDeleteDialog(tarif) {
+    tarifToDelete.value = tarif;
     deleteDialog.value = true;
 }
 
-const deleteUser = () => {
-    if (userToDelete.value) {
-        router.delete(`/admin/users/${userToDelete.value.id}`, {
+const deleteTarif = () => {
+    if (tarifToDelete.value) {
+        router.delete(`/admin/tarifs/${tarifToDelete.value.id}`, {
             onSuccess: () => {
                 deleteDialog.value = false;
-                userToDelete.value = null;
+                tarifToDelete.value = null;
             },
             onError: (errors) => {
                 // Gérer les erreurs si nécessaire
                 console.error(
-                    "Erreur lors de la suppression de l'utilisateur.",
+                    'Erreur lors de la suppression du tarif.',
                     errors,
                 );
             },
@@ -47,12 +47,22 @@ const deleteUser = () => {
     }
 };
 
-const createUser = () => {
-    router.visit('/admin/users/create');
+const createTarif = () => {
+    router.visit('/admin/tarifs/create');
 };
 
-const editUser = (user) => {
-    router.visit(`/admin/users/${user.id}/edit`);
+const editTarif = (tarif) => {
+    router.visit(`/admin/tarifs/${tarif.id}/edit`);
+};
+
+const desactiverTarif = (tarif) => {
+    router.patch(
+        `/admin/tarifs/${tarif.id}/actifs`,
+        {},
+        {
+            preserveScroll: true,
+        },
+    );
 };
 </script>
 
@@ -61,44 +71,66 @@ const editUser = (user) => {
         <div
             class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
-            <h1 class="px-4 py-4 text-xl font-bold sm:text-2xl">Users</h1>
-            <Button @click="createUser" class="text-[#F6F6F6] sm:w-auto"
-                >Créer un utilisateur</Button
+            <h1 class="px-4 py-4 text-xl font-bold sm:text-2xl">Tarifs</h1>
+            <Button @click="createTarif" class="text-[#F6F6F6] sm:w-auto"
+                >Créer un tarif</Button
             >
         </div>
         <div class="overflow-x-auto rounded-lg border">
             <table class="w-full table-auto">
                 <thead>
-                    <tr>
-                        <th class="px-4 py-2 text-left">User</th>
-                        <th class="px-4 py-2 text-left">Email</th>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2 text-left">Label</th>
+                        <th class="px-4 py-2 text-left">Catégorie</th>
+                        <th class="px-4 py-2 text-left">Prix</th>
+                        <th class="px-4 py-2 text-left">Est actif</th>
+                        <th class="px-4 py-2 text-left">Actions</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr v-for="user in users" :key="user.id" class="border-t">
-                        <td class="px-4 py-2">{{ user.name }}</td>
-                        <td class="px-4 py-2">{{ user.email }}</td>
-                        <td
-                            class="px-4 py-2 text-right text-sm font-medium whitespace-nowrap sm:px-6 sm:py-4"
-                            @click.stop
-                        >
+                    <tr
+                        v-for="tarif in tarifs"
+                        :key="tarif.id"
+                        class="border-t hover:bg-gray-50"
+                    >
+                        <td class="px-4 py-2">{{ tarif.label }}</td>
+                        <td class="px-4 py-2">{{ tarif.categorie }}</td>
+                        <td class="px-4 py-2">{{ tarif.prix }} €</td>
+                        <td class="px-4 py-2">
+                            {{ tarif.est_actif ? 'Oui' : 'Non' }}
+                        </td>
+                        <td class="px-4 py-2">
                             <DropdownMenu>
-                                <DropdownMenuTrigger>
-                                    <Button variant="outline" size="sm">
-                                        •••
-                                    </Button>
+                                <DropdownMenuTrigger as-child>
+                                    <Button variant="outline" size="sm"
+                                        >•••</Button
+                                    >
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
-                                    <DropdownMenuLabel>
-                                        Actions pour {{ user.name }}
-                                    </DropdownMenuLabel>
-                                    <DropdownMenuItem @click="editUser(user)">
+                                <DropdownMenuContent
+                                    style="
+                                        background-color: var(
+                                            --background-footer
+                                        );
+                                        color: var(--secondary);
+                                    "
+                                >
+                                    <DropdownMenuItem @click="editTarif(tarif)">
                                         Modifier
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        @click="openDeleteDialog(user)"
+                                        @click="openDeleteDialog(tarif)"
                                     >
                                         Supprimer
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        @click="desactiverTarif(tarif)"
+                                    >
+                                        {{
+                                            tarif.est_actif
+                                                ? 'Désactiver'
+                                                : 'Activer'
+                                        }}
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
@@ -118,15 +150,13 @@ const editUser = (user) => {
         >
             <DialogHeader>
                 <DialogTitle>Confirmer la suppression</DialogTitle>
-                <DialogDescription>
-                    Êtes-vous sûr de vouloir supprimer l'utilisateur "{{
-                        userToDelete?.name
-                    }}" ? Cette action est irréversible.
-                </DialogDescription>
             </DialogHeader>
+            <DialogDescription>
+                Êtes-vous sûr de vouloir supprimer ce tarif ? Cette action est
+                irréversible.
+            </DialogDescription>
             <DialogFooter>
                 <Button
-                    type="button"
                     variant="outline"
                     @click="deleteDialog = false"
                     style="color: var(--primary)"
@@ -134,10 +164,8 @@ const editUser = (user) => {
                     Annuler
                 </Button>
                 <Button
-                    type="button"
-                    variant="destructive"
-                    @click="deleteUser"
                     style="background-color: var(--button)"
+                    @click="deleteTarif"
                 >
                     Supprimer
                 </Button>

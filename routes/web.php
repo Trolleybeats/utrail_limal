@@ -68,6 +68,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Gestion des membres
     Route::get('admin/membres/export', [MembreController::class, 'export'])->name('admin.membres.export');
     Route::resource('admin/membres', MembreController::class);
+
+    //Gestion des tarifs
+    Route::resource('admin/tarifs', \App\Http\Controllers\TarifController::class);
+    Route::patch('admin/tarifs/{tarif}/actifs', [\App\Http\Controllers\TarifController::class, 'tarifsActifs'])->name('admin.tarifs.actifs');
 });
 
 require __DIR__.'/settings.php';

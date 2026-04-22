@@ -40,4 +40,14 @@ class Membre extends Model
     {
         return $this->belongsTo(Participant::class);
     }
+
+    public function versements()
+    {
+        return $this->hasMany(Versement::class);
+    }
+
+    public function echeancier()
+    {
+        return $this->belongsTo(Echeancier::class);
+    }
 }

@@ -8,6 +8,8 @@ import {
     Folder,
     FolderCheck,
     FolderCheckIcon,
+    FolderClock,
+    FolderDot,
     FolderGit2,
     LayoutGrid,
     User,
@@ -41,6 +43,7 @@ const mainNavItems: NavItem[] = [
     { title: 'Membres', href: '/admin/membres', icon: BookUser },
     { title: 'Participants', href: '/admin/participants', icon: Contact },
     { title: 'Tarifs', href: '/admin/tarifs', icon: DollarSign },
+    { title: 'Echéanciers', href: '/admin/echeanciers', icon: FolderClock },
     { title: 'Users', href: '/admin/users', icon: User },
 ];
 

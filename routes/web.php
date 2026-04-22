@@ -75,6 +75,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Gestion des tarifs
     Route::resource('admin/tarifs', \App\Http\Controllers\TarifController::class);
     Route::patch('admin/tarifs/{tarif}/actifs', [\App\Http\Controllers\TarifController::class, 'tarifsActifs'])->name('admin.tarifs.actifs');
+
+    //Gestion des échéanciers
+    Route::resource('admin/echeanciers', \App\Http\Controllers\EcheancierController::class);
+    Route::patch('admin/echeanciers/{echeancier}/actifs', [\App\Http\Controllers\EcheancierController::class, 'echeanciersActifs'])->name('admin.echeanciers.actifs');
 });
 
 require __DIR__.'/settings.php';

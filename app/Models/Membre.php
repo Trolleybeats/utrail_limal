@@ -25,6 +25,8 @@ class Membre extends Model
         'stripe_payment_intent_id',
         'payment_status',
         'montant_total',
+        'mode_paiement',
+        'echeancier_id',
     ];
 
     protected $casts = [

@@ -20,7 +20,7 @@ class MembreController extends Controller
     public function index()
     {
         return Inertia::render('admin/membres/Index', [
-            'membres' => Membre::with('participant')->get(),
+            'membres' => Membre::with(['participant', 'versements', 'echeancier'])->get(),
         ]);
     }
 

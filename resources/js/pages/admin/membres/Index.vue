@@ -91,7 +91,9 @@ const exportExcel = () => {
                         <th class="border px-4 py-2">Distance 2</th>
                         <th class="border px-4 py-2">Logement 2</th>
                         <th class="border px-4 py-2">Taille tshirt</th>
-                        <th class="border px-4 py-2">Paiement</th>
+                        <th class="border px-4 py-2">Statut</th>
+                        <th class="border px-4 py-2">Mode paiement</th>
+                        <th class="border px-4 py-2">Versements</th>
                         <th class="border px-4 py-2">Actions</th>
                     </tr>
                 </thead>
@@ -147,7 +149,36 @@ const exportExcel = () => {
                             {{ membre.tshirt_taille }}
                         </td>
                         <td class="border px-4 py-2">
-                            {{ membre.payment_status ? 'Payé' : 'Non payé' }}
+                            {{
+                                membre.payment_status === 'succeeded'
+                                    ? 'Payé'
+                                    : 'Non payé'
+                            }}
+                        </td>
+                        <td class="border px-4 py-2">
+                            {{
+                                membre.mode_paiement === 'echelonne'
+                                    ? 'Échelonné'
+                                    : 'Immédiat'
+                            }}
+                        </td>
+                        <td class="border px-4 py-2">
+                            <template
+                                v-if="
+                                    membre.mode_paiement === 'echelonne' &&
+                                    membre.echeancier
+                                "
+                            >
+                                <span>
+                                    {{
+                                        membre.versements.filter(
+                                            (v) => v.statut === 'succeeded',
+                                        ).length
+                                    }}/{{ membre.echeancier.nombre_versements }}
+                                    payés
+                                </span>
+                            </template>
+                            <span v-else class="text-xs text-gray-400">—</span>
                         </td>
                         <td
                             class="border px-4 py-2 text-right text-sm font-medium whitespace-nowrap"

@@ -11,6 +11,8 @@ import {
     FolderClock,
     FolderDot,
     FolderGit2,
+    Hand,
+    HandCoins,
     LayoutGrid,
     User,
     Users,
@@ -44,6 +46,7 @@ const mainNavItems: NavItem[] = [
     { title: 'Participants', href: '/admin/participants', icon: Contact },
     { title: 'Tarifs', href: '/admin/tarifs', icon: DollarSign },
     { title: 'Echéanciers', href: '/admin/echeanciers', icon: FolderClock },
+    { title: 'Versements', href: '/admin/versements', icon: HandCoins },
     { title: 'Users', href: '/admin/users', icon: User },
 ];
 

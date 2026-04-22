@@ -12,9 +12,17 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    versement: {
+        type: Object,
+        default: null,
+    },
 });
 
 const isSuccess = props.status === 'succeeded';
+const isInstallment = !!props.versement;
+const isLastInstallment =
+    isInstallment &&
+    props.versement.numero_versement === props.versement.total_versements;
 </script>
 
 <template>
@@ -65,22 +73,67 @@ const isSuccess = props.status === 'succeeded';
         <section class="mx-auto w-full max-w-[640px] px-4 pb-14">
             <div class="rounded-[6px] bg-white px-6 py-8 text-center">
                 <div v-if="isSuccess">
-                    <p class="mb-4 text-[18px] font-medium text-[#586166]">
-                        Merci
-                        <span class="font-semibold text-[#B3A96F]">
-                            {{ membre.participant.prenom }}
-                            {{ membre.participant.nom }}
-                        </span>
-                        , votre paiement de
-                        <span class="font-semibold text-[#B3A96F]">
-                            {{ membre.montant_total.toFixed(2) }} €
-                        </span>
-                        a bien été reçu.
-                    </p>
-                    <p class="text-[16px] text-[#586166]">
-                        Votre inscription est maintenant complète. Vous recevrez
-                        une confirmation par e-mail.
-                    </p>
+                    <!-- Installment payment confirmation -->
+                    <template v-if="isInstallment">
+                        <p class="mb-4 text-[18px] font-medium text-[#586166]">
+                            Merci
+                            <span class="font-semibold text-[#B3A96F]">
+                                {{ membre.participant.prenom }}
+                                {{ membre.participant.nom }}
+                            </span>
+                            , votre versement n°{{
+                                versement.numero_versement
+                            }}/{{ versement.total_versements }} de
+                            <span class="font-semibold text-[#B3A96F]">
+                                {{ Number(versement.montant).toFixed(2) }} €
+                            </span>
+                            a bien été reçu.
+                        </p>
+                        <p
+                            v-if="isLastInstallment"
+                            class="text-[16px] text-[#586166]"
+                        >
+                            Tous vos versements ont été réglés. Votre
+                            inscription est maintenant complète. Vous recevrez
+                            une confirmation par e-mail.
+                        </p>
+                        <p v-else class="text-[16px] text-[#586166]">
+                            Il vous reste
+                            {{
+                                versement.total_versements -
+                                versement.numero_versement
+                            }}
+                            versement{{
+                                versement.total_versements -
+                                    versement.numero_versement >
+                                1
+                                    ? 's'
+                                    : ''
+                            }}
+                            à régler. Vous recevrez un lien de paiement par
+                            e-mail pour chaque échéance.
+                        </p>
+                    </template>
+
+                    <!-- Full / immediate payment confirmation -->
+                    <template v-else>
+                        <p class="mb-4 text-[18px] font-medium text-[#586166]">
+                            Merci
+                            <span class="font-semibold text-[#B3A96F]">
+                                {{ membre.participant.prenom }}
+                                {{ membre.participant.nom }}
+                            </span>
+                            , votre paiement de
+                            <span class="font-semibold text-[#B3A96F]">
+                                {{ membre.montant_total.toFixed(2) }} €
+                            </span>
+                            a bien été reçu.
+                        </p>
+                        <p class="text-[16px] text-[#586166]">
+                            Votre inscription est maintenant complète. Vous
+                            recevrez une confirmation par e-mail.
+                        </p>
+                    </template>
                 </div>
                 <div v-else>
                     <p class="text-[18px] text-[#586166]">

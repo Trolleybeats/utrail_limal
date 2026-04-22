@@ -8,7 +8,9 @@ use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PhotoProjetController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VersementController;
 use App\Models\Membre;
 use App\Models\Participant;
 use Illuminate\Support\Facades\Route;
@@ -19,17 +21,29 @@ Route::get('/', [ProjetController::class, 'welcome'])->name('home');
 Route::get('/Presentation', [ProjetController::class, 'presentation'])->name('presentation');
 Route::get('/Projet', [ProjetController::class, 'projetPage'])->name('projet');
 Route::get('/Equipe', [EquipeController::class, 'equipe'])->name('equipe');
-Route::inertia('/Inscription', 'Inscription')->name('inscription');
-Route::post('/inscription', [ParticipantController::class, 'store'])->name('inscription.store');
-Route::get('/paiement/confirmation', [PaiementController::class, 'confirmation'])->name('paiement.confirmation');
-Route::get('/paiement/{token}', [MembreController::class, 'create'])->name('paiement');
-Route::post('/paiement/{token}', [MembreController::class, 'store'])->name('paiement.store');
-Route::get('/checkout/{membre}', [PaiementController::class, 'show'])->name('checkout');
 Route::get('/Formation', [FormationController::class, 'formation'])->name('formation');
 Route::inertia('/Contact', 'Contact')->name('contact');
 
+//Page d'inscription à la séance d'information
+Route::inertia('/Inscription', 'Inscription')->name('inscription');
+Route::post('/inscription', [ParticipantController::class, 'store'])->name('inscription.store');
+
+//Page d'inscription au projet
+Route::get('/paiement/confirmation', [PaiementController::class, 'confirmation'])->name('paiement.confirmation');
+Route::get('/paiement/{token}', [MembreController::class, 'create'])->name('paiement');
+Route::post('/paiement/{token}', [MembreController::class, 'store'])->name('paiement.store');
+//Page de checkout
+Route::get('/checkout/{membre}', [PaiementController::class, 'show'])->name('checkout');
+Route::post('/checkout/{membre}/echelonne', [PaiementController::class, 'switchToInstallments'])->name('checkout.switch-installments');
+Route::post('/checkout/{membre}/immediat', [PaiementController::class, 'switchToFull'])->name('checkout.switch-full');
+Route::get('/versement/{versement}/checkout', [PaiementController::class, 'showVersement'])->name('versement.checkout');
+
+
 //Contact form submission
 Route::post('/contact', EnvoiContactFormController::class)->name('contact.submit');
+
+//Stripe webhook (no CSRF)
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 //Page admin
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -79,6 +93,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Gestion des échéanciers
     Route::resource('admin/echeanciers', \App\Http\Controllers\EcheancierController::class);
     Route::patch('admin/echeanciers/{echeancier}/actifs', [\App\Http\Controllers\EcheancierController::class, 'echeanciersActifs'])->name('admin.echeanciers.actifs');
+
+    //Gestion des versements
+    Route::get('admin/versements', [VersementController::class, 'index'])->name('admin.versements.index');
+    Route::post('admin/versements/{versement}/send-lien', [VersementController::class, 'sendLienVersement'])->name('admin.versements.send-lien');
 });
 
 require __DIR__.'/settings.php';

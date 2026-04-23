@@ -22,7 +22,7 @@ const imgFacebook =
                     aria-label="Facebook"
                 >
                     <img
-                        src="storage/Facebook.png"
+                        src="/storage/Facebook.png"
                         alt="Facebook"
                         class="h-[40px] w-[40px] object-contain"
                     />
@@ -100,7 +100,7 @@ const imgFacebook =
                             aria-label="Cubitus"
                         >
                             <img
-                                src="storage/Cubitus.png"
+                                src="/storage/Cubitus.png"
                                 alt="Cubitus"
                                 class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
                             />
@@ -114,7 +114,7 @@ const imgFacebook =
                             aria-label="Trakks"
                         >
                             <img
-                                src="storage/Trakks.png"
+                                src="/storage/Trakks.png"
                                 alt="Trakks"
                                 class="h-[20px] w-[60px] object-contain md:h-[28px] md:w-[88px]"
                             />
@@ -128,7 +128,7 @@ const imgFacebook =
                             aria-label="Nutribay"
                         >
                             <img
-                                src="storage/Nutribay.png"
+                                src="/storage/Nutribay.png"
                                 alt="Nutribay"
                                 class="h-[60px] w-[60px] object-contain md:h-[88px] md:w-[88px]"
                             />

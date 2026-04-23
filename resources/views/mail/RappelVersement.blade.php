@@ -29,7 +29,7 @@
 
         <div class="info-box">
             <strong>Versement n°{{ $versement->numero_versement }}</strong><br>
-            Montant : <strong>{{ number_format($versement->montant / 100, 2, ',', ' ') }} €</strong><br>
+            Montant : <strong>{{ number_format($versement->montant) }} €</strong><br>
             Date d'échéance : <strong>{{ \Carbon\Carbon::parse($versement->date_echeance)->translatedFormat('d F Y') }}</strong>
         </div>
 

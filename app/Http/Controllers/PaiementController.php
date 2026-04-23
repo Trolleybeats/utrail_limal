@@ -7,6 +7,7 @@ use App\Models\Membre;
 use App\Models\Versement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\LienVersement;
 use App\Mail\PaiementReussi;
 use Inertia\Inertia;
 use Stripe\PaymentIntent;
@@ -16,6 +17,12 @@ class PaiementController extends Controller
 {
     public function show(Membre $membre)
     {
+        if ($membre->payment_status === 'succeeded') {
+            return redirect()->route('paiement.confirmation', [
+                'payment_intent' => $membre->stripe_payment_intent_id,
+            ]);
+        }
+
         Stripe::setApiKey(config('services.stripe.secret'));
         $paymentIntent = PaymentIntent::retrieve($membre->stripe_payment_intent_id);
 
@@ -133,12 +140,18 @@ class PaiementController extends Controller
 
     public function showVersement(Versement $versement)
     {
+        if ($versement->statut === 'succeeded') {
+            return redirect()->route('paiement.confirmation', [
+                'payment_intent' => $versement->stripe_payment_intent_id,
+            ]);
+        }
+
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $membre = $versement->membre->load('participant');
 
         $paymentIntent = PaymentIntent::create([
-            'amount'   => $versement->montant,
+            'amount'   => (int) round($versement->montant * 100),
             'currency' => 'eur',
             'metadata' => [
                 'membre_id'    => $membre->id,
@@ -181,6 +194,14 @@ class PaiementController extends Controller
 
             if ($paymentIntent->status === 'succeeded' && $versement->statut !== 'succeeded') {
                 $versement->update(['statut' => 'succeeded']);
+
+                if ($versement->numero_versement === 1) {
+                    $membre->versements()
+                        ->where('numero_versement', '>', 1)
+                        ->orderBy('numero_versement')
+                        ->get()
+                        ->each(fn($v) => Mail::to($membre->participant->email)->send(new LienVersement($v)));
+                }
 
                 $allPaid = $membre->versements()->where('statut', '!=', 'succeeded')->doesntExist();
                 if ($allPaid && $membre->payment_status !== 'succeeded') {

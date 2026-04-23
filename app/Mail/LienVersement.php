@@ -20,7 +20,7 @@ class LienVersement extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Votre lien de paiement — versement n°' . $this->versement->numero_versement,
+            subject: 'Confirmation de paiement et lien pour le prochain versement',
         );
     }
 

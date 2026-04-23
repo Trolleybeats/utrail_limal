@@ -22,11 +22,16 @@
         </div>
         <p>Bonjour <strong>{{ $versement->membre->participant->prenom }} {{ $versement->membre->participant->nom }}</strong>,</p>
         <p>
-            Vous avez un versement en attente pour votre inscription au projet U-Trail Limal.
+            Merci pour votre inscription au projet <strong>U-Trail Limal</strong> ! Le versement a bien été enregistré, et nous sommes ravis de vous compter parmi les participants.
         </p>
         <p>
+            Votre prochain versement pour votre inscription au projet U-Trail Limal est prévu pour le <strong>{{ \Carbon\Carbon::parse($versement->date_echeance)->translatedFormat('d F Y') }}</strong>.
+        </p>
+        <p>
+            Un rappel de paiement vous sera envoyé quelques jours avant la date d'échéance pour vous assurer de ne pas oublier ce versement.
+        <p>
             <strong>Versement n°{{ $versement->numero_versement }}</strong> —
-            {{ number_format($versement->montant / 100, 2, ',', ' ') }} €
+            {{ number_format($versement->montant) }} €
             (échéance : {{ \Carbon\Carbon::parse($versement->date_echeance)->translatedFormat('d F Y') }})
         </p>
         <p>Cliquez sur le bouton ci-dessous pour procéder au paiement :</p>

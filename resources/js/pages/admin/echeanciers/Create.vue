@@ -89,7 +89,7 @@ function submitForm() {
                             : 'border-gray-300',
                     ]"
                 >
-                    <option v-for="n in 4" :key="n" :value="n">{{ n }}</option>
+                    <option v-for="n in 8" :key="n" :value="n">{{ n }}</option>
                 </select>
             </div>
 

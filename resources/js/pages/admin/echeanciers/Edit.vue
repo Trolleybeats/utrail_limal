@@ -103,7 +103,7 @@ function submitForm() {
                     required
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 >
-                    <option v-for="n in 4" :key="n" :value="n">{{ n }}</option>
+                    <option v-for="n in 8" :key="n" :value="n">{{ n }}</option>
                 </select>
             </div>
             <div>

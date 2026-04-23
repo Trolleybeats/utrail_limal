@@ -19,7 +19,7 @@ class EnvoiContactFormController extends Controller
         'message' => 'required|string|max:2000',
     ]));
 
-    Mail::to('admin@test.com')->queue(new EnvoiFormContact(
+    Mail::to('loicmascre@gmail.com')->queue(new EnvoiFormContact(
        $contactForm
     ));
 

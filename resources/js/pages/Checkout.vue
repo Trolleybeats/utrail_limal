@@ -56,6 +56,9 @@ const showToggle = computed(
 );
 
 const montantAPayer = computed(() => {
+    if (props.versement) {
+        return props.versement.montant;
+    }
     if (
         paymentMode.value === 'echelonne' &&
         currentVersements.value.length > 0

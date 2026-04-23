@@ -21,6 +21,8 @@ createInertiaApp({
             case name === 'Paiement':
             case name === 'Checkout':
             case name === 'PaiementConfirmation':
+            case name === 'MentionLegale':
+            case name === 'Confidentialite':
                 return null;
             case name.startsWith('auth/'):
                 return AuthLayout;

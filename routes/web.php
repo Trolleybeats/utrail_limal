@@ -23,6 +23,12 @@ Route::get('/Projet', [ProjetController::class, 'projetPage'])->name('projet');
 Route::get('/Equipe', [EquipeController::class, 'equipe'])->name('equipe');
 Route::get('/Formation', [FormationController::class, 'formation'])->name('formation');
 Route::inertia('/Contact', 'Contact')->name('contact');
+Route::get('/MentionLegale', function () {
+    return Inertia::render('MentionLegale');
+})->name('mention-legale');
+Route::get('/Confidentialite', function () {
+    return Inertia::render('Confidentialite');
+})->name('confidentialite');
 
 //Page d'inscription à la séance d'information
 Route::inertia('/Inscription', 'Inscription')->name('inscription');

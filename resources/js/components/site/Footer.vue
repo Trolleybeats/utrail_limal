@@ -16,7 +16,7 @@ const imgFacebook =
             <!-- Facebook icon row -->
             <div class="mb-6 flex justify-end">
                 <a
-                    href="https://www.facebook.com"
+                    href="https://www.facebook.com/profile.php?id=61566596292504"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
@@ -83,7 +83,7 @@ const imgFacebook =
             >
                 <p>
                     <a
-                        href="/Mentions-legales"
+                        href="/MentionLegale"
                         class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
                     >
                         Mentions légales

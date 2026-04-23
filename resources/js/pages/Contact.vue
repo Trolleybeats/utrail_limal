@@ -245,25 +245,30 @@ const submitForm = () => {
                     class="flex min-h-[100px] items-center justify-end gap-3 bg-[#d0c6af] px-4 py-6 sm:min-h-[120px] sm:px-8 md:min-h-[160px] lg:px-14"
                 >
                     <span class="text-lg text-[#1a1a1a] sm:text-xl md:text-2xl"
-                        >Suivez-nous</span
+                        ><a href="/MentionLegale" class="hover:underline"
+                            >Mentions légales</a
+                        ></span
                     >
-                    <a
-                        href="https://www.facebook.com/profile.php?id=61566596292504"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Facebook U-Trail Limal"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-8 w-8 sm:h-9 sm:w-9 md:h-[42px] md:w-[42px]"
-                            viewBox="0 0 24 24"
-                            fill="#1a1a1a"
+
+                    <span>
+                        <a
+                            href="https://www.facebook.com/profile.php?id=61566596292504"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook U-Trail Limal"
                         >
-                            <path
-                                d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"
-                            />
-                        </svg>
-                    </a>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-8 w-8 sm:h-9 sm:w-9 md:h-[42px] md:w-[42px]"
+                                viewBox="0 0 24 24"
+                                fill="#1a1a1a"
+                            >
+                                <path
+                                    d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"
+                                />
+                            </svg>
+                        </a>
+                    </span>
                 </div>
             </div>
         </section>

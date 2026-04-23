@@ -2,6 +2,7 @@
 import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import CookieBanner from '@/components/site/CookieBanner.vue';
 
 const props = defineProps<{
     canRegister?: boolean;
@@ -300,4 +301,5 @@ const props = defineProps<{
         </section>
     </main>
     <Footer></Footer>
+    <CookieBanner></CookieBanner>
 </template>

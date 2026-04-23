@@ -73,7 +73,7 @@ const isLastInstallment =
         <section class="mx-auto w-full max-w-[640px] px-4 pb-14">
             <div class="rounded-[6px] bg-white px-6 py-8 text-center">
                 <div v-if="isSuccess">
-                    <!-- Installment payment confirmation -->
+                    <!-- Confirmation de paiement en plusieurs fois -->
                     <template v-if="isInstallment">
                         <p class="mb-4 text-[18px] font-medium text-[#586166]">
                             Merci
@@ -115,7 +115,7 @@ const isLastInstallment =
                         </p>
                     </template>
 
-                    <!-- Full / immediate payment confirmation -->
+                    <!-- Confirmation de paiement immédiat -->
                     <template v-else>
                         <p class="mb-4 text-[18px] font-medium text-[#586166]">
                             Merci

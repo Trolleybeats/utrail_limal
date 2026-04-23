@@ -14,8 +14,9 @@ import { request } from '@/routes/password';
 
 defineOptions({
     layout: {
-        title: 'Log in to your account',
-        description: 'Enter your email and password below to log in',
+        title: 'Connectez vous à votre compte',
+        description:
+            'Entrez votre email et mot de passe ci-dessous pour vous connecter',
     },
 });
 
@@ -27,7 +28,7 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Log in" />
+    <Head title="Connexion" />
 
     <div
         v-if="status"
@@ -67,7 +68,7 @@ defineProps<{
                         class="text-sm"
                         :tabindex="5"
                     >
-                        Forgot password?
+                        Mot de passe oublié?
                     </TextLink>
                 </div>
                 <PasswordInput
@@ -84,7 +85,7 @@ defineProps<{
             <div class="flex items-center justify-between">
                 <Label for="remember" class="flex items-center space-x-3">
                     <Checkbox id="remember" name="remember" :tabindex="3" />
-                    <span>Remember me</span>
+                    <span>Se souvenir de moi</span>
                 </Label>
             </div>
 
@@ -96,7 +97,7 @@ defineProps<{
                 data-test="login-button"
             >
                 <Spinner v-if="processing" />
-                Log in
+                Se connecter
             </Button>
         </div>
 
@@ -104,8 +105,8 @@ defineProps<{
             class="text-center text-sm text-muted-foreground"
             v-if="canRegister"
         >
-            Don't have an account?
-            <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+            Vous n'avez pas de compte ?
+            <TextLink :href="register()" :tabindex="5">S'inscrire</TextLink>
         </div>
     </Form>
 </template>

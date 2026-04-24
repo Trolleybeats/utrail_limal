@@ -42,6 +42,7 @@ defineOptions({
             <div class="flex items-center">
                 <Button
                     class="w-full"
+                    style="color: var(--secondary)"
                     :disabled="processing"
                     data-test="confirm-password-button"
                 >

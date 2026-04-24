@@ -38,6 +38,7 @@ Route::post('/inscription', [ParticipantController::class, 'store'])->name('insc
 Route::get('/paiement/confirmation', [PaiementController::class, 'confirmation'])->name('paiement.confirmation');
 Route::get('/paiement/{token}', [MembreController::class, 'create'])->name('paiement');
 Route::post('/paiement/{token}', [MembreController::class, 'store'])->name('paiement.store');
+
 //Page de checkout
 Route::get('/checkout/{membre}', [PaiementController::class, 'show'])->name('checkout');
 Route::post('/checkout/{membre}/echelonne', [PaiementController::class, 'switchToInstallments'])->name('checkout.switch-installments');
@@ -52,7 +53,7 @@ Route::post('/contact', EnvoiContactFormController::class)->name('contact.submit
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 //Page admin
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'require.2fa'])->group(function () {
 
     //Page accueil admin
     Route::get('dashboard', function () {

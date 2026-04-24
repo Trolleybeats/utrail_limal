@@ -111,6 +111,7 @@ onUnmounted(() => clearTwoFactorAuthData());
                 <Button
                     :disabled="processing"
                     data-test="update-password-button"
+                    style="color: var(--secondary)"
                 >
                     Enregistrer le mot de passe
                 </Button>
@@ -160,7 +161,11 @@ onUnmounted(() => clearTwoFactorAuthData());
                     @success="showSetupModal = true"
                     #default="{ processing }"
                 >
-                    <Button type="submit" :disabled="processing">
+                    <Button
+                        type="submit"
+                        :disabled="processing"
+                        style="color: var(--secondary)"
+                    >
                         Activer 2FA
                     </Button>
                 </Form>
@@ -180,6 +185,8 @@ onUnmounted(() => clearTwoFactorAuthData());
                         variant="destructive"
                         type="submit"
                         :disabled="processing"
+                        class="border"
+                        style="color: var(--primary)"
                     >
                         Désactiver 2FA
                     </Button>

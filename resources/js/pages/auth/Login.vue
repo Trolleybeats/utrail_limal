@@ -92,6 +92,7 @@ defineProps<{
             <Button
                 type="submit"
                 class="mt-4 w-full"
+                style="color: var(--secondary)"
                 :tabindex="4"
                 :disabled="processing"
                 data-test="login-button"
@@ -99,14 +100,6 @@ defineProps<{
                 <Spinner v-if="processing" />
                 Se connecter
             </Button>
-        </div>
-
-        <div
-            class="text-center text-sm text-muted-foreground"
-            v-if="canRegister"
-        >
-            Vous n'avez pas de compte ?
-            <TextLink :href="register()" :tabindex="5">S'inscrire</TextLink>
         </div>
     </Form>
 </template>

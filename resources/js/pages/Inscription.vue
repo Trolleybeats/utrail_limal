@@ -18,9 +18,7 @@ const submit = () => {
             form.reset();
         },
         onError: () => {
-            alert(
-                "Une erreur est survenue lors de l'envoi de votre inscription. Veuillez réessayer.",
-            );
+            console.error('Validation errors:', form.errors);
         },
     });
 };
@@ -85,6 +83,15 @@ const submit = () => {
 
             <!-- Form -->
             <form @submit.prevent="submit" class="flex flex-col gap-6">
+                <!-- Message de réussite -->
+                <p
+                    v-if="form.recentlySuccessful"
+                    class="text-sm text-[#28a745]"
+                >
+                    Votre inscription a été encodée avec succès ! Rendez-vous à
+                    la séance d'information pour découvrir le projet en détail.
+                </p>
+
                 <!-- Prénom -->
                 <div class="flex flex-col gap-2">
                     <label

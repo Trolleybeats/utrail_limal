@@ -35,7 +35,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => ['required', 'string', \Illuminate\Validation\Rules\Password::default(), 'confirmed'],
         ]);
 
         User::create([
@@ -75,7 +75,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => ['nullable', 'string', \Illuminate\Validation\Rules\Password::default(), 'confirmed'],
         ]);
 
         $user = User::findOrFail($id);
@@ -92,11 +92,20 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->id === $request->user()->id) {
+            return redirect()->route('users.index')->with('error', 'Vous ne pouvez pas supprimer votre propre compte.');
+        }
+
+        if (User::count() <= 1) {
+            return redirect()->route('users.index')->with('error', 'Impossible de supprimer le dernier administrateur.');
+        }
+
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès.');
     }
 }

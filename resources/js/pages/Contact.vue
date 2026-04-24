@@ -18,9 +18,7 @@ const submitForm = () => {
             form.reset();
         },
         onError: (errors) => {
-            alert(
-                'Une erreur est survenue. Veuillez vérifier vos informations et réessayer.',
-            );
+            console.error('Validation errors:', errors);
         },
     });
 };
@@ -113,12 +111,14 @@ const submitForm = () => {
                         >
                             <div class="flex flex-col gap-2">
                                 <label
+                                    for="prenom"
                                     class="text-base text-[#1a1a1a] md:text-lg lg:text-xl"
                                     >Prénom</label
                                 >
                                 <input
                                     v-model="form.prenom"
                                     type="text"
+                                    id="prenom"
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         {
@@ -136,12 +136,14 @@ const submitForm = () => {
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label
+                                    for="nom"
                                     class="text-base text-[#1a1a1a] md:text-lg lg:text-xl"
                                     >Nom de famille</label
                                 >
                                 <input
                                     v-model="form.nom"
                                     type="text"
+                                    id="nom"
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         { 'border-red-500': form.errors.nom },
@@ -162,12 +164,14 @@ const submitForm = () => {
                         >
                             <div class="flex flex-col gap-2">
                                 <label
+                                    for="email"
                                     class="text-base text-[#1a1a1a] md:text-lg lg:text-xl"
                                     >Email</label
                                 >
                                 <input
                                     v-model="form.email"
                                     type="email"
+                                    id="email"
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         { 'border-red-500': form.errors.email },
@@ -182,12 +186,14 @@ const submitForm = () => {
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label
+                                    for="telephone"
                                     class="text-base text-[#1a1a1a] md:text-lg lg:text-xl"
                                     >N° de téléphone</label
                                 >
                                 <input
                                     v-model="form.telephone"
                                     type="tel"
+                                    id="telephone"
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         {
@@ -208,12 +214,14 @@ const submitForm = () => {
                         <!-- Message -->
                         <div class="flex flex-col gap-2">
                             <label
+                                for="message"
                                 class="text-base text-[#1a1a1a] md:text-lg lg:text-xl"
                                 >Message</label
                             >
                             <textarea
                                 v-model="form.message"
                                 rows="3"
+                                id="message"
                                 :class="[
                                     'resize-none border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                     { 'border-red-500': form.errors.message },

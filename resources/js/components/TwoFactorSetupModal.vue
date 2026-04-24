@@ -62,10 +62,10 @@ const modalConfig = computed<TwoFactorConfigContent>(() => {
     }
 
     return {
-        title: 'Enable two-factor authentication',
+        title: "Activer l'authentification à deux facteurs",
         description:
-            'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
-        buttonText: 'Continue',
+            "Pour terminer l'activation de l'authentification à deux facteurs, scannez le code QR ou entrez la clé de configuration dans votre application d'authentification",
+        buttonText: 'Continuer',
     };
 });
 
@@ -185,7 +185,11 @@ watch(
                         </div>
 
                         <div class="flex w-full items-center space-x-5">
-                            <Button class="w-full" @click="handleModalNextStep">
+                            <Button
+                                class="w-full"
+                                @click="handleModalNextStep"
+                                style="color: var(--secondary)"
+                            >
                                 {{ modalConfig.buttonText }}
                             </Button>
                         </div>
@@ -197,7 +201,7 @@ watch(
                                 class="absolute inset-0 top-1/2 h-px w-full bg-border"
                             />
                             <span class="relative bg-card px-2 py-1"
-                                >or, enter the code manually</span
+                                >ou, entrez le code manuellement</span
                             >
                         </div>
 
@@ -278,14 +282,14 @@ watch(
                                     @click="showVerificationStep = false"
                                     :disabled="processing"
                                 >
-                                    Back
+                                    Retour
                                 </Button>
                                 <Button
                                     type="submit"
                                     class="w-auto flex-1"
                                     :disabled="processing || code.length < 6"
                                 >
-                                    Confirm
+                                    Confirmer
                                 </Button>
                             </div>
                         </div>

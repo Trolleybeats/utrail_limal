@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Versement;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ParticipantSeeder::class,
             MembreSeeder::class,
             TarifSeeder::class,
+            VersementSeeder::class,
         ]);
     }
 }

@@ -55,94 +55,121 @@ function supprimerPhoto() {
 </script>
 
 <template>
-    <section class="mx-auto w-full max-w-[600px] px-4 py-8">
-        <h2 class="mb-4 text-2xl font-bold">Modifier la formation</h2>
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Modifier la formation
+        </h1>
         <form @submit.prevent="updateFormation" class="space-y-6">
             <div>
-                <label
-                    for="titre"
-                    class="block text-sm font-medium text-gray-700"
-                    >Titre</label
-                >
+                <label for="titre" class="mb-2 block font-medium">Titre</label>
                 <input
                     v-model="form.titre"
                     type="text"
                     id="titre"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.titre
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
+                <p v-if="form.errors.titre" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.titre }}
+                </p>
             </div>
             <div>
-                <label
-                    for="description"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="description" class="mb-2 block font-medium"
                     >Description</label
                 >
-                <input
+                <textarea
                     v-model="form.description"
-                    type="text"
                     id="description"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
-                />
+                    rows="4"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.description
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
+                ></textarea>
+                <p
+                    v-if="form.errors.description"
+                    class="mt-1 text-sm text-red-600"
+                >
+                    {{ form.errors.description }}
+                </p>
             </div>
             <div>
-                <label
-                    for="date"
-                    class="block text-sm font-medium text-gray-700"
-                    >Date</label
-                >
+                <label for="date" class="mb-2 block font-medium">Date</label>
                 <input
                     v-model="form.date"
                     type="text"
                     id="date"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.date
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
+                <p v-if="form.errors.date" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.date }}
+                </p>
             </div>
             <div>
-                <label
-                    for="niveau"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="niveau" class="mb-2 block font-medium"
                     >Niveau</label
                 >
                 <select
                     v-model="form.niveau"
                     id="niveau"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.niveau
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 >
                     <option value="">-- Sélectionner le niveau --</option>
                     <option value="Débutant">Débutant</option>
                     <option value="Intermédiaire">Intermédiaire</option>
                     <option value="Avancé">Avancé</option>
                 </select>
+                <p v-if="form.errors.niveau" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.niveau }}
+                </p>
             </div>
-            <button
-                type="submit"
-                class="hover:bg-primary-dark inline-flex items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none disabled:opacity-50"
-                :disabled="form.processing || uploading"
-            >
-                Enregistrer
-            </button>
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="form.processing || uploading"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
+                >
+                    {{ form.processing ? 'Enregistrement...' : 'Enregistrer' }}
+                </button>
+            </div>
         </form>
         <hr class="my-8" />
-        <h3 class="mb-4 text-xl font-semibold text-gray-800">
-            Photo de profil
-        </h3>
+        <h2 class="mb-4 text-xl font-semibold text-[var(--primary)]">Photo</h2>
         <div class="flex items-center gap-4">
             <input
                 ref="photoFile"
                 type="file"
                 accept="image/*"
                 @change="changerPhoto"
-                class="hover:file:bg-primary-dark block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                class="block w-full rounded-md border border-[var(--primary)] px-3 py-2 text-sm"
             />
             <button
                 @click="supprimerPhoto"
-                class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50"
                 :disabled="
                     form.processing || uploading || !props.formation.photo
                 "
+                class="cursor-pointer rounded-md bg-red-500 px-4 py-2 text-white hover:bg-red-600 disabled:bg-gray-400"
             >
                 Supprimer la photo
             </button>
         </div>
-    </section>
+    </div>
 </template>

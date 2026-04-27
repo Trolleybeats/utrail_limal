@@ -74,42 +74,57 @@ function submitForm() {
 </script>
 
 <template>
-    <section class="mx-auto w-full max-w-[600px] px-4 py-8">
-        <h2 class="mb-4 text-2xl font-bold">Modifier l'échéancier</h2>
-        <form @submit.prevent="submitForm" class="space-y-4">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Modifier l'échéancier
+        </h1>
+        <form @submit.prevent="submitForm" class="space-y-6">
             <div>
-                <label
-                    for="label"
-                    class="block text-sm font-medium text-gray-700"
-                    >Label</label
-                >
+                <label for="label" class="mb-2 block font-medium">Label</label>
                 <input
                     id="label"
                     v-model="form.label"
                     type="text"
                     required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.label
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
+                <p v-if="form.errors.label" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.label }}
+                </p>
             </div>
             <div>
-                <label
-                    for="nombre_versements"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="nombre_versements" class="mb-2 block font-medium"
                     >Nombre de versements</label
                 >
                 <select
                     id="nombre_versements"
                     v-model="form.nombre_versements"
                     required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.nombre_versements
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 >
                     <option v-for="n in 8" :key="n" :value="n">{{ n }}</option>
                 </select>
+                <p
+                    v-if="form.errors.nombre_versements"
+                    class="mt-1 text-sm text-red-600"
+                >
+                    {{ form.errors.nombre_versements }}
+                </p>
             </div>
             <div>
-                <label
-                    for="dates"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="dates" class="mb-2 block font-medium"
                     >Dates (séparées par des virgules, format JJ/MM/AAAA)</label
                 >
                 <input
@@ -117,31 +132,35 @@ function submitForm() {
                     v-model="form.dates"
                     type="text"
                     required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.dates
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
+                <p v-if="form.errors.dates" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.dates }}
+                </p>
             </div>
-            <div class="flex items-center">
-                <label
-                    for="est_actif"
-                    class="block text-sm font-medium text-gray-700"
-                    >Actif</label
-                >
+            <div class="flex items-center gap-2">
                 <input
                     id="est_actif"
                     v-model="form.est_actif"
                     type="checkbox"
-                    class="ml-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    class="h-4 w-4 rounded border-[var(--primary)] text-[var(--primary)]"
                 />
+                <label for="est_actif" class="font-medium">Actif</label>
             </div>
-            <div class="flex justify-end">
+            <div class="flex justify-center">
                 <button
                     type="submit"
-                    class="hover:bg-primary-dark inline-flex items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none disabled:opacity-50"
                     :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
                 >
-                    Enregistrer
+                    {{ form.processing ? 'Enregistrement...' : 'Enregistrer' }}
                 </button>
             </div>
         </form>
-    </section>
+    </div>
 </template>

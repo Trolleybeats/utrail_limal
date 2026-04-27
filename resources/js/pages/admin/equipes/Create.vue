@@ -27,33 +27,33 @@ function submitForm() {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
             Créer un membre de l'équipe
         </h1>
-        <form @submit.prevent="submitForm" class="space-y-4">
+        <form @submit.prevent="submitForm" class="space-y-6">
             <div>
-                <label for="nom" class="block text-sm font-medium text-gray-700"
-                    >Nom</label
-                >
+                <label for="nom" class="mb-2 block font-medium">Nom</label>
                 <input
                     id="nom"
                     v-model="form.nom"
                     type="text"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
-                        form.errors.nom ? 'border-red-500' : 'border-gray-300',
+                        'w-full rounded-md border p-2',
+                        form.errors.nom
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.nom" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.nom }}
+                </p>
             </div>
-            <p v-if="form.errors.nom" class="mt-1 text-sm text-red-600">
-                {{ form.errors.nom }}
-            </p>
             <div>
-                <label
-                    for="prenom"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="prenom" class="mb-2 block font-medium"
                     >Prénom</label
                 >
                 <input
@@ -62,68 +62,61 @@ function submitForm() {
                     type="text"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.prenom
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.prenom" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.prenom }}
+                </p>
             </div>
-            <p v-if="form.errors.prenom" class="mt-1 text-sm text-red-600">
-                {{ form.errors.prenom }}
-            </p>
             <div>
-                <label
-                    for="role"
-                    class="block text-sm font-medium text-gray-700"
-                    >Rôle</label
-                >
+                <label for="role" class="mb-2 block font-medium">Rôle</label>
                 <input
                     id="role"
                     v-model="form.role"
                     type="text"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
-                        form.errors.role ? 'border-red-500' : 'border-gray-300',
+                        'w-full rounded-md border p-2',
+                        form.errors.role
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.role" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.role }}
+                </p>
             </div>
-            <p v-if="form.errors.role" class="mt-1 text-sm text-red-600">
-                {{ form.errors.role }}
-            </p>
             <div>
-                <label
-                    for="photo"
-                    class="block text-sm font-medium text-gray-700"
-                    >Photo</label
-                >
+                <label for="photo" class="mb-2 block font-medium">Photo</label>
                 <input
                     id="photo"
                     type="file"
                     accept="image/*"
                     @change="handleFileChange"
-                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-50 file:px-4 file:py-2 file:text-sm file:font-semibold hover:file:bg-gray-100"
+                    class="block w-full rounded-md border border-[var(--primary)] px-3 py-2 text-sm"
                 />
+                <p v-if="form.errors.photo" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.photo }}
+                </p>
             </div>
-            <p v-if="form.errors.photo" class="mt-1 text-sm text-red-600">
-                {{ form.errors.photo }}
-            </p>
             <div>
-                <label
-                    for="description"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="description" class="mb-2 block font-medium"
                     >Description</label
                 >
                 <textarea
                     id="description"
                     v-model="form.description"
                     required
+                    rows="4"
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 p-10 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.description
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 ></textarea>
                 <p
@@ -133,14 +126,15 @@ function submitForm() {
                     {{ form.errors.description }}
                 </p>
             </div>
-            <div>
+            <div class="flex justify-center">
                 <button
                     type="submit"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                    :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
                 >
-                    Créer
+                    {{ form.processing ? 'Création...' : 'Créer' }}
                 </button>
             </div>
         </form>
-    </section>
+    </div>
 </template>

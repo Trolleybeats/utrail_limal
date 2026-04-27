@@ -22,13 +22,15 @@ const submitForm = () => {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Créer un tarif</h1>
-        <form @submit.prevent="submitForm" class="space-y-4">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Créer un tarif
+        </h1>
+        <form @submit.prevent="submitForm" class="space-y-6">
             <div>
-                <label
-                    for="label"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="label" class="mb-2 block font-medium"
                     >Label (Nom du produit : ex. T-shirt 2026, Dolomiti
                     50k...)</label
                 >
@@ -38,10 +40,10 @@ const submitForm = () => {
                     type="text"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.label
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
                 <p v-if="form.errors.label" class="mt-1 text-sm text-red-600">
@@ -49,9 +51,7 @@ const submitForm = () => {
                 </p>
             </div>
             <div>
-                <label
-                    for="prix"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="prix" class="mb-2 block font-medium"
                     >Prix (en euros)</label
                 >
                 <input
@@ -61,8 +61,10 @@ const submitForm = () => {
                     step="0.01"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
-                        form.errors.prix ? 'border-red-500' : 'border-gray-300',
+                        'w-full rounded-md border p-2',
+                        form.errors.prix
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
                     ]"
                 />
                 <p v-if="form.errors.prix" class="mt-1 text-sm text-red-600">
@@ -70,9 +72,7 @@ const submitForm = () => {
                 </p>
             </div>
             <div>
-                <label
-                    for="categorie"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="categorie" class="mb-2 block font-medium"
                     >Catégorie</label
                 >
                 <select
@@ -80,10 +80,10 @@ const submitForm = () => {
                     v-model="form.categorie"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.categorie
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 >
                     <option value="" disabled>
@@ -100,20 +100,24 @@ const submitForm = () => {
                     {{ form.errors.categorie }}
                 </p>
             </div>
-            <div>
-                <label
-                    for="est_actif"
-                    class="block text-sm font-medium text-gray-700"
-                    >Est actif</label
-                >
+            <div class="flex items-center gap-2">
                 <input
                     id="est_actif"
                     v-model="form.est_actif"
                     type="checkbox"
-                    class="mt-1"
+                    class="h-4 w-4 rounded border-[var(--primary)] text-[var(--primary)]"
                 />
+                <label for="est_actif" class="font-medium">Est actif</label>
             </div>
-            <Button type="submit" class="text-[#F6F6F6]">Créer le tarif</Button>
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
+                >
+                    {{ form.processing ? 'Création...' : 'Créer le tarif' }}
+                </button>
+            </div>
         </form>
-    </section>
+    </div>
 </template>

@@ -104,9 +104,9 @@ const dateEnvoi = (date) => {
             </p>
         </div>
         <div class="overflow-x-auto rounded-lg border">
-            <table class="w-full table-auto border-collapse">
+            <table class="w-full table-auto">
                 <thead>
-                    <tr class="bg-gray-100">
+                    <tr>
                         <th scope="col" class="border px-4 py-2 text-left">
                             Nom
                         </th>

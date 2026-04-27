@@ -74,9 +74,9 @@ const desactiverEcheancier = (echeancier) => {
             >
         </div>
         <div class="overflow-x-auto rounded-lg border">
-            <table class="w-full table-auto border-collapse">
+            <table class="w-full table-auto">
                 <thead>
-                    <tr class="bg-gray-100">
+                    <tr>
                         <th class="border px-4 py-2 text-left">Label</th>
                         <th class="border px-4 py-2 text-left">
                             Nombre de versements

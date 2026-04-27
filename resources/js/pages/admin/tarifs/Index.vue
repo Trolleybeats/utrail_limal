@@ -79,13 +79,13 @@ const desactiverTarif = (tarif) => {
         <div class="overflow-x-auto rounded-lg border">
             <table class="w-full table-auto">
                 <thead>
-                    <tr class="bg-gray-100">
-                        <th class="px-4 py-2 text-left">Label</th>
-                        <th class="px-4 py-2 text-left">Catégorie</th>
-                        <th class="px-4 py-2 text-left">Prix</th>
-                        <th class="px-4 py-2 text-left">Est actif</th>
-                        <th class="px-4 py-2 text-left">Course</th>
-                        <th class="px-4 py-2 text-left">Actions</th>
+                    <tr>
+                        <th class="border px-4 py-2 text-left">Label</th>
+                        <th class="border px-4 py-2 text-left">Catégorie</th>
+                        <th class="border px-4 py-2 text-left">Prix</th>
+                        <th class="border px-4 py-2 text-left">Est actif</th>
+                        <th class="border px-4 py-2 text-left">Course</th>
+                        <th class="border px-4 py-2 text-left">Actions</th>
                     </tr>
                 </thead>
 
@@ -95,20 +95,20 @@ const desactiverTarif = (tarif) => {
                         :key="tarif.id"
                         class="border-t hover:bg-gray-50"
                     >
-                        <td class="px-4 py-2">{{ tarif.label }}</td>
-                        <td class="px-4 py-2">{{ tarif.categorie }}</td>
-                        <td class="px-4 py-2">{{ tarif.prix }} €</td>
-                        <td class="px-4 py-2">
+                        <td class="border px-4 py-2">{{ tarif.label }}</td>
+                        <td class="border px-4 py-2">{{ tarif.categorie }}</td>
+                        <td class="border px-4 py-2">{{ tarif.prix }} €</td>
+                        <td class="border px-4 py-2">
                             {{ tarif.est_actif ? 'Oui' : 'Non' }}
                         </td>
-                        <td class="px-4 py-2">
+                        <td class="border px-4 py-2">
                             {{
                                 tarif.course_numero
                                     ? tarif.course_numero
                                     : 'Toutes'
                             }}
                         </td>
-                        <td class="px-4 py-2">
+                        <td class="border px-4 py-2">
                             <DropdownMenu>
                                 <DropdownMenuTrigger as-child>
                                     <Button variant="outline" size="sm"

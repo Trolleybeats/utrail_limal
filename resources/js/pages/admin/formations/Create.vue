@@ -32,76 +32,74 @@ function submitForm() {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Créer une formation</h1>
-        <form @submit.prevent="submitForm" class="space-y-4">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Créer une formation
+        </h1>
+        <form @submit.prevent="submitForm" class="space-y-6">
             <div>
-                <label
-                    for="titre"
-                    class="block text-sm font-medium text-gray-700"
-                    >Titre</label
-                >
+                <label for="titre" class="mb-2 block font-medium">Titre</label>
                 <input
                     id="titre"
                     v-model="form.titre"
                     type="text"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.titre
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.titre" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.titre }}
+                </p>
             </div>
-            <p v-if="form.errors.titre" class="mt-1 text-sm text-red-600">
-                {{ form.errors.titre }}
-            </p>
             <div>
-                <label
-                    for="description"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="description" class="mb-2 block font-medium"
                     >Description</label
                 >
                 <textarea
                     id="description"
                     v-model="form.description"
                     required
+                    rows="4"
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.description
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 ></textarea>
-            </div>
-            <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">
-                {{ form.errors.description }}
-            </p>
-            <div>
-                <label
-                    for="date"
-                    class="block text-sm font-medium text-gray-700"
-                    >Date</label
+                <p
+                    v-if="form.errors.description"
+                    class="mt-1 text-sm text-red-600"
                 >
+                    {{ form.errors.description }}
+                </p>
+            </div>
+            <div>
+                <label for="date" class="mb-2 block font-medium">Date</label>
                 <input
                     id="date"
                     v-model="form.date"
                     type="date"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
-                        form.errors.date ? 'border-red-500' : 'border-gray-300',
+                        'w-full rounded-md border p-2',
+                        form.errors.date
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.date" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.date }}
+                </p>
             </div>
-            <p v-if="form.errors.date" class="mt-1 text-sm text-red-600">
-                {{ form.errors.date }}
-            </p>
             <div>
-                <label
-                    for="niveau"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="niveau" class="mb-2 block font-medium"
                     >Niveau</label
                 >
                 <select
@@ -109,10 +107,10 @@ function submitForm() {
                     v-model="form.niveau"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.niveau
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 >
                     <option value="" disabled>Choisir un niveau</option>
@@ -120,30 +118,32 @@ function submitForm() {
                     <option value="Intermédiaire">Intermédiaire</option>
                     <option value="Avancé">Avancé</option>
                 </select>
+                <p v-if="form.errors.niveau" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.niveau }}
+                </p>
             </div>
-            <p v-if="form.errors.niveau" class="mt-1 text-sm text-red-600">
-                {{ form.errors.niveau }}
-            </p>
             <div>
-                <label
-                    for="photo"
-                    class="block text-sm font-medium text-gray-700"
-                    >Photo</label
-                >
+                <label for="photo" class="mb-2 block font-medium">Photo</label>
                 <input
                     id="photo"
                     type="file"
                     @change="handleFileChange"
                     accept="image/*"
-                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-50 file:px-4 file:py-2 file:text-sm file:font-semibold hover:file:bg-gray-100"
+                    class="block w-full rounded-md border border-[var(--primary)] px-3 py-2 text-sm"
                 />
+                <p v-if="form.errors.photo" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.photo }}
+                </p>
             </div>
-            <p v-if="form.errors.photo" class="mt-1 text-sm text-red-600">
-                {{ form.errors.photo }}
-            </p>
-            <Button type="submit" class="text-[#F6F6F6]">
-                Créer la formation
-            </Button>
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
+                >
+                    {{ form.processing ? 'Création...' : 'Créer la formation' }}
+                </button>
+            </div>
         </form>
-    </section>
+    </div>
 </template>

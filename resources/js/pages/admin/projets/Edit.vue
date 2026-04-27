@@ -56,38 +56,46 @@ function definirPrincipale(photoId) {
 </script>
 
 <template>
-    <section class="mx-auto w-full max-w-[600px] px-4 py-8">
-        <h2 class="mb-4 text-2xl font-bold">Modifier le projet</h2>
-        <form @submit.prevent="updateProjet" class="space-y-4">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Modifier le projet
+        </h1>
+        <form @submit.prevent="updateProjet" class="space-y-6">
             <div>
-                <label
-                    for="titre"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="titre" class="mb-2 block font-medium"
                     >Nom du projet</label
                 >
                 <input
                     v-model="form.titre"
                     type="text"
                     id="titre"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    :class="{ 'border-red-500': form.errors.titre }"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.titre
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
                 <p v-if="form.errors.titre" class="mt-1 text-sm text-red-600">
                     {{ form.errors.titre }}
                 </p>
             </div>
             <div>
-                <label
-                    for="description"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="description" class="mb-2 block font-medium"
                     >Description</label
                 >
                 <textarea
                     v-model="form.description"
                     id="description"
                     rows="4"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    :class="{ 'border-red-500': form.errors.description }"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.description
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 ></textarea>
                 <p
                     v-if="form.errors.description"
@@ -97,9 +105,7 @@ function definirPrincipale(photoId) {
                 </p>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700"
-                    >Photo principale</label
-                >
+                <label class="mb-2 block font-medium">Photo principale</label>
                 <div v-if="projet.photo_principale" class="mt-1">
                     <img
                         :src="projet.photo_principale.url"
@@ -115,11 +121,11 @@ function definirPrincipale(photoId) {
                     galerie ci-dessous.
                 </p>
             </div>
-            <div>
+            <div class="flex justify-center">
                 <button
                     type="submit"
                     :disabled="form.processing"
-                    class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 disabled:bg-gray-400"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
                 >
                     {{ form.processing ? 'Enregistrement...' : 'Enregistrer' }}
                 </button>
@@ -127,7 +133,7 @@ function definirPrincipale(photoId) {
         </form>
 
         <!-- Gestion des photos -->
-        <div class="mt-6 rounded-lg border border-gray-200 p-4">
+        <div class="mt-6 rounded-lg border border-[var(--primary)] p-4">
             <h3 class="mb-4 text-lg font-semibold">Photos</h3>
 
             <!-- Upload -->
@@ -141,19 +147,19 @@ function definirPrincipale(photoId) {
                         type="file"
                         multiple
                         accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
-                        class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                        class="block w-full rounded-md border border-[var(--primary)] px-3 py-2 text-sm"
                         :disabled="uploading"
                     />
                     <button
                         type="button"
                         @click="ajouterPhotos"
                         :disabled="uploading"
-                        class="rounded bg-green-500 px-4 py-2 whitespace-nowrap text-white hover:bg-green-600 disabled:bg-gray-400"
+                        class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 whitespace-nowrap text-white disabled:bg-gray-400"
                     >
                         {{ uploading ? 'Upload...' : 'Ajouter' }}
                     </button>
                 </div>
-                <p class="mt-1 text-xs text-gray-500">
+                <p class="mt-1 text-xs text-[var(--primary)]">
                     Formats acceptés : JPEG, PNG, JPG, GIF, WEBP (max 2MB par
                     photo)
                 </p>
@@ -174,14 +180,14 @@ function definirPrincipale(photoId) {
                         :alt="`Photo ${photo.id}`"
                         class="h-32 w-full rounded-lg object-cover shadow"
                         :class="{
-                            'ring-2 ring-indigo-500':
+                            'ring-2 ring-[#B3A96F]':
                                 photo.id === projet.photo_id,
                         }"
                     />
                     <!-- Badge principale -->
                     <span
                         v-if="photo.id === projet.photo_id"
-                        class="absolute top-2 left-2 rounded bg-indigo-500 px-1.5 py-0.5 text-xs text-white"
+                        class="absolute top-2 left-2 rounded bg-[#B3A96F] px-1.5 py-0.5 text-xs text-white"
                         >principale</span
                     >
                     <!-- Bouton définir principale -->
@@ -223,5 +229,5 @@ function definirPrincipale(photoId) {
                 Aucune photo pour ce projet.
             </div>
         </div>
-    </section>
+    </div>
 </template>

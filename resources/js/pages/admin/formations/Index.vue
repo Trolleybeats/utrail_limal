@@ -66,8 +66,8 @@ const createFormation = () => {
             >
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full table-auto border-collapse">
+        <div class="overflow-x-auto rounded-lg border">
+            <table class="w-full table-auto">
                 <thead>
                     <tr>
                         <th class="border px-4 py-2 text-left">Titre</th>

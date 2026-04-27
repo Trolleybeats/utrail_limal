@@ -70,16 +70,17 @@ const editUser = (user) => {
             <table class="w-full table-auto">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2 text-left">User</th>
-                        <th class="px-4 py-2 text-left">Email</th>
+                        <th class="border px-4 py-2 text-left">User</th>
+                        <th class="border px-4 py-2 text-left">Email</th>
+                        <th class="border px-4 py-2 text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="user in users" :key="user.id" class="border-t">
-                        <td class="px-4 py-2">{{ user.name }}</td>
-                        <td class="px-4 py-2">{{ user.email }}</td>
+                        <td class="border px-4 py-2">{{ user.name }}</td>
+                        <td class="border px-4 py-2">{{ user.email }}</td>
                         <td
-                            class="px-4 py-2 text-right text-sm font-medium whitespace-nowrap sm:px-6 sm:py-4"
+                            class="border px-4 py-2 text-right text-sm font-medium whitespace-nowrap sm:px-6 sm:py-4"
                             @click.stop
                         >
                             <DropdownMenu>

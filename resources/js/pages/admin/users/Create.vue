@@ -25,55 +25,51 @@ function submitForm() {
 </script>
 
 <template>
-    <section class="mx-4 my-4 space-y-4">
-        <h1 class="px-4 py-4 text-2xl font-bold">Créer un utilisateur</h1>
-        <form @submit.prevent="submitForm" class="space-y-4">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Créer un utilisateur
+        </h1>
+        <form @submit.prevent="submitForm" class="space-y-6">
             <div>
-                <label
-                    for="name"
-                    class="block text-sm font-medium text-gray-700"
-                    >Nom</label
-                >
+                <label for="name" class="mb-2 block font-medium">Nom</label>
                 <input
                     id="name"
                     v-model="form.name"
                     type="text"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
-                        form.errors.name ? 'border-red-500' : 'border-gray-300',
+                        'w-full rounded-md border p-2',
+                        form.errors.name
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.name }}
+                </p>
             </div>
-            <p v-if="form.errors.name" class="mt-1 text-sm text-red-600">
-                {{ form.errors.name }}
-            </p>
             <div>
-                <label
-                    for="email"
-                    class="block text-sm font-medium text-gray-700"
-                    >Email</label
-                >
+                <label for="email" class="mb-2 block font-medium">Email</label>
                 <input
                     id="email"
                     v-model="form.email"
                     type="email"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.email
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.email }}
+                </p>
             </div>
-            <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">
-                {{ form.errors.email }}
-            </p>
             <div>
-                <label
-                    for="password"
-                    class="block text-sm font-medium text-gray-700"
+                <label for="password" class="mb-2 block font-medium"
                     >Mot de passe</label
                 >
                 <input
@@ -82,20 +78,23 @@ function submitForm() {
                     type="password"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.password
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
+                <p
+                    v-if="form.errors.password"
+                    class="mt-1 text-sm text-red-600"
+                >
+                    {{ form.errors.password }}
+                </p>
             </div>
-            <p v-if="form.errors.password" class="mt-1 text-sm text-red-600">
-                {{ form.errors.password }}
-            </p>
             <div>
                 <label
                     for="password_confirmation"
-                    class="block text-sm font-medium text-gray-700"
+                    class="mb-2 block font-medium"
                     >Confirmer le mot de passe</label
                 >
                 <input
@@ -104,10 +103,10 @@ function submitForm() {
                     type="password"
                     required
                     :class="[
-                        'focus:ring-opacity-50 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200',
+                        'w-full rounded-md border p-2',
                         form.errors.password_confirmation
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
                 <p
@@ -117,9 +116,15 @@ function submitForm() {
                     {{ form.errors.password_confirmation }}
                 </p>
             </div>
-            <div>
-                <Button type="submit" class="text-[#F6F6F6]">Créer</Button>
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
+                >
+                    {{ form.processing ? 'Création...' : 'Créer' }}
+                </button>
             </div>
         </form>
-    </section>
+    </div>
 </template>

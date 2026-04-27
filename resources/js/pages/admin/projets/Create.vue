@@ -67,7 +67,7 @@ function submitForm() {
 <template>
     <div class="mx-auto w-full max-w-[600px] px-4 py-8">
         <h1
-            class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
         >
             Créer un projet
         </h1>
@@ -82,7 +82,7 @@ function submitForm() {
                         'w-full rounded-md border p-2',
                         form.errors.titre
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 />
                 <p v-if="form.errors.titre" class="mt-1 text-sm text-red-600">
@@ -101,7 +101,7 @@ function submitForm() {
                         'w-full rounded-md border p-2',
                         form.errors.description
                             ? 'border-red-500'
-                            : 'border-gray-300',
+                            : 'border-[var(--primary)]',
                     ]"
                 ></textarea>
                 <p
@@ -113,7 +113,7 @@ function submitForm() {
             </div>
 
             <!-- Gestion multi-photos -->
-            <div class="rounded-lg border border-gray-200 p-4">
+            <div class="rounded-lg border border-[var(--primary)] p-4">
                 <h3 class="mb-4 text-lg font-semibold">Photos</h3>
 
                 <!-- Upload -->
@@ -126,9 +126,9 @@ function submitForm() {
                         multiple
                         accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
                         @change="handleFileChange"
-                        class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                        class="block w-full rounded-md border border-[var(--primary)] px-3 py-2 text-sm"
                     />
-                    <p class="mt-1 text-xs text-gray-500">
+                    <p class="mt-1 text-xs text-[var(--primary)]">
                         Formats acceptés : JPEG, PNG, JPG, GIF, WEBP (max 2MB
                         par photo)
                     </p>
@@ -204,13 +204,15 @@ function submitForm() {
                 </div>
             </div>
 
-            <button
-                type="submit"
-                :disabled="form.processing"
-                class="rounded-md bg-[#B3A96F] px-4 py-2 text-white hover:bg-[#a18e5c] disabled:bg-gray-400"
-            >
-                {{ form.processing ? 'Création...' : 'Créer le projet' }}
-            </button>
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
+                >
+                    {{ form.processing ? 'Création...' : 'Créer le projet' }}
+                </button>
+            </div>
         </form>
     </div>
 </template>

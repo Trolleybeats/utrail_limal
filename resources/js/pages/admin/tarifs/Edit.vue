@@ -18,33 +18,60 @@ function updateTarif() {
 </script>
 
 <template>
-    <section class="mx-auto w-full max-w-[600px] px-4 py-8">
-        <h2 class="mb-4 text-2xl font-bold">Modifier le tarif</h2>
-        <form @submit.prevent="updateTarif" class="space-y-4">
+    <div class="mx-auto w-full max-w-[600px] px-4 py-8">
+        <h1
+            class="mb-6 text-center text-2xl font-bold text-[var(--primary)] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
+        >
+            Modifier le tarif
+        </h1>
+        <form @submit.prevent="updateTarif" class="space-y-6">
             <div>
-                <label for="label" class="block text-sm font-medium"
-                    >Label</label
-                >
+                <label for="label" class="mb-2 block font-medium">Label</label>
                 <input
                     v-model="form.label"
                     type="text"
                     id="label"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.label
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
+                <p v-if="form.errors.label" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.label }}
+                </p>
             </div>
             <div>
-                <label for="categorie" class="block text-sm font-medium"
+                <label for="categorie" class="mb-2 block font-medium"
                     >Catégorie</label
                 >
-                <input
+                <select
                     v-model="form.categorie"
-                    type="text"
                     id="categorie"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.categorie
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
+                >
+                    <option value="" disabled>
+                        -- Sélectionnez une catégorie --
+                    </option>
+                    <option value="Course">Course</option>
+                    <option value="T-shirt">T-shirt</option>
+                    <option value="Logement">Logement</option>
+                </select>
+                <p
+                    v-if="form.errors.categorie"
+                    class="mt-1 text-sm text-red-600"
+                >
+                    {{ form.errors.categorie }}
+                </p>
             </div>
             <div>
-                <label for="prix" class="block text-sm font-medium"
+                <label for="prix" class="mb-2 block font-medium"
                     >Prix (€)</label
                 >
                 <input
@@ -52,23 +79,35 @@ function updateTarif() {
                     type="number"
                     step="0.01"
                     id="prix"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.prix
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
                 />
+                <p v-if="form.errors.prix" class="mt-1 text-sm text-red-600">
+                    {{ form.errors.prix }}
+                </p>
             </div>
             <div class="flex items-center gap-2">
                 <input
                     v-model="form.est_actif"
                     type="checkbox"
                     id="est_actif"
-                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    class="h-4 w-4 rounded border-[var(--primary)] text-[var(--primary)]"
                 />
-                <label for="est_actif" class="text-sm font-medium"
-                    >Est actif</label
-                >
+                <label for="est_actif" class="font-medium">Est actif</label>
             </div>
-            <Button type="submit" style="background-color: var(--button)"
-                >Enregistrer</Button
-            >
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="form.processing"
+                    class="cursor-pointer rounded-md bg-[var(--primary)] px-4 py-2 text-white disabled:bg-gray-400"
+                >
+                    {{ form.processing ? 'Enregistrement...' : 'Enregistrer' }}
+                </button>
+            </div>
         </form>
-    </section>
+    </div>
 </template>

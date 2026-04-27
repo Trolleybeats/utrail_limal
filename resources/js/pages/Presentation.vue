@@ -47,7 +47,7 @@ const props = defineProps({
             />
         </figure>
     </header>
-    <main>
+    <main id="main-content">
         <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"

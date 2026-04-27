@@ -1,14 +1,26 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, watch } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 const visible = ref(false);
+const acceptBtn = ref<HTMLButtonElement | null>(null);
 
 onMounted(() => {
     if (!localStorage.getItem('cookie_consent')) {
         visible.value = true;
     }
 });
+
+watch(visible, async (val) => {
+    if (val) {
+        await nextTick();
+        acceptBtn.value?.focus();
+    }
+});
+
+function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') decline();
+}
 
 function accept() {
     localStorage.setItem('cookie_consent', 'accepted');
@@ -25,12 +37,16 @@ function decline() {
     <Transition name="slide-up">
         <div
             v-if="visible"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cookie-banner-title"
             class="fixed right-0 bottom-0 left-0 z-50 bg-[#1e1e1e] text-[#f6f6f6] shadow-lg"
+            @keydown="handleKeydown"
         >
             <div
                 class="mx-auto flex max-w-[1182px] flex-col items-start gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between"
             >
-                <p class="text-sm">
+                <p id="cookie-banner-title" class="text-sm">
                     Ce site utilise des cookies pour améliorer votre expérience.
                     En continuant à naviguer, vous acceptez leur utilisation.
                     <Link
@@ -48,6 +64,7 @@ function decline() {
                         Refuser
                     </button>
                     <button
+                        ref="acceptBtn"
                         @click="accept"
                         class="rounded bg-[#C42827] px-4 py-2 text-sm text-white hover:bg-red-700"
                     >

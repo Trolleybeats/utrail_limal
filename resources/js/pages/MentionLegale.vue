@@ -29,7 +29,7 @@ import { Head } from '@inertiajs/vue3';
         </figure>
     </header>
 
-    <main class="bg-[#f6f6f6]">
+    <main id="main-content" class="bg-[#f6f6f6]">
         <section class="mx-auto w-full max-w-[860px] px-4 py-12 md:py-20">
             <h1
                 class="mb-10 text-3xl font-bold text-[#B3A96F] md:text-4xl lg:text-[48px]"

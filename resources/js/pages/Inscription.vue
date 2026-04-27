@@ -59,7 +59,7 @@ const submit = () => {
         <div class="absolute inset-0 bg-[#d9d9d9] opacity-10"></div>
     </header>
 
-    <main class="bg-[#f6f6f6]">
+    <main id="main-content" class="bg-[#f6f6f6]">
         <section class="mx-auto w-full max-w-[1182px] px-4 py-10 md:py-16">
             <!-- Page title -->
             <h2
@@ -86,6 +86,8 @@ const submit = () => {
                 <!-- Message de réussite -->
                 <p
                     v-if="form.recentlySuccessful"
+                    role="status"
+                    aria-live="polite"
                     class="text-sm text-[#28a745]"
                 >
                     Votre inscription a été encodée avec succès ! Rendez-vous à
@@ -106,9 +108,18 @@ const submit = () => {
                         id="prenom"
                         name="prenom"
                         required
+                        :aria-invalid="!!form.errors.prenom"
+                        :aria-describedby="
+                            form.errors.prenom ? 'prenom-error' : undefined
+                        "
                         class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
                     />
-                    <p v-if="form.errors.prenom" class="text-sm text-[#c42827]">
+                    <p
+                        v-if="form.errors.prenom"
+                        id="prenom-error"
+                        role="alert"
+                        class="text-sm text-[#c42827]"
+                    >
                         {{ form.errors.prenom }}
                     </p>
                 </div>
@@ -127,9 +138,18 @@ const submit = () => {
                         id="nom"
                         name="nom"
                         required
+                        :aria-invalid="!!form.errors.nom"
+                        :aria-describedby="
+                            form.errors.nom ? 'nom-error' : undefined
+                        "
                         class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
                     />
-                    <p v-if="form.errors.nom" class="text-sm text-[#c42827]">
+                    <p
+                        v-if="form.errors.nom"
+                        id="nom-error"
+                        role="alert"
+                        class="text-sm text-[#c42827]"
+                    >
                         {{ form.errors.nom }}
                     </p>
                 </div>
@@ -148,9 +168,18 @@ const submit = () => {
                         id="email"
                         name="email"
                         required
+                        :aria-invalid="!!form.errors.email"
+                        :aria-describedby="
+                            form.errors.email ? 'email-error' : undefined
+                        "
                         class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
                     />
-                    <p v-if="form.errors.email" class="text-sm text-[#c42827]">
+                    <p
+                        v-if="form.errors.email"
+                        id="email-error"
+                        role="alert"
+                        class="text-sm text-[#c42827]"
+                    >
                         {{ form.errors.email }}
                     </p>
                 </div>
@@ -171,10 +200,18 @@ const submit = () => {
                         id="telephone"
                         name="telephone"
                         required
+                        :aria-invalid="!!form.errors.telephone"
+                        :aria-describedby="
+                            form.errors.telephone
+                                ? 'telephone-error'
+                                : undefined
+                        "
                         class="h-[54px] w-full rounded-[6px] border border-transparent bg-white px-4 text-[16px] text-black focus:border-[#b3a96f] focus:outline-none"
                     />
                     <p
                         v-if="form.errors.telephone"
+                        id="telephone-error"
+                        role="alert"
                         class="text-sm text-[#c42827]"
                     >
                         {{ form.errors.telephone }}
@@ -232,7 +269,7 @@ const submit = () => {
                     <button
                         type="submit"
                         :disabled="form.processing"
-                        class="rounded-[2px] bg-[#c42827] px-[44px] py-[18px] text-[20px] leading-[22px] font-semibold text-white hover:bg-[#a82120] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-[24px]"
+                        class="cursor-pointer rounded-[2px] bg-[#c42827] px-[44px] py-[18px] text-[20px] leading-[22px] font-semibold text-white hover:bg-[#a82120] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-50 md:text-[24px]"
                     >
                         S'inscrire
                     </button>

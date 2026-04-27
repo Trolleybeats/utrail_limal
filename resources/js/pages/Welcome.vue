@@ -3,6 +3,9 @@ import Nav from '@/components/site/Nav.vue';
 import Footer from '@/components/site/Footer.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import CookieBanner from '@/components/site/CookieBanner.vue';
+import { ref, onMounted } from 'vue';
+
+const navRef = ref<InstanceType<typeof Nav> | null>(null);
 
 const props = defineProps<{
     canRegister?: boolean;
@@ -14,6 +17,27 @@ const props = defineProps<{
         photoPrincipale: { id: number; url: string } | null;
     } | null;
 }>();
+
+const videoRef = ref<HTMLVideoElement | null>(null);
+const videoPaused = ref(false);
+
+function toggleVideo() {
+    if (!videoRef.value) return;
+    if (videoRef.value.paused) {
+        videoRef.value.play();
+        videoPaused.value = false;
+    } else {
+        videoRef.value.pause();
+        videoPaused.value = true;
+    }
+}
+
+onMounted(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        videoRef.value?.pause();
+        videoPaused.value = true;
+    }
+});
 </script>
 
 <template>
@@ -38,18 +62,21 @@ const props = defineProps<{
     </Head>
     <header class="relative h-[500px] w-full sm:h-[650px] md:h-screen">
         <video
+            ref="videoRef"
             autoplay
             muted
             loop
+            aria-hidden="true"
             class="absolute top-0 left-0 h-full w-full object-cover"
         >
             <source src="/storage/utrail_limal.mp4" type="video/mp4" />
             Your browser does not support the video tag.
         </video>
         <div class="absolute top-0 left-0 h-full w-full">
-            <Nav></Nav>
+            <Nav ref="navRef"></Nav>
         </div>
         <figure
+            :class="{ 'invisible md:visible': navRef?.mobileOpen }"
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform"
         >
             <img
@@ -69,8 +96,47 @@ const props = defineProps<{
         >
             Intégrer le projet 2026
         </Link>
+        <!-- Video play/pause control — WCAG 2.2.2 -->
+        <button
+            @click="toggleVideo"
+            :aria-label="
+                videoPaused ? 'Lancer la vidéo' : 'Mettre la vidéo en pause'
+            "
+            class="absolute right-3 bottom-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 focus-visible:outline-2"
+        >
+            <!-- Pause icon -->
+            <svg
+                v-if="!videoPaused"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="h-4 w-4"
+                aria-hidden="true"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25z"
+                    clip-rule="evenodd"
+                />
+            </svg>
+            <!-- Play icon -->
+            <svg
+                v-else
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="h-4 w-4"
+                aria-hidden="true"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                    clip-rule="evenodd"
+                />
+            </svg>
+        </button>
     </header>
-    <main>
+    <main id="main-content">
         <section id="shortpres">
             <div class="mx-auto w-full max-w-[1182px] px-4 py-10 md:py-16">
                 <h2
@@ -79,15 +145,17 @@ const props = defineProps<{
                     U-Trail Limal c'est quoi ?
                 </h2>
                 <p class="text-base text-[#1A1A1A] sm:text-lg md:text-[20px]">
-                    Le trail, c’est bien plus qu’une simple course en pleine
-                    nature.
+                    Le <strong>trail</strong>, c’est bien plus qu’une simple
+                    course en pleine nature.
                 </p>
                 <p
                     class="mt-4 text-base text-[#1A1A1A] sm:text-lg md:text-[20px]"
                 >
-                    C’est une discipline d’endurance qui allie course à pied et
-                    exploration de terrains variés : sentiers escarpés,
-                    montagnes, forêts, vallées, parfois même neige ou rochers.
+                    C’est une discipline d’endurance qui allie
+                    <strong>course à pied</strong> et
+                    <strong>exploration de terrains variés</strong> : sentiers
+                    escarpés, montagnes, forêts, vallées, parfois même neige ou
+                    rochers.
                 </p>
                 <p
                     class="mt-4 text-base text-[#1A1A1A] sm:text-lg md:text-[20px]"
@@ -99,11 +167,13 @@ const props = defineProps<{
                 <p
                     class="mt-4 text-base text-[#1A1A1A] sm:text-lg md:text-[20px]"
                 >
-                    Mais au-delà de la performance, le trail est avant tout une
-                    aventure, à la fois physique et mentale. On y apprend à
-                    gérer son effort, à écouter son corps, à s’adapter et
-                    surtout à profiter pleinement de chaque instant, au cœur
-                    d’une nature préservée.
+                    Mais au-delà de la performance, le trail est avant tout
+                    <strong
+                        >une aventure, à la fois physique et mentale.</strong
+                    >
+                    On y apprend à gérer son effort, à écouter son corps, à
+                    s’adapter et surtout à profiter pleinement de chaque
+                    instant, au cœur d’une nature préservée.
                 </p>
             </div>
         </section>

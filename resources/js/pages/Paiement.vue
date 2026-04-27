@@ -104,7 +104,7 @@ const submit = () => {
             />
         </figure>
     </header>
-    <main>
+    <main id="main-content">
         <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
@@ -286,7 +286,7 @@ const submit = () => {
                 <button
                     type="submit"
                     :disabled="form.processing"
-                    class="rounded-[2px] bg-[#c42827] px-[44px] py-[18px] text-[20px] leading-[22px] font-semibold text-white hover:bg-[#a82120] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-[24px]"
+                    class="cursor-pointer rounded-[2px] bg-[#c42827] px-[44px] py-[18px] text-[20px] leading-[22px] font-semibold text-white hover:bg-[#a82120] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:cursor-not-allowed disabled:opacity-50 md:text-[24px]"
                 >
                     Payer
                 </button>

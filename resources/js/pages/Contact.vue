@@ -59,7 +59,7 @@ const submitForm = () => {
     </header>
 
     <!-- Contact form section -->
-    <main>
+    <main id="main-content">
         <div class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
@@ -97,9 +97,10 @@ const submitForm = () => {
                         class="flex flex-col gap-6 md:gap-8"
                     >
                         <!-- Success message -->
-
                         <p
                             v-if="form.recentlySuccessful"
+                            role="status"
+                            aria-live="polite"
                             class="mt-4 text-center text-green-600"
                         >
                             Votre message a été envoyé avec succès !
@@ -119,6 +120,12 @@ const submitForm = () => {
                                     v-model="form.prenom"
                                     type="text"
                                     id="prenom"
+                                    :aria-invalid="!!form.errors.prenom"
+                                    :aria-describedby="
+                                        form.errors.prenom
+                                            ? 'prenom-error'
+                                            : undefined
+                                    "
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         {
@@ -129,6 +136,8 @@ const submitForm = () => {
                                 />
                                 <p
                                     v-if="form.errors.prenom"
+                                    id="prenom-error"
+                                    role="alert"
                                     class="text-sm text-red-500"
                                 >
                                     {{ form.errors.prenom }}
@@ -144,6 +153,12 @@ const submitForm = () => {
                                     v-model="form.nom"
                                     type="text"
                                     id="nom"
+                                    :aria-invalid="!!form.errors.nom"
+                                    :aria-describedby="
+                                        form.errors.nom
+                                            ? 'nom-error'
+                                            : undefined
+                                    "
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         { 'border-red-500': form.errors.nom },
@@ -151,6 +166,8 @@ const submitForm = () => {
                                 />
                                 <p
                                     v-if="form.errors.nom"
+                                    id="nom-error"
+                                    role="alert"
                                     class="text-sm text-red-500"
                                 >
                                     {{ form.errors.nom }}
@@ -172,6 +189,12 @@ const submitForm = () => {
                                     v-model="form.email"
                                     type="email"
                                     id="email"
+                                    :aria-invalid="!!form.errors.email"
+                                    :aria-describedby="
+                                        form.errors.email
+                                            ? 'email-error'
+                                            : undefined
+                                    "
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         { 'border-red-500': form.errors.email },
@@ -179,6 +202,8 @@ const submitForm = () => {
                                 />
                                 <p
                                     v-if="form.errors.email"
+                                    id="email-error"
+                                    role="alert"
                                     class="text-sm text-red-500"
                                 >
                                     {{ form.errors.email }}
@@ -194,6 +219,12 @@ const submitForm = () => {
                                     v-model="form.telephone"
                                     type="tel"
                                     id="telephone"
+                                    :aria-invalid="!!form.errors.telephone"
+                                    :aria-describedby="
+                                        form.errors.telephone
+                                            ? 'telephone-error'
+                                            : undefined
+                                    "
                                     :class="[
                                         'border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                         {
@@ -204,6 +235,8 @@ const submitForm = () => {
                                 />
                                 <p
                                     v-if="form.errors.telephone"
+                                    id="telephone-error"
+                                    role="alert"
                                     class="text-sm text-red-500"
                                 >
                                     {{ form.errors.telephone }}
@@ -222,6 +255,12 @@ const submitForm = () => {
                                 v-model="form.message"
                                 rows="3"
                                 id="message"
+                                :aria-invalid="!!form.errors.message"
+                                :aria-describedby="
+                                    form.errors.message
+                                        ? 'message-error'
+                                        : undefined
+                                "
                                 :class="[
                                     'resize-none border-b-[1.5px] border-black bg-transparent py-2 text-[#1a1a1a] outline-none',
                                     { 'border-red-500': form.errors.message },
@@ -229,6 +268,8 @@ const submitForm = () => {
                             ></textarea>
                             <p
                                 v-if="form.errors.message"
+                                id="message-error"
+                                role="alert"
                                 class="text-sm text-red-500"
                             >
                                 {{ form.errors.message }}

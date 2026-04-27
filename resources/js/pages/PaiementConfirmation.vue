@@ -59,7 +59,7 @@ const isLastInstallment =
             />
         </figure>
     </header>
-    <main>
+    <main id="main-content">
         <section
             class="relative mx-auto flex w-full max-w-[1182px] items-center justify-center px-4 py-8 md:py-14"
         >

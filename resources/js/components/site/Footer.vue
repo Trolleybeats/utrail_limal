@@ -30,7 +30,7 @@ const imgFacebook =
             </div>
 
             <!-- Nav links row 1 -->
-            <nav class="mb-8">
+            <nav aria-label="Navigation pied de page" class="mb-8">
                 <ul
                     class="flex flex-row flex-wrap gap-x-9 gap-y-3 text-base font-normal md:flex-nowrap md:gap-x-16 md:text-[20px] lg:gap-x-25"
                 >

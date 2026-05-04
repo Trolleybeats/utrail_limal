@@ -44,6 +44,10 @@ const isLastInstallment =
             property="og:description"
             content="Confirmation de paiement pour votre inscription au trail annuel organisé par U-Trail Limal. Merci pour votre participation à notre événement trail en Brabant wallon."
         />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/paiement.jpg"
+        />
     </Head>
     <header
         class="relative h-[280px] w-full sm:h-[380px] md:h-[520px] lg:h-[580px]"
@@ -60,6 +64,30 @@ const isLastInstallment =
         </figure>
     </header>
     <main id="main-content">
+        <nav
+            aria-label="Fil d'Ariane"
+            class="mx-auto w-full max-w-[1182px] px-4 pt-6"
+        >
+            <ol class="flex items-center gap-1.5 text-sm text-gray-500">
+                <li>
+                    <a href="/" class="hover:text-[#C42827] hover:underline"
+                        >Accueil</a
+                    >
+                </li>
+                <li aria-hidden="true" class="select-none">/</li>
+                <li>
+                    <a
+                        href="/Inscription"
+                        class="hover:text-[#C42827] hover:underline"
+                        >Inscription</a
+                    >
+                </li>
+                <li aria-hidden="true" class="select-none">/</li>
+                <li aria-current="page" class="font-medium text-[#C42827]">
+                    Confirmation
+                </li>
+            </ol>
+        </nav>
         <section
             class="relative mx-auto flex w-full max-w-[1182px] items-center justify-center px-4 py-8 md:py-14"
         >

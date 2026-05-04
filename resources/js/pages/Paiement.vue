@@ -88,6 +88,10 @@ const submit = () => {
             content="Finalisez votre inscription au projet annuel de U-Trail Limal en procédant au paiement. Découvrez les modalités de paiement et confirmez votre participation à notre aventure trail en Brabant wallon."
         />
         <meta property="og:url" content="https://utrail-limal.be/paiement" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/paiement.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header
@@ -105,6 +109,30 @@ const submit = () => {
         </figure>
     </header>
     <main id="main-content">
+        <nav
+            aria-label="Fil d'Ariane"
+            class="mx-auto w-full max-w-[1182px] px-4 pt-6"
+        >
+            <ol class="flex items-center gap-1.5 text-sm text-gray-500">
+                <li>
+                    <a href="/" class="hover:text-[#C42827] hover:underline"
+                        >Accueil</a
+                    >
+                </li>
+                <li aria-hidden="true" class="select-none">/</li>
+                <li>
+                    <a
+                        href="/Inscription"
+                        class="hover:text-[#C42827] hover:underline"
+                        >Inscription</a
+                    >
+                </li>
+                <li aria-hidden="true" class="select-none">/</li>
+                <li aria-current="page" class="font-medium text-[#C42827]">
+                    Inscription au projet
+                </li>
+            </ol>
+        </nav>
         <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
             <h2
                 class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
@@ -265,7 +293,7 @@ const submit = () => {
             </div>
 
             <!-- Calcul du prix -->
-            <section class="mx-auto w-full max-w-[1182px] px-4 py-8 md:py-14">
+            <section class="max-w-layout mx-auto w-full px-4 py-8 md:py-14">
                 <h2
                     class="mb-6 text-center text-2xl font-bold text-[#B3A96F] sm:text-3xl md:mb-8 md:text-4xl lg:text-[48px]"
                 >

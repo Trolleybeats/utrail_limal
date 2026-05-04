@@ -31,6 +31,10 @@ const props = defineProps({
             property="og:url"
             content="https://utrail-limal.be/presentation"
         />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/histoire.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header

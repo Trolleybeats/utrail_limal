@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { ref, nextTick, onMounted, onUnmounted } from 'vue';
+import { ref, nextTick, onMounted, onUnmounted, computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+const currentUrl = computed(() => page.url.split('?')[0]);
+function isCurrentPage(path: string): boolean {
+    return currentUrl.value === path;
+}
 
 const mobileOpen = ref(false);
 const hamburgerBtn = ref<HTMLButtonElement | null>(null);
@@ -101,13 +108,23 @@ defineExpose({ mobileOpen });
                     class="flex flex-row items-center gap-6 text-[16px] font-normal lg:gap-12 lg:text-[20px]"
                 >
                     <li>
-                        <a href="/" class="whitespace-nowrap hover:underline"
+                        <a
+                            href="/"
+                            :aria-current="
+                                isCurrentPage('/') ? 'page' : undefined
+                            "
+                            class="whitespace-nowrap hover:underline"
                             >Accueil</a
                         >
                     </li>
                     <li>
                         <a
                             href="/Presentation"
+                            :aria-current="
+                                isCurrentPage('/Presentation')
+                                    ? 'page'
+                                    : undefined
+                            "
                             class="whitespace-nowrap hover:underline"
                             >Histoire du club</a
                         >
@@ -115,6 +132,9 @@ defineExpose({ mobileOpen });
                     <li>
                         <a
                             href="/Equipe"
+                            :aria-current="
+                                isCurrentPage('/Equipe') ? 'page' : undefined
+                            "
                             class="whitespace-nowrap hover:underline"
                             >L'équipe</a
                         >
@@ -122,6 +142,9 @@ defineExpose({ mobileOpen });
                     <li>
                         <a
                             href="/Projet"
+                            :aria-current="
+                                isCurrentPage('/Projet') ? 'page' : undefined
+                            "
                             class="whitespace-nowrap hover:underline"
                             >Projet de l'année</a
                         >
@@ -129,6 +152,9 @@ defineExpose({ mobileOpen });
                     <li>
                         <a
                             href="/Formation"
+                            :aria-current="
+                                isCurrentPage('/Formation') ? 'page' : undefined
+                            "
                             class="whitespace-nowrap hover:underline"
                             >U-Trail formation</a
                         >
@@ -136,6 +162,9 @@ defineExpose({ mobileOpen });
                     <li>
                         <a
                             href="/Contact"
+                            :aria-current="
+                                isCurrentPage('/Contact') ? 'page' : undefined
+                            "
                             class="whitespace-nowrap hover:underline"
                             >Contact</a
                         >
@@ -169,28 +198,62 @@ defineExpose({ mobileOpen });
         >
             <ul class="flex flex-col gap-4 text-[18px] font-normal">
                 <li>
-                    <a href="/" class="hover:underline">Présentation</a>
+                    <a
+                        href="/"
+                        :aria-current="isCurrentPage('/') ? 'page' : undefined"
+                        class="hover:underline"
+                        >Accueil</a
+                    >
                 </li>
                 <li>
-                    <a href="/Presentation" class="hover:underline"
+                    <a
+                        href="/Presentation"
+                        :aria-current="
+                            isCurrentPage('/Presentation') ? 'page' : undefined
+                        "
+                        class="hover:underline"
                         >Histoire du club</a
                     >
                 </li>
                 <li>
-                    <a href="/Equipe" class="hover:underline">L'équipe</a>
+                    <a
+                        href="/Equipe"
+                        :aria-current="
+                            isCurrentPage('/Equipe') ? 'page' : undefined
+                        "
+                        class="hover:underline"
+                        >L'équipe</a
+                    >
                 </li>
                 <li>
-                    <a href="/Projet" class="hover:underline"
+                    <a
+                        href="/Projet"
+                        :aria-current="
+                            isCurrentPage('/Projet') ? 'page' : undefined
+                        "
+                        class="hover:underline"
                         >Projet de l'année</a
                     >
                 </li>
                 <li>
-                    <a href="/Formation" class="hover:underline"
+                    <a
+                        href="/Formation"
+                        :aria-current="
+                            isCurrentPage('/Formation') ? 'page' : undefined
+                        "
+                        class="hover:underline"
                         >U-Trail formation</a
                     >
                 </li>
                 <li>
-                    <a href="/Contact" class="hover:underline">Contact</a>
+                    <a
+                        href="/Contact"
+                        :aria-current="
+                            isCurrentPage('/Contact') ? 'page' : undefined
+                        "
+                        class="hover:underline"
+                        >Contact</a
+                    >
                 </li>
             </ul>
         </nav>
@@ -198,6 +261,10 @@ defineExpose({ mobileOpen });
 </template>
 
 <style scoped>
+a[aria-current='page'] {
+    font-weight: 600;
+    text-decoration: underline;
+}
 .slide-left-enter-active,
 .slide-left-leave-active {
     transition: transform 0.3s ease;

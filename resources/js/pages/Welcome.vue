@@ -59,6 +59,10 @@ onMounted(() => {
             content="Club de trail situé à Limal (Brabant wallon), proposant formations, événements et inscription au trail annuel pour les traileurs francophones."
         />
         <meta property="og:url" content="https://utrail-limal.be/" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/UtrailLimal.png"
+        />
     </Head>
     <header class="relative h-[500px] w-full sm:h-[650px] md:h-screen">
         <video

@@ -33,6 +33,10 @@ const props = defineProps({
             content="Rencontrez l'équipe de formateurs et encadrants du club U-Trail Limal. Des coachs trail passionnés pour vous accompagner."
         />
         <meta property="og:url" content="https://utrail-limal.be/equipe" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/equipe.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header

@@ -41,6 +41,10 @@ const submitForm = () => {
             content="Contactez le club de trail U-Trail Limal. Adresse, email et téléphone disponibles pour toute demande."
         />
         <meta property="og:url" content="https://utrail-limal.be/contact" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/contact.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header

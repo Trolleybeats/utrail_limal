@@ -41,6 +41,10 @@ const submit = () => {
             content="Inscrivez-vous à la séance d'information du projet annuel de U-Trail Limal. Découvrez le programme et participez à notre aventure trail en Brabant wallon."
         />
         <meta property="og:url" content="https://utrail-limal.be/inscription" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/inscription.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header

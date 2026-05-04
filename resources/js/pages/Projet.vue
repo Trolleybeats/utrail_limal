@@ -28,6 +28,10 @@ const props = defineProps({
             content="Inscrivez-vous au trail annuel organisé par U-Trail Limal. Participez à notre événement trail en Brabant wallon."
         />
         <meta property="og:url" content="https://utrail-limal.be/projet" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/projet.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header

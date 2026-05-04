@@ -35,6 +35,10 @@ const props = defineProps<{
             content="Découvrez le projet U-Trail formation : programme trail, apprentissage et développement des compétences pour les traileurs en Brabant wallon."
         />
         <meta property="og:url" content="https://utrail-limal.be/formation" />
+        <meta
+            property="og:image"
+            content="https://utrail-limal.be/storage/formation.jpg"
+        />
     </Head>
     <!-- Hero header -->
     <header class="relative h-70 w-full sm:h-95 md:h-130 lg:h-screen">

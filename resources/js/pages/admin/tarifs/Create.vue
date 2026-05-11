@@ -5,6 +5,7 @@ const form = useForm({
     label: '',
     prix: '',
     categorie: '',
+    course_numero: '',
     est_actif: true,
 });
 
@@ -98,6 +99,41 @@ const submitForm = () => {
                     class="mt-1 text-sm text-red-600"
                 >
                     {{ form.errors.categorie }}
+                </p>
+            </div>
+            <div
+                v-if="
+                    form.categorie === 'Course' || form.categorie === 'Logement'
+                "
+            >
+                <label for="course_numero" class="mb-2 block font-medium"
+                    >Numéro de la course</label
+                >
+                <select
+                    id="course_numero"
+                    v-model.number="form.course_numero"
+                    :required="
+                        form.categorie === 'Course' ||
+                        form.categorie === 'Logement'
+                    "
+                    :class="[
+                        'w-full rounded-md border p-2',
+                        form.errors.course_numero
+                            ? 'border-red-500'
+                            : 'border-[var(--primary)]',
+                    ]"
+                >
+                    <option value="" disabled>
+                        -- Sélectionnez une course --
+                    </option>
+                    <option :value="1">Course n°1</option>
+                    <option :value="2">Course n°2</option>
+                </select>
+                <p
+                    v-if="form.errors.course_numero"
+                    class="mt-1 text-sm text-red-600"
+                >
+                    {{ form.errors.course_numero }}
                 </p>
             </div>
             <div class="flex items-center gap-2">

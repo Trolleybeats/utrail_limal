@@ -66,26 +66,26 @@ import { Head } from '@inertiajs/vue3';
                 </h2>
                 <ul class="space-y-2 text-sm text-gray-700 md:text-base">
                     <li>
-                        <span class="font-medium">Nom du club :</span> [Nom du
-                        club de trail]
+                        <span class="font-medium">Nom du club :</span> U-Trail
+                        Limal
                     </li>
                     <li>
                         <span class="font-medium">Statut juridique :</span>
-                        [ASBL / autre]
+                        Loïc Mascré Kinésithérapeute SRL
                     </li>
                     <li>
-                        <span class="font-medium">Adresse :</span> [Adresse
-                        complète]
+                        <span class="font-medium">Adresse :</span> Rue d'Alvau
+                        33, 1435 Mont-Saint-Guibert, Belgique
                     </li>
                     <li>
                         <span class="font-medium">E-mail de contact :</span>
-                        [adresse e-mail]
+                        loic.mascre@gmail.com
                     </li>
                     <li>
                         <span class="font-medium"
                             >Responsable du traitement des données :</span
                         >
-                        [Nom et prénom]
+                        Loïc Mascré
                     </li>
                 </ul>
             </div>
@@ -236,7 +236,7 @@ import { Head } from '@inertiajs/vue3';
                     </li>
                     <li>
                         <span class="font-medium">Hébergeur du site web :</span>
-                        [nom de l'hébergeur]
+                        OVH Cloud
                     </li>
                     <li>
                         Outils de gestion des inscriptions ou e-mails (si
@@ -337,7 +337,10 @@ import { Head } from '@inertiajs/vue3';
                     <li>Droit à la portabilité des données</li>
                 </ul>
                 <p class="mt-3 text-sm text-gray-700 md:text-base">
-                    Pour exercer vos droits : [adresse e-mail RGPD]
+                    Pour exercer vos droits :
+                    <a href="mailto:loic.mascre@gmail.com" class="text-blue-500"
+                        >loic.mascre@gmail.com</a
+                    >
                 </p>
             </div>
 

@@ -44,38 +44,36 @@ import { Head } from '@inertiajs/vue3';
                 </h2>
                 <ul class="space-y-2 text-sm text-gray-700 md:text-base">
                     <li>
-                        <span class="font-medium"
-                            >Nom de l'association / club :</span
-                        >
-                        [Nom du club de trail]
+                        <span class="font-medium">Nom du club :</span>
+                        U-Trail Limal
                     </li>
                     <li>
                         <span class="font-medium">Statut juridique :</span>
-                        [ASBL / Association / autre]
+                        Loïc Mascré Kinésithérapeute SRL
                     </li>
                     <li>
                         <span class="font-medium"
                             >Numéro d'entreprise (BCE) :</span
                         >
-                        [Numéro BCE]
+                        BE 0797.482.233
                     </li>
                     <li>
                         <span class="font-medium"
                             >Adresse du siège social :</span
                         >
-                        [Adresse complète, code postal, ville, Belgique]
+                        Rue d'Alvau 33, 1435 Mont-Saint-Guibert, Belgique
                     </li>
                     <li>
                         <span class="font-medium">E-mail de contact :</span>
-                        [adresse e-mail]
+                        loic.mascre@gmail.com
                     </li>
                     <li>
-                        <span class="font-medium">Téléphone :</span> [numéro de
-                        téléphone]
+                        <span class="font-medium">Téléphone :</span> +32 478 99
+                        25 25
                     </li>
                     <li>
                         <span class="font-medium">Représentant légal :</span>
-                        [Nom et prénom du président ou responsable]
+                        Loïc Mascré
                     </li>
                 </ul>
             </div>
@@ -90,19 +88,25 @@ import { Head } from '@inertiajs/vue3';
                 <ul class="space-y-2 text-sm text-gray-700 md:text-base">
                     <li>
                         <span class="font-medium">Nom de l'hébergeur :</span>
-                        [Nom de l'hébergeur web]
+                        OVH Cloud
                     </li>
                     <li>
-                        <span class="font-medium">Adresse :</span> [Adresse de
-                        l'hébergeur]
+                        <span class="font-medium">Adresse :</span> 2 rue
+                        Kellermann, 59100 Roubaix, France
                     </li>
                     <li>
-                        <span class="font-medium">Téléphone :</span> [Numéro de
-                        l'hébergeur]
+                        <span class="font-medium">Téléphone :</span> +33 9 72 10
+                        10 07
                     </li>
                     <li>
-                        <span class="font-medium">Site web :</span> [URL de
-                        l'hébergeur]
+                        <span class="font-medium">Site web :</span>
+                        <a
+                            href="https://www.ovhcloud.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-[#B3A96F] underline"
+                            >www.ovhcloud.com</a
+                        >
                     </li>
                 </ul>
             </div>
@@ -123,7 +127,7 @@ import { Head } from '@inertiajs/vue3';
                     </p>
                     <p>
                         Sauf mention contraire, ces contenus sont la propriété
-                        exclusive de [Nom du club de trail].
+                        exclusive de Loïc Mascré Kinésithérapeute SRL.
                     </p>
                     <p>
                         Toute reproduction, représentation, modification,
@@ -152,7 +156,7 @@ import { Head } from '@inertiajs/vue3';
                             <span class="font-medium"
                                 >Responsable du traitement des données :</span
                             >
-                            [Nom du responsable]
+                            Loïc Mascré
                         </li>
                         <li>
                             <span class="font-medium"
@@ -170,7 +174,7 @@ import { Head } from '@inertiajs/vue3';
                             <span class="font-medium"
                                 >Durée de conservation :</span
                             >
-                            [ex. 3 ans après dernier contact]
+                            3 ans après le dernier contact
                         </li>
                     </ul>
                     <p>
@@ -185,8 +189,8 @@ import { Head } from '@inertiajs/vue3';
                         <li>Droit d'opposition</li>
                     </ul>
                     <p>
-                        Pour exercer ces droits, contactez : [adresse e-mail
-                        RGPD]
+                        Pour exercer ces droits, contactez :
+                        loic.mascre@gmail.com
                     </p>
                 </div>
             </div>

@@ -41,11 +41,12 @@ class TarifController extends Controller
         $request->validate([
             'label' => 'required|string|max:255',
             'categorie' => 'required|string|max:255',
+            'course_numero' => 'nullable|integer|in:1,2',
             'prix' => 'required|numeric|min:0',
             'est_actif' => 'required|boolean',
         ]);
 
-        Tarif::create($request->only('label', 'categorie', 'prix', 'est_actif'));
+        Tarif::create($request->only('label', 'categorie', 'course_numero', 'prix', 'est_actif'));
 
         return redirect()->route('tarifs.index')->with('success', 'Tarif créé avec succès.');
     }
@@ -76,12 +77,13 @@ class TarifController extends Controller
         $request->validate([
             'label' => 'required|string|max:255',
             'categorie' => 'required|string|max:255',
+            'course_numero' => 'nullable|integer|in:1,2',
             'prix' => 'required|numeric|min:0',
             'est_actif' => 'required|boolean',
         ]);
 
         $tarif = Tarif::findOrFail($id);
-        $tarif->update($request->only('label', 'categorie', 'prix', 'est_actif'));
+        $tarif->update($request->only('label', 'categorie', 'course_numero', 'prix', 'est_actif'));
 
         return redirect()->route('tarifs.index')->with('success', 'Tarif mis à jour avec succès.');
     }

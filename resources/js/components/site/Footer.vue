@@ -1,13 +1,4 @@
-<script setup lang="ts">
-const imgCubitus =
-    'https://www.figma.com/api/mcp/asset/e9f6482c-00b0-473a-ae17-ae5424fdf30e';
-const imgTrakks =
-    'https://www.figma.com/api/mcp/asset/de3a2064-cf06-41e3-82e0-2e9304c9a534';
-const imgNutribay =
-    'https://www.figma.com/api/mcp/asset/48a3823f-4d2d-4d88-8bf8-526d0636923f';
-const imgFacebook =
-    'https://www.figma.com/api/mcp/asset/26c30f58-29c1-4508-9b33-408276a09bbd';
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <footer class="w-full bg-[#1e1e1e] text-[#f6f6f6]">
@@ -32,7 +23,7 @@ const imgFacebook =
             <!-- Nav links row 1 -->
             <nav aria-label="Navigation pied de page" class="mb-8">
                 <ul
-                    class="flex flex-row flex-wrap gap-x-9 gap-y-3 text-base font-normal md:flex-nowrap md:gap-x-16 md:text-[20px] lg:gap-x-25"
+                    class="flex flex-col items-center gap-y-3 text-base font-normal md:flex-row md:flex-nowrap md:items-start md:gap-x-16 md:text-[20px] lg:gap-x-25"
                 >
                     <li>
                         <a href="/" class="whitespace-nowrap hover:underline"

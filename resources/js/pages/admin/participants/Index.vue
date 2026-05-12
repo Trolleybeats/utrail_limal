@@ -22,6 +22,7 @@ const props = defineProps({
 });
 
 const deleteDialog = ref(false);
+const deleteAllDialog = ref(false);
 const dernierEnvoi = ref(null);
 
 onMounted(() => {
@@ -73,6 +74,14 @@ const exportExcel = () => {
     window.location.href = '/admin/participants/export';
 };
 
+const deleteAllParticipants = () => {
+    router.delete('/admin/participants', {
+        onSuccess: () => {
+            deleteAllDialog.value = false;
+        },
+    });
+};
+
 const dateEnvoi = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
         day: '2-digit',
@@ -90,9 +99,17 @@ const dateEnvoi = (date) => {
             class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
             <h1 class="text-xl font-bold sm:text-2xl">Participants</h1>
-            <Button @click="exportExcel" variant="outline">
-                Exporter Excel
-            </Button>
+            <div class="flex gap-2">
+                <Button @click="exportExcel" variant="outline">
+                    Exporter Excel
+                </Button>
+                <Button
+                    variant="destructive"
+                    @click="deleteAllDialog = true"
+                    style="background-color: var(--primary)"
+                    >Supprimer tous les participants</Button
+                >
+            </div>
         </div>
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
             <Button @click="envoimailAll" style="color: var(--secondary)"
@@ -200,6 +217,40 @@ const dateEnvoi = (date) => {
             </table>
         </div>
     </section>
+    <!-- Dialog de confirmation suppression tous les participants -->
+    <Dialog v-model:open="deleteAllDialog">
+        <DialogContent
+            style="
+                background-color: var(--background-footer);
+                color: var(--secondary);
+            "
+        >
+            <DialogHeader>
+                <DialogTitle>Supprimer tous les participants</DialogTitle>
+                <DialogDescription>
+                    Êtes-vous sûr de vouloir supprimer <strong>tous</strong> les
+                    participants ? Cette action est irréversible.
+                </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+                <Button
+                    variant="outline"
+                    @click="deleteAllDialog = false"
+                    style="color: var(--primary)"
+                >
+                    Annuler
+                </Button>
+                <Button
+                    variant="destructive"
+                    @click="deleteAllParticipants"
+                    style="background-color: var(--button)"
+                >
+                    Tout supprimer
+                </Button>
+            </DialogFooter>
+        </DialogContent>
+    </Dialog>
+
     <!-- Dialog de confirmation de suppression -->
     <Dialog v-model:open="deleteDialog">
         <DialogContent

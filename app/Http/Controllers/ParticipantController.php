@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exports\ParticipantsExport;
 use App\Mail\LienPaiement;
+use App\Models\Membre;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -105,6 +107,16 @@ class ParticipantController extends Controller
         $participant->delete();
 
         return redirect()->route('participants.index')->with('success', 'Participant deleted successfully.');
+    }
+
+    public function deleteAll()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Membre::truncate();
+        Participant::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        return redirect()->route('participants.index')->with('success', 'Tous les participants ont été supprimés avec succès.');
     }
 
     public function resendMail(Participant $participant)

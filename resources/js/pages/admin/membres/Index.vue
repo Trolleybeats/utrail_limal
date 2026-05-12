@@ -26,6 +26,7 @@ const props = defineProps({
 });
 
 const deleteDialog = ref(false);
+const deleteAllDialog = ref(false);
 const membreToDelete = ref(null);
 
 function openDeleteDialog(membre) {
@@ -62,6 +63,14 @@ const dateFormat = (date) => {
 const exportExcel = () => {
     window.location.href = '/admin/membres/export';
 };
+
+const deleteAllMembres = () => {
+    router.delete('/admin/membres', {
+        onSuccess: () => {
+            deleteAllDialog.value = false;
+        },
+    });
+};
 </script>
 
 <template>
@@ -70,9 +79,18 @@ const exportExcel = () => {
             class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
             <h1 class="text-xl font-bold sm:text-2xl">Gestion des Membres</h1>
-            <Button @click="exportExcel" variant="outline">
-                Exporter Excel
-            </Button>
+            <div class="flex gap-2">
+                <Button @click="exportExcel" variant="outline">
+                    Exporter Excel
+                </Button>
+                <Button
+                    variant="destructive"
+                    @click="deleteAllDialog = true"
+                    style="background-color: var(--primary)"
+                >
+                    Supprimer tous les membres
+                </Button>
+            </div>
         </div>
         <div class="overflow-x-auto rounded-lg border">
             <table class="w-full table-auto">
@@ -219,7 +237,37 @@ const exportExcel = () => {
             </table>
         </div>
     </div>
-    <Dialog v-model="deleteDialog">
+    <!-- Dialog de confirmation suppression tous les membres -->
+    <Dialog v-model:open="deleteAllDialog">
+        <DialogContent
+            style="
+                background-color: var(--background-footer);
+                color: var(--secondary);
+            "
+        >
+            <DialogHeader>
+                <DialogTitle>Supprimer tous les membres</DialogTitle>
+                <DialogDescription>
+                    Êtes-vous sûr de vouloir supprimer <strong>tous</strong> les
+                    membres ? Cette action est irréversible.
+                </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+                <Button variant="outline" @click="deleteAllDialog = false">
+                    Annuler
+                </Button>
+                <Button
+                    variant="destructive"
+                    @click="deleteAllMembres"
+                    style="background-color: var(--button)"
+                >
+                    Tout supprimer
+                </Button>
+            </DialogFooter>
+        </DialogContent>
+    </Dialog>
+
+    <Dialog v-model:open="deleteDialog">
         <DialogContent>
             <DialogHeader>
                 <DialogTitle>Confirmer la suppression</DialogTitle>

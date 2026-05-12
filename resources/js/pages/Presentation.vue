@@ -93,7 +93,7 @@ const props = defineProps({
 
                     <!-- Si index impair : images gauche / texte droite -->
                     <template v-else>
-                        <div class="grid grid-cols-2 gap-2">
+                        <div class="order-2 grid grid-cols-2 gap-2 md:order-1">
                             <img
                                 v-for="photo in projet.photos"
                                 :key="photo.id"
@@ -103,7 +103,7 @@ const props = defineProps({
                             />
                         </div>
 
-                        <div>
+                        <div class="order-1 md:order-2">
                             <h3
                                 class="mb-3 text-left text-xl font-bold text-black uppercase"
                             >

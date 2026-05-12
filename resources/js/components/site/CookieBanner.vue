@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, watch } from 'vue';
-import { Link } from '@inertiajs/vue3';
-import { confidentialite } from '@/routes';
 
 const visible = ref(false);
 const acceptBtn = ref<HTMLButtonElement | null>(null);
@@ -50,8 +48,11 @@ function decline() {
                 <p id="cookie-banner-title" class="text-sm">
                     Ce site utilise des cookies pour améliorer votre expérience.
                     En continuant à naviguer, vous acceptez leur utilisation.
-                    Pour en savoir plus, consultez notre Politique de
-                    Confidentialité
+                    <a
+                        href="/Confidentialite"
+                        class="underline hover:text-[#C42827]"
+                        >En savoir plus</a
+                    >.
                 </p>
                 <div class="flex shrink-0 gap-3">
                     <button

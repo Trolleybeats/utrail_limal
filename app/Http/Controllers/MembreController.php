@@ -6,7 +6,9 @@ use App\Exports\MembresExport;
 use App\Models\Membre;
 use App\Models\Participant;
 use App\Models\Tarif;
+use App\Models\Versement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
 use Stripe\Stripe;
@@ -238,5 +240,15 @@ class MembreController extends Controller
         $membre->delete();
 
         return redirect()->route('membres.index')->with('success', 'Membre deleted successfully.');
+    }
+
+    public function deleteAll()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Versement::truncate();
+        Membre::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        return redirect()->route('membres.index')->with('success', 'Tous les membres ont été supprimés avec succès.');
     }
 }

@@ -88,7 +88,7 @@ const props = defineProps({
                         v-if="equipe.photo"
                         :src="`/storage/${equipe.photo}`"
                         :alt="`${equipe.prenom} ${equipe.nom}`"
-                        class="h-60 w-full object-cover"
+                        class="h-60 w-full object-cover object-top"
                     />
                     <div v-else class="h-60 w-full bg-muted" />
                     <CardHeader>

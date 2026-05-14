@@ -84,8 +84,8 @@ defineExpose({ mobileOpen });
         Aller au contenu principal
     </a>
 
-    <!-- Mobile: full-width red background wrapper -->
-    <div :class="mobileOpen ? 'bg-[#C42827]' : ''" class="md:bg-transparent">
+    <!-- Header bar -->
+    <div class="md:bg-transparent">
         <div
             class="mx-auto flex h-[80px] w-full max-w-[1182px] items-center gap-0 px-4 md:h-[200px]"
         >
@@ -178,7 +178,7 @@ defineExpose({ mobileOpen });
                 class="ml-auto flex flex-col justify-center gap-[5px] rounded-md p-2 md:hidden"
                 :aria-expanded="mobileOpen"
                 aria-controls="mobile-menu"
-                :aria-label="mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+                aria-label="Ouvrir le menu"
             >
                 <span class="block h-[2px] w-6 bg-[#F6F6F6]"></span>
                 <span class="block h-[2px] w-6 bg-[#F6F6F6]"></span>
@@ -186,77 +186,119 @@ defineExpose({ mobileOpen });
             </button>
         </div>
     </div>
-    <!-- Mobile dropdown menu -->
-    <Transition name="slide-left">
-        <nav
+
+    <!-- Mobile panel : figure + nav glissant depuis la droite -->
+    <Transition name="slide-from-right">
+        <div
             v-if="mobileOpen"
             id="mobile-menu"
             ref="mobileMenuRef"
-            aria-label="Navigation mobile"
-            class="overflow-hidden bg-[#C42827] px-6 py-4 text-[#F6F6F6] md:hidden"
+            class="fixed inset-0 z-50 flex flex-col bg-[#C42827] text-[#F6F6F6] md:hidden"
             @keydown="handleMobileKeydown"
         >
-            <ul class="flex flex-col gap-4 text-[18px] font-normal">
-                <li>
-                    <a
-                        href="/"
-                        :aria-current="isCurrentPage('/') ? 'page' : undefined"
-                        class="hover:underline"
-                        >Accueil</a
+            <!-- Ligne du haut : logo + bouton fermer -->
+            <div
+                class="mx-auto flex h-[80px] w-full max-w-[1182px] items-center px-4"
+            >
+                <figure class="shrink-0 px-2">
+                    <a href="/">
+                        <img
+                            src="/storage/UtrailLimal.png"
+                            alt="Utrail Limal Logo"
+                            class="h-[60px] w-[60px] object-contain"
+                        />
+                    </a>
+                </figure>
+                <button
+                    @click="closeMenu"
+                    class="ml-auto rounded-md p-2"
+                    aria-label="Fermer le menu"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
                     >
-                </li>
-                <li>
-                    <a
-                        href="/Presentation"
-                        :aria-current="
-                            isCurrentPage('/Presentation') ? 'page' : undefined
-                        "
-                        class="hover:underline"
-                        >Histoire du club</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="/Equipe"
-                        :aria-current="
-                            isCurrentPage('/Equipe') ? 'page' : undefined
-                        "
-                        class="hover:underline"
-                        >L'équipe</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="/Projet"
-                        :aria-current="
-                            isCurrentPage('/Projet') ? 'page' : undefined
-                        "
-                        class="hover:underline"
-                        >Projet de l'année</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="/Formation"
-                        :aria-current="
-                            isCurrentPage('/Formation') ? 'page' : undefined
-                        "
-                        class="hover:underline"
-                        >U-Trail formation</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="/Contact"
-                        :aria-current="
-                            isCurrentPage('/Contact') ? 'page' : undefined
-                        "
-                        class="hover:underline"
-                        >Contact</a
-                    >
-                </li>
-            </ul>
-        </nav>
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Liens de navigation -->
+            <nav aria-label="Navigation mobile" class="px-6 py-4">
+                <ul class="flex flex-col gap-4 text-[18px] font-normal">
+                    <li>
+                        <a
+                            href="/"
+                            :aria-current="
+                                isCurrentPage('/') ? 'page' : undefined
+                            "
+                            class="hover:underline"
+                            >Accueil</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/Presentation"
+                            :aria-current="
+                                isCurrentPage('/Presentation')
+                                    ? 'page'
+                                    : undefined
+                            "
+                            class="hover:underline"
+                            >Histoire du club</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/Equipe"
+                            :aria-current="
+                                isCurrentPage('/Equipe') ? 'page' : undefined
+                            "
+                            class="hover:underline"
+                            >L'équipe</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/Projet"
+                            :aria-current="
+                                isCurrentPage('/Projet') ? 'page' : undefined
+                            "
+                            class="hover:underline"
+                            >Projet de l'année</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/Formation"
+                            :aria-current="
+                                isCurrentPage('/Formation') ? 'page' : undefined
+                            "
+                            class="hover:underline"
+                            >U-Trail formation</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/Contact"
+                            :aria-current="
+                                isCurrentPage('/Contact') ? 'page' : undefined
+                            "
+                            class="hover:underline"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </Transition>
 </template>
 
@@ -265,12 +307,12 @@ a[aria-current='page'] {
     font-weight: 600;
     text-decoration: underline;
 }
-.slide-left-enter-active,
-.slide-left-leave-active {
-    transition: transform 0.3s ease;
+.slide-from-right-enter-active,
+.slide-from-right-leave-active {
+    transition: transform 0.35s ease;
 }
-.slide-left-enter-from,
-.slide-left-leave-to {
+.slide-from-right-enter-from,
+.slide-from-right-leave-to {
     transform: translateX(100%);
 }
 </style>

@@ -62,12 +62,12 @@ const props = defineProps({
             </h2>
 
             <h3
-                class="mb-4 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-6 md:text-3xl lg:text-[32px]"
+                class="mb-3 font-title text-2xl font-bold text-black uppercase sm:text-left sm:text-3xl md:text-[36px]"
             >
                 Vous rêvez de prendre le départ d’un trail ou d’un ultra-trail ?
             </h3>
             <p
-                class="mb-4 text-lg text-gray-700 sm:text-xl md:mb-6 md:text-2xl lg:text-[24px]"
+                class="mb-6 font-sans text-base leading-relaxed text-gray-800 sm:text-lg md:mb-8 md:text-[20px]"
             >
                 Avec U-Trail Limal, nous vous accompagnons sur plusieurs mois
                 pour transformer ce rêve en réalité, grâce à un programme
@@ -92,7 +92,7 @@ const props = defineProps({
                     />
                     <div v-else class="h-60 w-full bg-muted" />
                     <CardHeader>
-                        <CardTitle
+                        <CardTitle class="font-title"
                             >{{ equipe.prenom }} {{ equipe.nom }}</CardTitle
                         >
                         <CardDescription>{{ equipe.role }}</CardDescription>
@@ -104,7 +104,7 @@ const props = defineProps({
                         <p class="text-sm text-gray-600">
                             <a
                                 :href="`#membre-${equipe.id}`"
-                                class="text-primary hover:underline"
+                                class="font-sans text-primary hover:underline"
                             >
                                 Découvrir le profil →
                             </a>
@@ -129,7 +129,7 @@ const props = defineProps({
                     .split('\n')
                     .filter((p) => p.trim())"
                 :key="index"
-                class="mb-6 text-lg text-gray-700 sm:text-xl md:mb-8 md:text-2xl lg:text-[24px]"
+                class="mb-6 font-sans text-base leading-relaxed text-gray-800 sm:text-lg md:mb-8 md:text-[20px]"
             >
                 {{ description }}
             </p>

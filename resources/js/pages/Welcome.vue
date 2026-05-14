@@ -358,7 +358,7 @@ onMounted(() => {
                                 .split('\n')
                                 .filter((p) => p.trim())"
                             :key="index"
-                            class="w-full text-justify text-sm leading-relaxed text-gray-800 sm:text-base md:text-[20px]"
+                            class="w-full text-justify font-sans text-base leading-relaxed text-gray-800 sm:text-lg md:text-[20px]"
                         >
                             {{ paragraph }}
                         </p>

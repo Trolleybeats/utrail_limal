@@ -69,12 +69,12 @@ const props = defineProps({
                     <template v-if="index % 2 === 0">
                         <div>
                             <h3
-                                class="mb-3 text-right text-xl font-bold text-black uppercase"
+                                class="mb-3 font-title text-2xl font-bold text-black uppercase sm:text-right sm:text-3xl md:text-[36px]"
                             >
                                 {{ projet.titre }}
                             </h3>
                             <p
-                                class="text-justify text-sm leading-relaxed text-gray-800"
+                                class="w-full text-justify font-sans text-base leading-relaxed text-gray-800 sm:text-lg md:text-[20px]"
                             >
                                 {{ projet.description }}
                             </p>
@@ -105,12 +105,12 @@ const props = defineProps({
 
                         <div class="order-1 md:order-2">
                             <h3
-                                class="mb-3 text-left text-xl font-bold text-black uppercase"
+                                class="mb-3 font-title text-2xl font-bold text-black uppercase sm:text-left sm:text-3xl md:text-[36px]"
                             >
                                 {{ projet.titre }}
                             </h3>
                             <p
-                                class="text-justify text-sm leading-relaxed text-gray-800"
+                                class="w-full text-justify font-sans text-base leading-relaxed text-gray-800 sm:text-lg md:text-[20px]"
                             >
                                 {{ projet.description }}
                             </p>

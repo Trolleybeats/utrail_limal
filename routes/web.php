@@ -26,6 +26,9 @@ Route::inertia('/Contact', 'Contact')->name('contact');
 Route::get('/MentionLegale', function () {
     return Inertia::render('MentionLegale');
 })->name('mention-legale');
+Route::get('/ConditionsGeneralesVente', function () {
+    return Inertia::render('ConditionsGeneralesVente');
+})->name('cgv');
 Route::get('/Confidentialite', function () {
     return Inertia::render('Confidentialite');
 })->name('confidentialite');

@@ -23,6 +23,7 @@ createInertiaApp({
             case name === 'PaiementConfirmation':
             case name === 'MentionLegale':
             case name === 'Confidentialite':
+            case name === 'ConditionsGeneralesVente':
                 return null;
             case name.startsWith('auth/'):
                 return AuthLayout;

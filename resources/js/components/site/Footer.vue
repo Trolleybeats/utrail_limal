@@ -72,14 +72,20 @@
             <div
                 class="mb-8 flex flex-col items-center gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between"
             >
-                <p>
+                <div class="flex flex-col gap-3 sm:flex-row sm:gap-6">
                     <a
                         href="/MentionLegale"
                         class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
                     >
                         Mentions légales
                     </a>
-                </p>
+                    <a
+                        href="/ConditionsGeneralesVente"
+                        class="text-base font-normal whitespace-nowrap hover:underline md:text-[20px]"
+                    >
+                        CGV
+                    </a>
+                </div>
 
                 <!-- Sponsor logos -->
                 <div class="flex items-center gap-8 md:gap-16 lg:gap-30">

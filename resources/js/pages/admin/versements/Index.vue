@@ -103,7 +103,9 @@ const statutClass = (statut) => {
                 </span>
             </div>
 
-            <table class="w-full table-auto border-collapse">
+            <table
+                class="w-full table-auto border-collapse bg-[var(--background)]"
+            >
                 <thead>
                     <tr class="bg-gray-100">
                         <th scope="col" class="border px-4 py-2 text-left">

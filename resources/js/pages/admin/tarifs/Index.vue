@@ -77,7 +77,7 @@ const desactiverTarif = (tarif) => {
             >
         </div>
         <div class="overflow-x-auto rounded-lg border">
-            <table class="w-full table-auto">
+            <table class="w-full table-auto bg-[var(--background)]">
                 <thead>
                     <tr>
                         <th class="border px-4 py-2 text-left">Label</th>
